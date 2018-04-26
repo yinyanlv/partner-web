@@ -1,0 +1,29 @@
+<section class="login">
+
+  <form [formGroup]="form">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>登录</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="请输入账号" formControlName="username" />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="请输入密码" formControlName="password" />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-checkbox >记住我</mat-checkbox>
+        </div>
+      </mat-card-content>
+      <mat-card-footer>
+        <button mat-button>登录</button>
+      </mat-card-footer>
+    </mat-card>
+  </form>
+
+</section>
