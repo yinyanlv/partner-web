@@ -1,0 +1,10 @@
+@import "./shared/scss/variables";
+
+body {
+  background: $bg-color;
+}
+
+a {
+  color: $theme-color;
+  cursor: pointer;
+}
