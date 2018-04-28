@@ -1,0 +1,24 @@
+@import "~@angular/material/theming";
+
+@include mat-core();
+$config: mat-typography-config();
+
+$primary: mat-palette($mat-indigo);
+$accent: mat-palette($mat-amber, A200, A100, A400);
+$warn: mat-palette($mat-red);
+$theme: mat-light-theme($primary, $accent, $warn);
+$background: mat-get($theme, background);
+$foreground: mat-get($theme, foreground);
+
+@include angular-material-theme($theme);
+
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent: mat-palette($mat-amber, A200, A100, A400);
+$dark-warn: mat-palette($mat-deep-orange);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+$dark-background: mat-get($theme, background);
+$dark-foreground: mat-get($theme, foreground);
+
+.app-dark-theme{
+  @include angular-material-theme($dark-theme);
+}
