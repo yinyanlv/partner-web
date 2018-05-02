@@ -1,15 +1,50 @@
-@import "../shared/scss/variables";
+@import "../../assets/styles/scss/etc/vars";
 
-.login {
+.login-box {
   width: 400px;
+
+  mat-card{
+    padding: 1rem;
+  }
+
+  mat-card-header {
+    margin-top:.5rem;
+    justify-content: center;
+  }
+
+  mat-card-title{
+    font-weight: bold;
+    font-size:1.2rem !important;
+    margin-bottom: 0;
+  }
+
+  mat-card-content{
+    padding: 1rem 0;
+    margin-bottom: 0;
+  }
+
+  mat-card-footer{
+    margin:0;
+    display: flex;
+    justify-content: center;
+
+    a {
+      color: $lighter-font-color;
+      text-decoration: none;
+      font-size: 12px;
+      margin-right: 1rem;
+    }
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    margin-top:.5rem;
+  }
 
   .input-line{
     display: block;
     width:100%;
-  }
-
-  .panel-header{
-    font-weight: bold;
-    text-align: center;
+    padding-bottom: .5rem;
   }
 }

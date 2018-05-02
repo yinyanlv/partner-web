@@ -1,31 +1,28 @@
 <div class="app-container">
-  <section class="login">
+  <section class="login-box">
     <form [formGroup]="form">
       <mat-card>
-        <mat-card-header class="panel-header">
-          <mat-card-title>登录</mat-card-title>
+        <mat-card-header>
+          <mat-card-title>PARTNER - 登录</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <mat-form-field class="input-line">
-            <input matInput placeholder="请输入账号" formControlName="username" />
+            <input matInput placeholder="请输入用户名" formControlName="username" />
           </mat-form-field>
           <mat-form-field  class="input-line">
             <input matInput placeholder="请输入密码" formControlName="password" />
           </mat-form-field>
           <div class="input-line">
             <mat-checkbox >记住我</mat-checkbox>
-            <a>忘记密码</a>
           </div>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">登录</button>
         </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>登录</button>
-        </mat-card-actions>
         <mat-card-footer>
-          <a>注册</a>
+          <a [routerLink]="['/forgot']">忘记密码？</a>
+          <a [routerLink]="['/register']">注册用户</a>
         </mat-card-footer>
       </mat-card>
     </form>
-
   </section>
 </div>
 
