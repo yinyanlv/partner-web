@@ -4,7 +4,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 
 import {MaterialModule} from '../shared/modules/material.module';
-import {RegisterComponent} from './register.component';
+import {ForgotComponent} from './forgot.component';
 
 @NgModule({
   imports: [
@@ -14,10 +14,7 @@ import {RegisterComponent} from './register.component';
     MaterialModule
   ],
   declarations: [
-    RegisterComponent
-  ],
-  exports: [
-    RegisterComponent
+    ForgotComponent
   ]
 })
-export class RegisterModule { }
+export class ForgotModule { }

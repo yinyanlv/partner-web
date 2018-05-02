@@ -1,6 +1,6 @@
-<div class="app-container">
-  <section class="login-box">
-    <form [formGroup]="form">
+<div class="app-container session-container">
+  <section class="session-box">
+    <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
       <mat-card>
         <mat-card-header>
           <mat-card-title>PARTNER - 登录</mat-card-title>
@@ -10,7 +10,7 @@
             <input matInput placeholder="请输入用户名" formControlName="username" />
           </mat-form-field>
           <mat-form-field  class="input-line">
-            <input matInput placeholder="请输入密码" formControlName="password" />
+            <input matInput placeholder="请输入密码" type="password" formControlName="password" />
           </mat-form-field>
           <div class="input-line">
             <mat-checkbox >记住我</mat-checkbox>

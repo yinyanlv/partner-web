@@ -1,0 +1,22 @@
+<div class="app-container session-container">
+  <section class="session-box">
+    <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>PARTNER - 找回密码</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field class="input-line">
+            <input matInput placeholder="请输入用户的注册邮箱" formControlName="email" />
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">找回密码</button>
+        </mat-card-content>
+        <mat-card-footer>
+          <a [routerLink]="['/login']">登录用户</a>
+          <a [routerLink]="['/register']">注册用户</a>
+        </mat-card-footer>
+      </mat-card>
+    </form>
+  </section>
+</div>
+

@@ -7,9 +7,10 @@ import {AppRoutingModule} from './app.routing';
 import {AppComponent} from './app.component';
 import {LoginModule} from './login/login.module';
 import {RegisterModule} from './register/register.module';
+import {ForgotModule} from './forgot/forgot.module';
 import {NotFoundModule} from './not-found/not-found.module';
-import { HeaderComponent } from './shared/components/header/header.component';
-import { FooterComponent } from './shared/components/footer/footer.component';
+import {HeaderComponent} from './shared/components/header/header.component';
+import {FooterComponent} from './shared/components/footer/footer.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     AppRoutingModule,
     LoginModule,
     RegisterModule,
+    ForgotModule,
     NotFoundModule
   ],
   declarations: [

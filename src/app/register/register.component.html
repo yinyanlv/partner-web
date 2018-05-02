@@ -1,3 +1,31 @@
-<p>
-  register works!
-</p>
+<div class="app-container session-container">
+  <section class="session-box">
+    <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>PARTNER - 注册</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field class="input-line">
+            <input matInput placeholder="请输入用户名" formControlName="username" />
+          </mat-form-field>
+          <mat-form-field class="input-line">
+            <input matInput placeholder="请输入邮箱" formControlName="email" />
+          </mat-form-field>
+          <mat-form-field  class="input-line">
+            <input matInput placeholder="请输入密码" type="password" formControlName="password" />
+          </mat-form-field>
+          <mat-form-field  class="input-line">
+            <input matInput placeholder="请确认密码" type="password" formControlName="confirmPassword" />
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">注册</button>
+        </mat-card-content>
+        <mat-card-footer>
+          <a [routerLink]="['/forgot']">忘记密码？</a>
+          <a [routerLink]="['/login']">登录用户</a>
+        </mat-card-footer>
+      </mat-card>
+    </form>
+  </section>
+</div>
+

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-forgot',
+  templateUrl: './forgot.component.html',
+  styleUrls: ['./forgot.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class ForgotComponent implements OnInit {
 
   private form: FormGroup;
 
@@ -15,9 +15,13 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.form = this.fb.group({
-      username: [null, Validators.required],
-      password: [null, Validators.required]
+      email: [null, [Validators.required, Validators.email]]
     });
+  }
+
+  onSubmit() {
+
   }
 }
