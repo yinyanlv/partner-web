@@ -1,0 +1,16 @@
+<div class="app-wrapper">
+  <ngx-loading-bar></ngx-loading-bar>
+  <app-header></app-header>
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" opened="true">
+      side
+    </mat-sidenav>
+    <mat-sidenav mode="over" position="end" opened="true">
+      over
+    </mat-sidenav>
+    <div class="app-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-container>
+  <app-options></app-options>
+</div>

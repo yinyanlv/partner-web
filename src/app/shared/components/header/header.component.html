@@ -1,3 +1,35 @@
-<p>
-  header works!
-</p>
+<mat-toolbar>
+  <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div class="logo"></div>
+  <div class="search-box">
+    <form class="search-form">
+      <mat-icon>search</mat-icon>
+      <input type="text" placeholder="请输入关键字" />
+    </form>
+  </div>
+  <button mat-icon-button>
+    <mat-icon>fullscreen</mat-icon>
+  </button>
+  <button mat-icon-button>
+    <mat-icon>notifications</mat-icon>
+  </button>
+  <button mat-icon-button [matMenuTriggerFor]="user">
+    <mat-icon>person</mat-icon>
+  </button>
+  <mat-menu #user="matMenu">
+    <button mat-menu-item>
+      <mat-icon>settings</mat-icon> 设置
+    </button>
+    <button mat-menu-item>
+      <mat-icon>account_box</mat-icon> 个人信息
+    </button>
+    <button mat-menu-item>
+      <mat-icon>notifications_off</mat-icon> 关闭通知
+    </button>
+    <button mat-menu-item>
+      <mat-icon>exit_to_app</mat-icon> 退出登录
+    </button>
+  </mat-menu>
+</mat-toolbar>

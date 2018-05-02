@@ -20,8 +20,4 @@ export class ForgotComponent implements OnInit {
       email: [null, [Validators.required, Validators.email]]
     });
   }
-
-  onSubmit() {
-
-  }
 }

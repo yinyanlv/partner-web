@@ -5,11 +5,17 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {ForgotComponent} from './forgot/forgot.component';
 import {NotFoundComponent} from './not-found/not-found.component';
+import {ErrorComponent} from './error/error.component';
+
+import {NormalLayoutComponent} from './shared/components/normal-layout/normal-layout.component';
 
 const routes: Routes = [{
   path: '',
-  pathMatch: 'full',
-  redirectTo: 'login'
+  component: NormalLayoutComponent,
+  children: [{
+    path: '',
+    loadChildren: './dashboard/dashboard.module#DashboardModule'
+  }]
 }, {
   path: 'login',
   component: LoginComponent
@@ -19,6 +25,9 @@ const routes: Routes = [{
 }, {
   path: 'forgot',
   component: ForgotComponent
+}, {
+  path: 'error',
+  component: ErrorComponent
 }, {
   path: '**',
   component: NotFoundComponent
