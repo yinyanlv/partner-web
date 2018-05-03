@@ -1,5 +1,31 @@
-body{
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+
+html{
+  font-size:16px;
+}
+
+html, body{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  min-height: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
   color: rgba(0, 0, 0, 0.87);
+  font-family:  Roboto, 'Helvetica Neue', sans-serif;
+}
+
+input {
+  box-sizing: border-box;
 }
 
 .app-container {
@@ -14,10 +40,18 @@ body{
   align-items: center;
 }
 
-.pt-1{
+.pt-1-rem{
   padding-top: 1rem !important;
 }
 
-.pb-1{
+.pb-1-rem{
   padding-bottom: 1rem !important;
+}
+
+.ml-8-px{
+  margin-left:8px !important;
+}
+
+.visible{
+  overflow: visible;
 }

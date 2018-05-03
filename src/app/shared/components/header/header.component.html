@@ -1,10 +1,10 @@
-<mat-toolbar>
+<mat-toolbar color="primary" class="block-header">
   <button mat-icon-button>
     <mat-icon>menu</mat-icon>
   </button>
-  <div class="logo"></div>
-  <div class="search-box">
-    <form class="search-form">
+  <a class="logo" [routerLink]="['/']">PARTNER</a>
+  <div class="search-form-wrapper" fxFlex>
+    <form class="search-form" novalidate>
       <mat-icon>search</mat-icon>
       <input type="text" placeholder="请输入关键字" />
     </form>
@@ -12,13 +12,14 @@
   <button mat-icon-button>
     <mat-icon>fullscreen</mat-icon>
   </button>
-  <button mat-icon-button>
+  <button mat-icon-button class="visible ml-8-px">
     <mat-icon>notifications</mat-icon>
+    <span class="number">5</span>
   </button>
-  <button mat-icon-button [matMenuTriggerFor]="user">
+  <button mat-icon-button  class="ml-8-px" [matMenuTriggerFor]="user">
     <mat-icon>person</mat-icon>
   </button>
-  <mat-menu #user="matMenu">
+  <mat-menu #user="matMenu" x-position="before">
     <button mat-menu-item>
       <mat-icon>settings</mat-icon> 设置
     </button>

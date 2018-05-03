@@ -1,0 +1,23 @@
+@import "~assets/styles/scss/etc/vars";
+
+mat-sidenav-container{
+  position: relative;
+  width: 100%;
+  height: calc(100vh - #{$mat-toolbar-height-desktop});
+  display: flex;
+  flex-direction: row;
+
+}
+
+.menu{
+  width: $sidebar-width;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.app-main-content{
+  padding:8px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}

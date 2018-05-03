@@ -2,13 +2,13 @@
   <ngx-loading-bar></ngx-loading-bar>
   <app-header></app-header>
   <mat-sidenav-container>
-    <mat-sidenav mode="side" opened="true">
-      side
+    <mat-sidenav class="menu" mode="side" opened="true">
+      <app-menu></app-menu>
     </mat-sidenav>
-    <mat-sidenav mode="over" position="end" opened="true">
+    <mat-sidenav mode="over" position="end">
       over
     </mat-sidenav>
-    <div class="app-content">
+    <div class="app-main-content" perfectScrollbar>
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-container>
