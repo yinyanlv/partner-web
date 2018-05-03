@@ -12,7 +12,7 @@ export class NormalLayoutComponent {
 
   private scrollBarConfig: PerfectScrollbarConfigInterface = {};
 
-  @ViewChild(PerfectScrollbarDirective) directiveScroll: PerfectScrollbarDirective;
+  @ViewChild(PerfectScrollbarDirective) scrollBar: PerfectScrollbarDirective;
 
   ngOnInit() {
 

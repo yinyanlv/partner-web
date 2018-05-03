@@ -8,8 +8,10 @@
     <mat-sidenav mode="over" position="end">
       over
     </mat-sidenav>
-    <div class="app-main-content" perfectScrollbar>
-      <router-outlet></router-outlet>
+    <div class="app-main-content">
+      <div class="outlet-wrapper" perfectScrollbar>
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </mat-sidenav-container>
   <app-options></app-options>
