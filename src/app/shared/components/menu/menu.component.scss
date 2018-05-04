@@ -1,3 +1,5 @@
+@import "~assets/styles/scss/etc/vars";
+
 mat-nav-list{
   a {
     display: flex;
@@ -9,5 +11,9 @@ mat-nav-list{
     mat-icon{
       margin-right:24px;
     }
+  }
+
+  .text{
+    color: $lighter-font-color;
   }
 }

@@ -1,13 +1,8 @@
 import {ModuleWithProviders} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {LoginComponent} from './login/login.component';
-import {RegisterComponent} from './register/register.component';
-import {ForgotComponent} from './forgot/forgot.component';
-import {NotFoundComponent} from './not-found/not-found.component';
-import {ErrorComponent} from './error/error.component';
-
 import {NormalLayoutComponent} from './shared/components/normal-layout/normal-layout.component';
+import {SessionLayoutComponent} from './shared/components/session-layout/session-layout.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,20 +12,40 @@ const routes: Routes = [{
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   }]
 }, {
-  path: 'login',
-  component: LoginComponent
+  path: '',
+  component: SessionLayoutComponent,
+  children: [{
+    path: 'login',
+    loadChildren: './login/login.module#LoginModule'
+  }]
 }, {
-  path: 'register',
-  component: RegisterComponent
+  path: '',
+  component: SessionLayoutComponent,
+  children: [{
+    path: 'register',
+    loadChildren: './register/register.module#RegisterModule'
+  }]
 }, {
-  path: 'forgot',
-  component: ForgotComponent
+  path: '',
+  component: SessionLayoutComponent,
+  children: [{
+    path: 'forgot',
+    loadChildren: './forgot/forgot.module#ForgotModule'
+  }]
 }, {
-  path: 'error',
-  component: ErrorComponent
+  path: '',
+  component: SessionLayoutComponent,
+  children: [{
+    path: 'error',
+    loadChildren: './error/error.module#ErrorModule'
+  }]
 }, {
-  path: '**',
-  component: NotFoundComponent
+  path: '',
+  component: SessionLayoutComponent,
+  children: [{
+    path: '**',
+    loadChildren: './not-found/not-found.module#NotFoundModule'
+  }]
 }];
 
 export const AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(routes, {

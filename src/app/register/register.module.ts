@@ -4,6 +4,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 
 import {MaterialModule} from '../shared/modules/material.module';
+import {RegisterRoutingModule} from './register.routing';
 import {RegisterComponent} from './register.component';
 
 @NgModule({
@@ -11,7 +12,8 @@ import {RegisterComponent} from './register.component';
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    MaterialModule
+    MaterialModule,
+    RegisterRoutingModule
   ],
   declarations: [
     RegisterComponent

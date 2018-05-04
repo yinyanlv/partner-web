@@ -4,6 +4,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 
 import {MaterialModule} from '../shared/modules/material.module';
+import {ForgotRoutingModule} from './forgot.routing';
 import {ForgotComponent} from './forgot.component';
 
 @NgModule({
@@ -11,7 +12,8 @@ import {ForgotComponent} from './forgot.component';
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    MaterialModule
+    MaterialModule,
+    ForgotRoutingModule
   ],
   declarations: [
     ForgotComponent

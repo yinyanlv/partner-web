@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="block-header">
-  <button mat-icon-button>
+  <button mat-icon-button (click)="toggleMenu.emit()">
     <mat-icon>menu</mat-icon>
   </button>
   <a class="logo" [routerLink]="['/']">PARTNER</a>
@@ -9,10 +9,10 @@
       <input type="text" placeholder="请输入关键字" />
     </form>
   </div>
-  <button mat-icon-button>
+  <button mat-icon-button (click)="toggleFullScreen()">
     <mat-icon>fullscreen</mat-icon>
   </button>
-  <button mat-icon-button class="visible ml-8-px">
+  <button mat-icon-button class="visible ml-8-px" (click)="toggleNotification.emit()">
     <mat-icon>notifications</mat-icon>
     <span class="number">5</span>
   </button>

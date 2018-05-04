@@ -4,6 +4,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 
 import {MaterialModule} from '../shared/modules/material.module';
+import {LoginRoutingModule} from './login.routing';
 import {LoginComponent} from './login.component';
 
 @NgModule({
@@ -11,7 +12,8 @@ import {LoginComponent} from './login.component';
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    MaterialModule
+    MaterialModule,
+    LoginRoutingModule
   ],
   declarations: [
     LoginComponent

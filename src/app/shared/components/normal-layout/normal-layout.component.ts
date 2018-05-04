@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild, ComponentRef} from '@angular/core';
 import { PerfectScrollbarConfigInterface, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
 
 @Component({
@@ -17,4 +17,5 @@ export class NormalLayoutComponent {
   ngOnInit() {
 
   }
+
 }

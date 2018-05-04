@@ -1,17 +1,15 @@
-<div class="app-wrapper">
+<div>
   <ngx-loading-bar></ngx-loading-bar>
-  <app-header></app-header>
+  <app-header (toggleMenu)="menu.toggle()" (toggleNotification)="notification.toggle()"></app-header>
   <mat-sidenav-container>
-    <mat-sidenav class="menu" mode="side" opened="true">
+    <mat-sidenav class="menu" #menu mode="side" opened="true">
       <app-menu></app-menu>
     </mat-sidenav>
-    <mat-sidenav mode="over" position="end">
-      over
+    <mat-sidenav mode="over" #notification position="end">
+      <app-notification></app-notification>
     </mat-sidenav>
     <div class="app-main-content">
-      <div class="outlet-wrapper" perfectScrollbar>
-        <router-outlet></router-outlet>
-      </div>
+      <router-outlet></router-outlet>
     </div>
   </mat-sidenav-container>
   <app-options></app-options>
