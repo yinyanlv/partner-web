@@ -1,3 +1,39 @@
-<p>
-  time-statistics works!
-</p>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <span fxFlex fxShow="false" fxShow.gt-xs>{{date | calendarDate:(calendarMode+'ViewTitle'):'zh'}}</span>
+    <div fxShow="false" fxShow.gt-xs>
+      <button mat-button (click)="calendarMode = 'month'" [class.active]="calendarMode === 'month'">月视图</button>
+      <button mat-button (click)="calendarMode = 'week'" [class.active]="calendarMode === 'week'">周视图</button>
+      <button mat-button (click)="calendarMode = 'day'" [class.active]="calendarMode === 'day'">日视图</button>
+    </div>
+
+    <button mat-icon-button mwlCalendarPreviousView [view]="calendarMode" [(viewDate)]="date"><mat-icon>chevron_left</mat-icon></button>
+    <button mat-icon-button mwlCalendarToday  [(viewDate)]="date"><mat-icon>today</mat-icon></button>
+    <button mat-icon-button mwlCalendarNextView [view]="calendarMode" [(viewDate)]="date"><mat-icon>chevron_right</mat-icon></button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-card>
+  <div [ngSwitch]="calendarMode">
+
+    <mwl-calendar-month-view
+      *ngSwitchCase="'month'"
+      [viewDate]="date"
+      [locale]="locale"
+    ></mwl-calendar-month-view>
+
+    <mwl-calendar-week-view
+      *ngSwitchCase="'week'"
+      [viewDate]="date"
+      [locale]="locale"
+    ></mwl-calendar-week-view>
+
+    <mwl-calendar-day-view
+      *ngSwitchCase="'day'"
+      [viewDate]="date"
+      [locale]="locale"
+    ></mwl-calendar-day-view>
+  </div>
+</mat-card>

@@ -1,0 +1,6 @@
+@import "~assets/styles/scss/etc/vars";
+
+.active{
+ background: mat-color($mat-amber, A200);
+ color: $lighter-font-color;
+}
