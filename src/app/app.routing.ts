@@ -10,6 +10,9 @@ const routes: Routes = [{
   children: [{
     path: '',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
+  }, {
+    path: 'time-statistics',
+    loadChildren: './time-statistics/time-statistics.module#TimeStatisticsModule'
   }]
 }, {
   path: '',
