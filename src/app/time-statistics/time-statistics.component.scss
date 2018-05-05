@@ -4,3 +4,13 @@
  background: mat-color($mat-amber, A200);
  color: $lighter-font-color;
 }
+
+mat-toolbar-row{
+ span, button{
+  margin-left: 5px;
+ }
+
+ .time-count{
+  margin-right:30px;
+ }
+}

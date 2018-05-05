@@ -4,12 +4,12 @@
   </mat-toolbar-row>
   <mat-toolbar-row>
     <span fxFlex fxShow="false" fxShow.gt-xs>{{date | calendarDate:(calendarMode+'ViewTitle'):'zh'}}</span>
+    <span class="time-count">总计加班：{{timeCount}}小时</span>
     <div fxShow="false" fxShow.gt-xs>
       <button mat-button (click)="calendarMode = 'month'" [class.active]="calendarMode === 'month'">月视图</button>
       <button mat-button (click)="calendarMode = 'week'" [class.active]="calendarMode === 'week'">周视图</button>
       <button mat-button (click)="calendarMode = 'day'" [class.active]="calendarMode === 'day'">日视图</button>
     </div>
-
     <button mat-icon-button mwlCalendarPreviousView [view]="calendarMode" [(viewDate)]="date"><mat-icon>chevron_left</mat-icon></button>
     <button mat-icon-button mwlCalendarToday  [(viewDate)]="date"><mat-icon>today</mat-icon></button>
     <button mat-icon-button mwlCalendarNextView [view]="calendarMode" [(viewDate)]="date"><mat-icon>chevron_right</mat-icon></button>
@@ -22,6 +22,7 @@
       *ngSwitchCase="'month'"
       [viewDate]="date"
       [locale]="locale"
+      (dayClicked)="dayClicked($event)"
     ></mwl-calendar-month-view>
 
     <mwl-calendar-week-view
