@@ -1,6 +1,14 @@
-<p>
-  calendar-dialog works!
-</p>
-
-<button mat-button type="button" (click)="dialogRef.close()">保存</button>
-<button mat-button type="button" (click)="dialogRef.close()">关闭</button>
+<h2 mat-dialog-title>编辑加班时长</h2>
+<mat-dialog-content>
+  <div class="input-line">
+    加班
+    <mat-form-field>
+      <input matInput type="number" [ngModel]="count" min="0" max="24" placeholder="请输入加班时长" />
+    </mat-form-field>
+    小时
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button type="button" (click)="dialogRef.close()">保存</button>
+  <button mat-button type="button" mat-dialog-close>关闭</button>
+</mat-dialog-actions>

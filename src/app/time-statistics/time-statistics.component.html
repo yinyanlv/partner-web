@@ -15,6 +15,14 @@
     <button mat-icon-button mwlCalendarNextView [view]="calendarMode" [(viewDate)]="date"><mat-icon>chevron_right</mat-icon></button>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<ng-template #customCellTemplate let-day="day" let-locale="locale">
+  <div class="cal-cell-top">
+    <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+    <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+  </div>
+  <small style="margin: 5px">1.1小时</small>
+</ng-template>
 <mat-card>
   <div [ngSwitch]="calendarMode">
 
@@ -22,6 +30,7 @@
       *ngSwitchCase="'month'"
       [viewDate]="date"
       [locale]="locale"
+      [events]="events"
       (dayClicked)="dayClicked($event)"
     ></mwl-calendar-month-view>
 
@@ -29,12 +38,14 @@
       *ngSwitchCase="'week'"
       [viewDate]="date"
       [locale]="locale"
+      [events]="events"
     ></mwl-calendar-week-view>
 
     <mwl-calendar-day-view
       *ngSwitchCase="'day'"
       [viewDate]="date"
       [locale]="locale"
+      [events]="events"
     ></mwl-calendar-day-view>
   </div>
 </mat-card>

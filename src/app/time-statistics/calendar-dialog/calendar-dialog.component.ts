@@ -8,6 +8,8 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class CalendarDialogComponent implements OnInit {
 
+  private count: string = '111';
+
   constructor(
     public dialogRef: MatDialogRef<CalendarDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
