@@ -8,13 +8,18 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class CalendarDialogComponent implements OnInit {
 
-  private count: string = '111';
+  private timeCount: string | number;
+  private date: Date;
 
   constructor(
-    public dialogRef: MatDialogRef<CalendarDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    private dialogRef: MatDialogRef<CalendarDialogComponent, any>,
+    @Inject(MAT_DIALOG_DATA) private data: any) {
   }
 
   ngOnInit() {
+
+    console.log(this.data);
+    this.date = this.data.day.date;
+    this.timeCount = this.data.day.events && this.data.day.events[0] && this.data.day.events[0].meta;
   }
 }
