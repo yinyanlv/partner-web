@@ -13,7 +13,7 @@ export class CalendarDialogComponent implements OnInit {
   private isUpdate: boolean = false;
 
   constructor(
-    private dialogRef: MatDialogRef,
+    private dialogRef: MatDialogRef<CalendarDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any) {
   }
 

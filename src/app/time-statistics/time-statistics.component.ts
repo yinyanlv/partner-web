@@ -21,9 +21,9 @@ export class TimeStatisticsComponent implements OnInit {
   private calendarMode: string = 'month';
   private date: Date = new Date();
   private locale: string = 'zh';
-  private timeCount: number = 33;
+  private timeCount: number = 0;
   private events: Array<CalendarEvent> = [];
-  private dialogRef: MatDialogRef;
+  private dialogRef: MatDialogRef<CalendarDialogComponent>;
   private isLoading: boolean = false;
 
   constructor(
@@ -37,7 +37,7 @@ export class TimeStatisticsComponent implements OnInit {
     this.getEvents();
   }
 
-  onClickDay(event: CalendarEvent) {
+  onClickDay(event) {
 
     this.dialogRef = this.dialog.open(CalendarDialogComponent, {
       data: event
@@ -63,7 +63,20 @@ export class TimeStatisticsComponent implements OnInit {
           meta: data.timeCount
         });
       }
+
+      this.updateTimeCount();
     });
+  }
+
+  updateTimeCount() {
+    let sum = 0;
+
+    this.events.forEach((item) => {
+
+      sum += item.meta;
+    });
+
+    this.timeCount = sum;
   }
 
   changeCalendarMode(mode: string) {
@@ -78,6 +91,7 @@ export class TimeStatisticsComponent implements OnInit {
 
     setTimeout(() => {
       this.events = this.service.getEvents();
+      this.updateTimeCount();
       this.isLoading = false;
     }, 1000);
   }
