@@ -20,15 +20,18 @@
     <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
     <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
   </div>
-  <small style="margin: 5px">1.1小时</small>
+  <div class="cal-cell-bottom" *ngIf="day.events && day.events[0]">
+    <i class="dot"></i>
+    <small>{{day.events[0].meta}} 小时</small>
+  </div>
 </ng-template>
 
-<ng-template #loading>
-  <mat-spinner></mat-spinner>
-</ng-template>
 <div class="calendar-container">
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
 
-  <mat-card *ngIf="events$ | async; else loading; let events;">
+  <mat-card *ngIf="!isLoading; else loading;">
     <div [ngSwitch]="calendarMode">
 
       <mwl-calendar-month-view
@@ -37,6 +40,7 @@
         [locale]="locale"
         [events]="events"
         (dayClicked)="onClickDay($event)"
+        [cellTemplate]="customCellTemplate"
       ></mwl-calendar-month-view>
 
       <mwl-calendar-week-view

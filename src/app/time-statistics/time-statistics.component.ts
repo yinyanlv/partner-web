@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {CalendarDateFormatter, CalendarEvent} from 'angular-calendar';
-import {Observable} from 'rxjs/Observable';
+import * as startOfDay from 'date-fns/start_of_day';
 
 import {CalendarDialogComponent} from './calendar-dialog/calendar-dialog.component';
 import {CustomCalendarDateFormatter} from '../shared/etc/custom-calendar-date-formatter';
@@ -22,8 +22,9 @@ export class TimeStatisticsComponent implements OnInit {
   private date: Date = new Date();
   private locale: string = 'zh';
   private timeCount: number = 33;
-  private events$: Observable<Array<CalendarEvent>>;
+  private events: Array<CalendarEvent> = [];
   private dialogRef: MatDialogRef;
+  private isLoading: boolean = false;
 
   constructor(
     private dialog: MatDialog,
@@ -36,13 +37,32 @@ export class TimeStatisticsComponent implements OnInit {
     this.getEvents();
   }
 
-  onClickDay(event) {
+  onClickDay(event: CalendarEvent) {
 
     this.dialogRef = this.dialog.open(CalendarDialogComponent, {
       data: event
     });
 
     this.dialogRef.afterClosed().subscribe((data) => {
+
+      if (!data) return;
+
+      if (data.isUpdate) {
+
+        if (data.timeCount) {  // 更新
+          event.day.events[0].meta = data.timeCount;
+        } else {  // 删除
+          event.day.events[0] = null;
+          event.day.badgeTotal = 0;
+        }
+      } else {  // 增加
+
+        this.events = this.events.concat({
+          start: startOfDay(data.date),
+          title: data.timeCount + '小时',
+          meta: data.timeCount
+        });
+      }
     });
   }
 
@@ -54,6 +74,11 @@ export class TimeStatisticsComponent implements OnInit {
 
   getEvents() {
 
-    this.events$ = this.service.getEvents();
+    this.isLoading = true;
+
+    setTimeout(() => {
+      this.events = this.service.getEvents();
+      this.isLoading = false;
+    }, 1000);
   }
 }
