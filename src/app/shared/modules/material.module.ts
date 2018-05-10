@@ -11,7 +11,8 @@ import {
   MatSidenavModule,
   MatListModule,
   MatTabsModule,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 const modules = [
@@ -26,7 +27,8 @@ const modules = [
   MatSidenavModule,
   MatListModule,
   MatTabsModule,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({

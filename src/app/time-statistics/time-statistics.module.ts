@@ -8,6 +8,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from '../shared/modules/material.module';
 import {TimeStatisticsRoutingModule} from './time-statistics.routing';
 import {TimeStatisticsComponent} from './time-statistics.component';
+import {TimeStatisticsService} from './time-statistics.service';
 import { CalendarDialogComponent } from './calendar-dialog/calendar-dialog.component';
 
 registerLocaleData(localeZh);
@@ -27,6 +28,9 @@ registerLocaleData(localeZh);
   ],
   entryComponents: [
     CalendarDialogComponent
+  ],
+  providers: [
+    TimeStatisticsService
   ]
 })
 export class TimeStatisticsModule {

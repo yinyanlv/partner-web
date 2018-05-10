@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog, MatDialogRef, MatDialogConfig} from '@angular/material';
-import {CalendarEvent, CalendarDateFormatter} from 'angular-calendar';
-import * as startOfDay from 'date-fns/start_of_day';
+import {MatDialog, MatDialogRef} from '@angular/material';
+import {CalendarDateFormatter, CalendarEvent} from 'angular-calendar';
+import {Observable} from 'rxjs/Observable';
 
 import {CalendarDialogComponent} from './calendar-dialog/calendar-dialog.component';
 import {CustomCalendarDateFormatter} from '../shared/etc/custom-calendar-date-formatter';
+import {TimeStatisticsService} from './time-statistics.service';
 
 @Component({
   selector: 'app-time-statistics',
@@ -21,34 +22,38 @@ export class TimeStatisticsComponent implements OnInit {
   private date: Date = new Date();
   private locale: string = 'zh';
   private timeCount: number = 33;
-  private color = {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  };
-  private events: Array<CalendarEvent> = [{
-    start: startOfDay(new Date()),
-    title: 'an event',
-    color: this.color,
-    meta: 1.5
-  }];
+  private events$: Observable<Array<CalendarEvent>>;
+  private dialogRef: MatDialogRef;
 
-  private dialogRef: MatDialogRef<CalendarDialogComponent, any>;
-
-  constructor(private dialog: MatDialog) {
+  constructor(
+    private dialog: MatDialog,
+    private service: TimeStatisticsService
+  ) {
   }
 
   ngOnInit() {
 
+    this.getEvents();
   }
 
   onClickDay(event) {
 
-    console.log(event);
-    // this.dialogRef = this.dialog.open(CalendarDialogComponent, {
-    //   data: event
-    // });
-    //
-    // this.dialogRef.afterClosed().subscribe((data) => {
-    // });
+    this.dialogRef = this.dialog.open(CalendarDialogComponent, {
+      data: event
+    });
+
+    this.dialogRef.afterClosed().subscribe((data) => {
+    });
+  }
+
+  changeCalendarMode(mode: string) {
+
+    this.calendarMode = mode;
+    this.getEvents();
+  }
+
+  getEvents() {
+
+    this.events$ = this.service.getEvents();
   }
 }
