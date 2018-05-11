@@ -1,6 +1,10 @@
 @import "~assets/styles/scss/etc/vars";
 
 mat-nav-list{
+  .active{
+    background: rgba(0, 0, 0, 0.1);
+  }
+
   a {
     display: flex;
     flex-direction: row;

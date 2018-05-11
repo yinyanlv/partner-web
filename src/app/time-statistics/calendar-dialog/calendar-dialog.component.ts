@@ -8,8 +8,8 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class CalendarDialogComponent implements OnInit {
 
-  private timeCount: string | number;
-  private date: Date;
+  public timeCount: string | number;
+  public date: Date;
   private isUpdate: boolean = false;
 
   constructor(

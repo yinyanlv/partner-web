@@ -18,13 +18,13 @@ import {TimeStatisticsService} from './time-statistics.service';
 })
 export class TimeStatisticsComponent implements OnInit {
 
-  private calendarMode: string = 'month';
-  private date: Date = new Date();
-  private locale: string = 'zh';
-  private timeCount: number = 0;
-  private events: Array<CalendarEvent> = [];
+  public calendarMode: string = 'month';
+  public date: Date = new Date();
+  public locale: string = 'zh';
+  public timeCount: number = 0;
+  public events: Array<CalendarEvent> = [];
   private dialogRef: MatDialogRef<CalendarDialogComponent>;
-  private isLoading: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(
     private dialog: MatDialog,

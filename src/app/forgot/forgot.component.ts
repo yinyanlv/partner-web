@@ -8,7 +8,7 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 })
 export class ForgotComponent implements OnInit {
 
-  private form: FormGroup;
+  public form: FormGroup;
 
   constructor(
     private fb: FormBuilder
@@ -19,5 +19,9 @@ export class ForgotComponent implements OnInit {
     this.form = this.fb.group({
       email: [null, [Validators.required, Validators.email]]
     });
+  }
+
+  onSubmit() {
+
   }
 }

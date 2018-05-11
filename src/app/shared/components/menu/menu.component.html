@@ -1,11 +1,11 @@
 <mat-nav-list>
-  <mat-list-item>
+  <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
     <a [routerLink]="['/']">
       <mat-icon>explore</mat-icon>
       <span class="text">首页</span>
     </a>
   </mat-list-item>
-  <mat-list-item>
+  <mat-list-item routerLinkActive="active"  [routerLinkActiveOptions]="{exact: true}">
     <a [routerLink]="['/time-statistics']">
       <mat-icon>equalizer</mat-icon>
       <span class="text">加班工时统计</span>
