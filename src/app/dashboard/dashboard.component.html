@@ -1,3 +1,22 @@
-<div [ngStyle.lt-md]="{'font-size': '22px'}">
+<div class="welcome" [ngStyle.lt-md]="{'font-size': '22px'}" *ngIf="isShowWelcome;else dashboard;">
   欢迎来到PARTNER！
 </div>
+
+<ng-template #dashboard>
+  <div class="panel" fxLayout="row wrap" fxLayoutAlign="start start">
+    <mat-card fxFlex fxFlex.gt-sm="50%">
+      <mat-card-subtitle>
+        <span class="chart-title">加班工时趋势图</span>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <canvas class="chart" baseChart style="width: 100%;"
+                [datasets]="timeChartData"
+                [labels]="timeChartLabels"
+                [options]="timeChartOptions"
+                [legend]="timeChartLegend"
+                [colors]="chartColors"
+                [chartType]="timeChartType"></canvas>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-template>

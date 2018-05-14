@@ -23,7 +23,10 @@
         "../node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
         "../node_modules/angular-calendar/css/angular-calendar.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/hammerjs/hammer.min.js",
+        "../node_modules/chart.js/dist/Chart.bundle.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

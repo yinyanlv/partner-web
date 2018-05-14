@@ -1,7 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {ChartsModule} from 'ng2-charts';
 
+import {MaterialModule} from '../shared/modules/material.module';
 import {DashboardRoutingModule} from './dashboard.routing';
 import {DashboardComponent} from './dashboard.component';
 
@@ -9,9 +11,13 @@ import {DashboardComponent} from './dashboard.component';
   imports: [
     CommonModule,
     FlexLayoutModule,
-    DashboardRoutingModule
+    ChartsModule,
+    DashboardRoutingModule,
+    MaterialModule
   ],
-  declarations: [DashboardComponent]
+  declarations: [
+    DashboardComponent
+  ]
 })
 export class DashboardModule {
 }
