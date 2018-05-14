@@ -38,6 +38,10 @@ input {
   align-items: center;
 }
 
+.session-container, .error-container{
+  padding: 1rem;
+}
+
 .pt-1-rem{
   padding-top: 1rem !important;
 }
@@ -52,14 +56,4 @@ input {
 
 .visible{
   overflow: visible;
-}
-
-.ps__rail-x{
-  top: auto !important;
-  bottom:0;
-}
-
-.ps__rail-y{
-  left: auto !important;
-  right: 0;
 }

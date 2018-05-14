@@ -2,15 +2,17 @@
   <ngx-loading-bar></ngx-loading-bar>
   <app-header (toggleMenu)="menu.toggle()" (toggleNotification)="notification.toggle()"></app-header>
   <mat-sidenav-container>
-    <mat-sidenav class="menu" #menu [mode]="getNavMode()" opened="true">
+    <mat-sidenav class="menu" #menu [mode]="getNavMode()" opened="true" perfectScrollbar>
       <app-menu></app-menu>
     </mat-sidenav>
-    <mat-sidenav mode="over" #notification position="end">
+    <mat-sidenav class="notification" mode="over" #notification position="end" perfectScrollbar>
       <app-notification></app-notification>
     </mat-sidenav>
-    <div class="app-main-content">
-      <router-outlet></router-outlet>
-    </div>
+    <mat-sidenav-content fxFlex>
+      <div class="app-main-content" perfectScrollbar>
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
   </mat-sidenav-container>
   <app-options></app-options>
 </div>

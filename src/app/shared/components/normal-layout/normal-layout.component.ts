@@ -1,5 +1,4 @@
-import {Component, ViewChild, ComponentRef, NgZone} from '@angular/core';
-import { PerfectScrollbarConfigInterface, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
+import {Component, NgZone} from '@angular/core';
 
 const SMALL_WIDTH_BREAKPOINT = '960px';
 
@@ -12,10 +11,7 @@ const SMALL_WIDTH_BREAKPOINT = '960px';
 })
 export class NormalLayoutComponent {
 
-  private scrollBarConfig: PerfectScrollbarConfigInterface = {};
   private mqlEvent: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT})`);
-
-  @ViewChild(PerfectScrollbarDirective) scrollBar: PerfectScrollbarDirective;
 
   constructor(
     private zone: NgZone
@@ -25,7 +21,7 @@ export class NormalLayoutComponent {
       zone.run(() => {
         this.mqlEvent = mql;
       });
-    })
+    });
   }
 
   ngOnInit() {
@@ -33,8 +29,6 @@ export class NormalLayoutComponent {
   }
 
   getNavMode() {
-console.log(this.mqlEvent.matches);
-console.log(this.mqlEvent.matches);
     return this.mqlEvent.matches ? 'over' : 'side';
   }
 }

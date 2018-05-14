@@ -1,6 +1,6 @@
-<mat-toolbar class="block-header" color="primary" fxLayout fxLayoutAlign="space-between center">
+<mat-toolbar class="header" color="primary" fxLayout fxLayoutAlign="space-between center">
   <div fxLayout fxLayoutAlign="start center" fxFlex="100">
-    <button mat-icon-button (click)="toggleMenu.emit()">
+    <button mat-icon-button (click)="toggleMenu.emit()" matTooltip="菜单">
       <mat-icon>menu</mat-icon>
     </button>
     <a class="logo" [routerLink]="['/']">PARTNER</a>
@@ -12,14 +12,14 @@
     </div>
   </div>
   <div fxLayout fxLayoutAlign="end center">
-    <button mat-icon-button (click)="toggleFullScreen()">
+    <button mat-icon-button (click)="toggleFullScreen()" matTooltip="全屏">
       <mat-icon>fullscreen</mat-icon>
     </button>
-    <button mat-icon-button class="visible ml-8-px" (click)="toggleNotification.emit()">
+    <button mat-icon-button class="visible ml-8-px" (click)="toggleNotification.emit()" matTooltip="消息">
       <mat-icon>notifications</mat-icon>
       <span class="number">5</span>
     </button>
-    <button mat-icon-button  class="ml-8-px" [matMenuTriggerFor]="user">
+    <button mat-icon-button  class="ml-8-px" [matMenuTriggerFor]="user" matTooltip="用户信息">
       <mat-icon>person</mat-icon>
     </button>
     <mat-menu #user="matMenu" x-position="before">

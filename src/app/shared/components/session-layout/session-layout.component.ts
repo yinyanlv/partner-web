@@ -11,5 +11,4 @@ export class SessionLayoutComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

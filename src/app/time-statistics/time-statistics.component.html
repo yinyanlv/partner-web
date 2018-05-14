@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-
+    <span fxFlex fxShow="false" fxShow.xs>{{date | calendarDate:(calendarMode+'ViewTitle'):'zh'}}</span>
   </mat-toolbar-row>
   <mat-toolbar-row>
     <span fxFlex fxShow="false" fxShow.gt-xs>{{date | calendarDate:(calendarMode+'ViewTitle'):'zh'}}</span>
@@ -9,9 +9,9 @@
       <button mat-button (click)="changeCalendarMode('month')" [class.active]="calendarMode === 'month'">月视图</button>
       <button mat-button (click)="changeCalendarMode('week')" [class.active]="calendarMode === 'week'">周视图</button>
     </div>
-    <button mat-icon-button mwlCalendarPreviousView (viewDateChange)="getEvents()" [view]="calendarMode" [(viewDate)]="date"><mat-icon>chevron_left</mat-icon></button>
-    <button mat-icon-button mwlCalendarToday  [(viewDate)]="date"><mat-icon>today</mat-icon></button>
-    <button mat-icon-button mwlCalendarNextView [view]="calendarMode" [(viewDate)]="date" (viewDateChange)="getEvents()"><mat-icon>chevron_right</mat-icon></button>
+    <button mat-icon-button matTooltip="上一页" mwlCalendarPreviousView (viewDateChange)="getEvents()" [view]="calendarMode" [(viewDate)]="date"><mat-icon>chevron_left</mat-icon></button>
+    <button mat-icon-button matTooltip="今天" mwlCalendarToday [(viewDate)]="date"><mat-icon>today</mat-icon></button>
+    <button mat-icon-button matTooltip="下一页" mwlCalendarNextView [view]="calendarMode" [(viewDate)]="date" (viewDateChange)="getEvents()"><mat-icon>chevron_right</mat-icon></button>
   </mat-toolbar-row>
 </mat-toolbar>
 
