@@ -1,8 +1,8 @@
-<div>
+<div class="normal-layout">
   <ngx-loading-bar></ngx-loading-bar>
   <app-header (toggleMenu)="menu.toggle()" (toggleNotification)="notification.toggle()"></app-header>
   <mat-sidenav-container>
-    <mat-sidenav class="menu" #menu mode="side" opened="true">
+    <mat-sidenav class="menu" #menu [mode]="getNavMode()" opened="true">
       <app-menu></app-menu>
     </mat-sidenav>
     <mat-sidenav mode="over" #notification position="end">

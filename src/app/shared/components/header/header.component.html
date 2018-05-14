@@ -1,36 +1,40 @@
-<mat-toolbar color="primary" class="block-header">
-  <button mat-icon-button (click)="toggleMenu.emit()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <a class="logo" [routerLink]="['/']">PARTNER</a>
-  <div class="search-form-wrapper" fxFlex>
-    <form class="search-form" novalidate>
-      <mat-icon>search</mat-icon>
-      <input type="text" placeholder="请输入关键字" />
-    </form>
+<mat-toolbar class="block-header" color="primary" fxLayout fxLayoutAlign="space-between center">
+  <div fxLayout fxLayoutAlign="start center" fxFlex="100">
+    <button mat-icon-button (click)="toggleMenu.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a class="logo" [routerLink]="['/']">PARTNER</a>
+    <div class="search-form-wrapper" fxFlex.gt-sm fxHide="false" fxHide.lt-md>
+      <form class="search-form" novalidate>
+        <mat-icon>search</mat-icon>
+        <input type="text" placeholder="请输入关键字" />
+      </form>
+    </div>
   </div>
-  <button mat-icon-button (click)="toggleFullScreen()">
-    <mat-icon>fullscreen</mat-icon>
-  </button>
-  <button mat-icon-button class="visible ml-8-px" (click)="toggleNotification.emit()">
-    <mat-icon>notifications</mat-icon>
-    <span class="number">5</span>
-  </button>
-  <button mat-icon-button  class="ml-8-px" [matMenuTriggerFor]="user">
-    <mat-icon>person</mat-icon>
-  </button>
-  <mat-menu #user="matMenu" x-position="before">
-    <button mat-menu-item>
-      <mat-icon>settings</mat-icon> 设置
+  <div fxLayout fxLayoutAlign="end center">
+    <button mat-icon-button (click)="toggleFullScreen()">
+      <mat-icon>fullscreen</mat-icon>
     </button>
-    <button mat-menu-item>
-      <mat-icon>account_box</mat-icon> 个人信息
+    <button mat-icon-button class="visible ml-8-px" (click)="toggleNotification.emit()">
+      <mat-icon>notifications</mat-icon>
+      <span class="number">5</span>
     </button>
-    <button mat-menu-item>
-      <mat-icon>notifications_off</mat-icon> 关闭通知
+    <button mat-icon-button  class="ml-8-px" [matMenuTriggerFor]="user">
+      <mat-icon>person</mat-icon>
     </button>
-    <button mat-menu-item>
-      <mat-icon>exit_to_app</mat-icon> 退出登录
-    </button>
-  </mat-menu>
+    <mat-menu #user="matMenu" x-position="before">
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon> 设置
+      </button>
+      <button mat-menu-item>
+        <mat-icon>account_box</mat-icon> 个人信息
+      </button>
+      <button mat-menu-item>
+        <mat-icon>notifications_off</mat-icon> 关闭通知
+      </button>
+      <button mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon> 退出登录
+      </button>
+    </mat-menu>
+  </div>
 </mat-toolbar>
