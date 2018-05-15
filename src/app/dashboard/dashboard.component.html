@@ -3,20 +3,36 @@
 </div>
 
 <ng-template #dashboard>
-  <div class="panel" fxLayout="row wrap" fxLayoutAlign="start start">
-    <mat-card fxFlex fxFlex.gt-sm="50%">
-      <mat-card-subtitle>
-        <span class="chart-title">加班工时趋势图</span>
-      </mat-card-subtitle>
-      <mat-card-content>
-        <canvas class="chart" baseChart style="width: 100%;"
-                [datasets]="timeChartData"
-                [labels]="timeChartLabels"
-                [options]="timeChartOptions"
-                [legend]="timeChartLegend"
-                [colors]="chartColors"
-                [chartType]="timeChartType"></canvas>
-      </mat-card-content>
-    </mat-card>
+  <div class="panel" fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutGap.lt-md="0px grid" fxLayoutAlign="start start">
+    <div fxFlex="50" fxFlex.lt-md="100">
+      <mat-card>
+        <mat-card-title>加班工时统计</mat-card-title>
+        <mat-card-subtitle>单位：小时</mat-card-subtitle>
+        <mat-card-content>
+          <canvas class="chart" baseChart style="width: 100%;"
+                  [datasets]="timeChartData"
+                  [labels]="timeChartLabels"
+                  [options]="timeChartOptions"
+                  [legend]="timeChartLegend"
+                  [colors]="chartColors"
+                  [chartType]="timeChartType"></canvas>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div fxFlex="50" fxFlex.lt-md="100">
+      <mat-card>
+        <mat-card-title>工作任务统计</mat-card-title>
+        <mat-card-subtitle>单位：个</mat-card-subtitle>
+        <mat-card-content>
+          <canvas class="chart" baseChart style="width: 100%;"
+                  [datasets]="timeChartData"
+                  [labels]="timeChartLabels"
+                  [options]="timeChartOptions"
+                  [legend]="timeChartLegend"
+                  [colors]="chartColors"
+                  [chartType]="timeChartType"></canvas>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </ng-template>

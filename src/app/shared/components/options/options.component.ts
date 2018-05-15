@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-options',
@@ -7,4 +7,11 @@ import {Component} from '@angular/core';
 })
 export class OptionsComponent {
 
+  @Input()
+  isShowOptions: boolean = false;
+
+  toggleOptionsStatus() {
+
+    this.isShowOptions = !this.isShowOptions;
+  }
 }
