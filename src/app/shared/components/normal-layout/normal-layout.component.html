@@ -1,6 +1,6 @@
 <div class="normal-layout">
   <ngx-loading-bar></ngx-loading-bar>
-  <app-header (toggleMenu)="menu.toggle()" (toggleNotification)="notification.toggle()"></app-header>
+  <app-header (toggleMenu)="menu.toggle()" (toggleNotification)="notification.toggle()" (toggleOptionsFab)="toggleOptionsFab($event)"></app-header>
   <mat-sidenav-container>
     <mat-sidenav class="menu" #menu [mode]="navMode" opened="true" perfectScrollbar>
       <app-menu></app-menu>
@@ -14,5 +14,5 @@
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
-  <app-options></app-options>
+  <app-options *ngIf="isShowOptionsFab"></app-options>
 </div>

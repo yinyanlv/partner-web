@@ -10,7 +10,8 @@ import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 })
 export class NormalLayoutComponent {
 
-  public navMode: string;
+  navMode: string;
+  isShowOptionsFab: boolean;
 
   constructor(private media: ObservableMedia) {
 
@@ -27,5 +28,10 @@ export class NormalLayoutComponent {
 
   ngOnInit() {
 
+  }
+
+  toggleOptionsFab(isShow) {
+
+    this.isShowOptionsFab = isShow;
   }
 }

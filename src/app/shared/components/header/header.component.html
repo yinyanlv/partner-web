@@ -24,7 +24,7 @@
       <span class="user">欢迎您，admin</span>
     </button>
 
-    <mat-menu #user="matMenu" x-position="before">
+    <mat-menu #user="matMenu" x-position="end">
       <button mat-menu-item (click)="goToUserCenter()">
         <mat-icon>person</mat-icon> 用户中心
       </button>
@@ -33,6 +33,12 @@
       </button>
       <button mat-menu-item *ngIf="isShowNotification"  (click)="toggleNotificationStatus()">
         <mat-icon>notifications_off</mat-icon> 关闭消息
+      </button>
+      <button mat-menu-item *ngIf="!isShowOptionsFab" (click)="toggleOptionsFabStatus()">
+        <mat-icon>visibility</mat-icon> 显示悬浮按钮
+      </button>
+      <button mat-menu-item *ngIf="isShowOptionsFab"  (click)="toggleOptionsFabStatus()">
+        <mat-icon>visibility_off</mat-icon> 隐藏悬浮按钮
       </button>
       <button mat-menu-item>
         <mat-icon>exit_to_app</mat-icon> 退出登录

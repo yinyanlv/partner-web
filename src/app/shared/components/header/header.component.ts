@@ -10,9 +10,13 @@ import * as screenfull from 'screenfull';
 export class HeaderComponent implements OnInit {
 
   isShowNotification: boolean = true;
+  isShowOptionsFab: boolean = true;
 
   @Output()
   toggleMenu: EventEmitter<void> = new EventEmitter<void>();
+
+  @Output()
+  toggleOptionsFab: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Output()
   toggleNotification: EventEmitter<void> = new EventEmitter<void>();
@@ -23,6 +27,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.toggleOptionsFab.emit(this.isShowOptionsFab);
   }
 
   toggleFullScreen() {
@@ -39,5 +45,10 @@ export class HeaderComponent implements OnInit {
 
   toggleNotificationStatus() {
     this.isShowNotification = !this.isShowNotification;
+  }
+
+  toggleOptionsFabStatus() {
+    this.isShowOptionsFab = !this.isShowOptionsFab;
+    this.toggleOptionsFab.emit(this.isShowOptionsFab);
   }
 }

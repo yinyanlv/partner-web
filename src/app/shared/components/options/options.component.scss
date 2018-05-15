@@ -4,3 +4,11 @@
   bottom: 20px;
   right: 20px;
 }
+
+.options {
+  position: fixed;
+  bottom: 6px;
+  right: 6px;
+  width: 250px;
+  z-index: 100;
+}
