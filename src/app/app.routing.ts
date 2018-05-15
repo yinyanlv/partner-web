@@ -13,6 +13,9 @@ const routes: Routes = [{
   }, {
     path: 'time-statistics',
     loadChildren: './time-statistics/time-statistics.module#TimeStatisticsModule'
+  }, {
+    path: 'user',
+    loadChildren: './user/user.module#UserModule'
   }]
 }, {
   path: '',

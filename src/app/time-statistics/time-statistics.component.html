@@ -17,7 +17,7 @@
 
 <ng-template #customCellTemplate let-day="day" let-locale="locale">
   <div class="cal-cell-top">
-    <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+    <!--<span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>-->
     <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
   </div>
   <div class="cal-cell-bottom" *ngIf="day.events && day.events[0]">

@@ -12,25 +12,27 @@
     </div>
   </div>
   <div fxLayout fxLayoutAlign="end center">
-    <button mat-icon-button (click)="toggleFullScreen()" matTooltip="全屏">
+    <button mat-icon-button (click)="toggleFullScreen()" matTooltip="全屏" fxHide="false" fxHide.lt-md>
       <mat-icon>fullscreen</mat-icon>
     </button>
-    <button mat-icon-button class="visible ml-8-px" (click)="toggleNotification.emit()" matTooltip="消息">
+    <button mat-icon-button class="visible ml-8-px" *ngIf="isShowNotification" (click)="toggleNotification.emit()" matTooltip="消息">
       <mat-icon>notifications</mat-icon>
       <span class="number">5</span>
     </button>
-    <button mat-icon-button  class="ml-8-px" [matMenuTriggerFor]="user" matTooltip="用户信息">
+    <button mat-button  class="ml-8-px" [matMenuTriggerFor]="user" matTooltip="用户信息">
       <mat-icon>person</mat-icon>
+      <span class="user">欢迎您，admin</span>
     </button>
+
     <mat-menu #user="matMenu" x-position="before">
-      <button mat-menu-item>
-        <mat-icon>settings</mat-icon> 设置
+      <button mat-menu-item (click)="goToUserCenter()">
+        <mat-icon>person</mat-icon> 用户中心
       </button>
-      <button mat-menu-item>
-        <mat-icon>account_box</mat-icon> 个人信息
+      <button mat-menu-item *ngIf="!isShowNotification" (click)="toggleNotificationStatus()">
+        <mat-icon>notifications_on</mat-icon> 开启消息
       </button>
-      <button mat-menu-item>
-        <mat-icon>notifications_off</mat-icon> 关闭通知
+      <button mat-menu-item *ngIf="isShowNotification"  (click)="toggleNotificationStatus()">
+        <mat-icon>notifications_off</mat-icon> 关闭消息
       </button>
       <button mat-menu-item>
         <mat-icon>exit_to_app</mat-icon> 退出登录

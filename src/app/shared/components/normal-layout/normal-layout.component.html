@@ -2,7 +2,7 @@
   <ngx-loading-bar></ngx-loading-bar>
   <app-header (toggleMenu)="menu.toggle()" (toggleNotification)="notification.toggle()"></app-header>
   <mat-sidenav-container>
-    <mat-sidenav class="menu" #menu [mode]="getNavMode()" opened="true" perfectScrollbar>
+    <mat-sidenav class="menu" #menu [mode]="navMode" opened="true" perfectScrollbar>
       <app-menu></app-menu>
     </mat-sidenav>
     <mat-sidenav class="notification" mode="over" #notification position="end" perfectScrollbar>

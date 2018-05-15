@@ -1,6 +1,5 @@
-import {Component, NgZone} from '@angular/core';
-
-const SMALL_WIDTH_BREAKPOINT = '960px';
+import {Component} from '@angular/core';
+import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 
 @Component({
   selector: 'normal-layout',
@@ -11,24 +10,22 @@ const SMALL_WIDTH_BREAKPOINT = '960px';
 })
 export class NormalLayoutComponent {
 
-  private mqlEvent: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT})`);
+  public navMode: string;
 
-  constructor(
-    private zone: NgZone
-  ) {
+  constructor(private media: ObservableMedia) {
 
-    this.mqlEvent.addListener((mql) => {
-      zone.run(() => {
-        this.mqlEvent = mql;
-      });
+    media.asObservable().subscribe((change: MediaChange) => {
+
+      if (change.mqAlias === 'sm' || change.mqAlias === 'xs') {
+
+        this.navMode = 'over';
+      } else {
+        this.navMode = 'side';
+      }
     });
   }
 
   ngOnInit() {
 
-  }
-
-  getNavMode() {
-    return this.mqlEvent.matches ? 'over' : 'side';
   }
 }
