@@ -6,17 +6,9 @@ $font-color: #333;
 $lighter-font-color: #666;
 $lightest-font-color: #999;
 $gutter: 1rem;
-$menu-width: 15rem !default;
 $mat-toolbar-height-desktop: 64px !default;
 $mat-toolbar-height-mobile-portrait: 56px !default;
 $mat-toolbar-height-mobile-landscape: 48px !default;
-
-$collapsed-menu-width: 80px !default;
-
-$grid-breakpoints: (
-  xs: 0,
-  sm: 600px,
-  md: 960px,
-  lg: 1280px,
-  xl: 1920px
-) !default;
+$menu-width: 15rem !default;
+$collapsed-menu-width: 60px !default;
+$compact-menu-width: 80px !default;

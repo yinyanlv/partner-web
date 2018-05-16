@@ -1,16 +1,16 @@
 <div class="normal-layout" [ngClass]="{
   'menu-collapsed-mode': settingsStatus.menuCollapsed,
-  'menu-compact-mode': settingsStatus.menuCompact,
+  'menu-compact-mode': settingsStatus.menuCompact && !settingsStatus.menuCollapsed,
   'app-dark-theme': settingsStatus.appDark,
   'app-boxed': settingsStatus.appBoxed
 }">
   <ngx-loading-bar></ngx-loading-bar>
   <app-header (toggleMenu)="menu.toggle()" (toggleNotification)="notification.toggle()" (toggleOptionsFab)="toggleOptionsFab($event)"></app-header>
   <mat-sidenav-container>
-    <mat-sidenav class="menu" #menu [mode]="navMode" opened="true" perfectScrollbar>
+    <mat-sidenav class="menu-wrapper" #menu [mode]="navMode" opened="true" perfectScrollbar>
       <app-menu></app-menu>
     </mat-sidenav>
-    <mat-sidenav class="notification" mode="over" #notification position="end" perfectScrollbar>
+    <mat-sidenav class="notification-wrapper" mode="over" #notification position="end" perfectScrollbar>
       <app-notification></app-notification>
     </mat-sidenav>
     <mat-sidenav-content fxFlex>

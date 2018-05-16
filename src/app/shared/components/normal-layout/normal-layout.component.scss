@@ -1,5 +1,4 @@
 @import "~assets/styles/scss/etc/vars";
-@import "~assets/styles/scss/etc/mixins";
 
 .normal-layout{
 
@@ -11,10 +10,12 @@
 
   mat-sidenav-content{
     overflow: hidden;
+    transition: margin-left .4s cubic-bezier(.25,.8,.25,1);
   }
 
-  .menu{
+  .menu-wrapper{
     width: $menu-width;
+    transition: width .4s cubic-bezier(.25, .8, .25, 1), transform .4s cubic-bezier(.25, .8, .25, 1) !important;
     box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0 1px 3px 0px rgba(0, 0, 0, 0.12);
   }
 
@@ -24,8 +25,126 @@
     overflow: hidden;
   }
 
-  .notification{
+  .notification-wrapper{
     max-width: 320px;
     width: 100%;
+  }
+}
+
+:host ::ng-deep {
+
+  .menu-collapsed-mode {
+
+    app-menu{
+      mat-nav-list {
+        display: block;
+      }
+    }
+
+    mat-sidenav-content{
+      margin-left: $collapsed-menu-width !important;
+    }
+
+    .menu-wrapper:not(:hover) {
+      width:  $collapsed-menu-width;
+
+      mat-icon{
+        margin-right:0;
+      }
+
+      .sub-menu {
+        display: none !important;
+      }
+
+      .text{
+        display: none;
+      }
+
+      .arrow{
+        display: none;
+      }
+    }
+  }
+
+  .menu-compact-mode {
+
+    mat-sidenav-content{
+      margin-left: $compact-menu-width !important;
+    }
+
+    .menu-wrapper{
+      width: $compact-menu-width !important;
+      overflow: visible !important;
+
+      .mat-list-item-content{
+        display: block;
+        overflow: visible;
+        position: relative;
+
+        &:hover{
+
+          .sub-menu{
+            display: block !important;
+          }
+        }
+      }
+
+      a {
+        box-sizing: content-box;
+        display: flex;
+        flex-direction: column;
+        padding: 12px 0 8px;
+
+        mat-icon {
+          width: $compact-menu-width;
+          margin: 0 !important;
+          text-align: center;
+        }
+
+        .text{
+          line-height: 24px;
+        }
+      }
+
+      .sub-menu {
+        display: none;
+        position: absolute;
+        left: 100%;
+        top:0;
+        max-height: 1000px;
+        z-index: 100;
+        background: #fff;
+        box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+
+        mat-list-item{
+          background: #fff;
+        }
+
+        a{
+          min-width: $compact-menu-width;
+          display: block;
+          box-sizing: border-box;
+          height: auto;
+          padding: 0 10px !important;
+        }
+
+        .text{
+          white-space: nowrap;
+          text-align: left;
+          height:36px !important;
+          line-height: 36px !important;
+          font-size:14px;
+        }
+      }
+
+      .text{
+        text-align: center;
+        font-size:12px;
+      }
+
+      .arrow{
+        display: none;
+      }
+    }
   }
 }

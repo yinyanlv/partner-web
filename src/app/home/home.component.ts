@@ -55,7 +55,8 @@ export class HomeComponent implements OnInit {
     }
   }, this.chartOptions);
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
