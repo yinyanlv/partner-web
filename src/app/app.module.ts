@@ -1,10 +1,14 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule} from '@angular/core';
+import {NgModule, LOCALE_ID} from '@angular/core';
+import {registerLocaleData} from '@angular/common';
+import localeZh from '@angular/common/locales/zh';
 
 import {ComponentsModule} from './shared/modules/components.module';
 import {AppRoutingModule} from './app.routing';
 import {AppComponent} from './app.component';
+
+registerLocaleData(localeZh);
 
 @NgModule({
   imports: [
@@ -16,7 +20,10 @@ import {AppComponent} from './app.component';
   declarations: [
     AppComponent
   ],
-  providers: [],
+  providers: [{
+    provide: LOCALE_ID,
+    useValue: 'zh'
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

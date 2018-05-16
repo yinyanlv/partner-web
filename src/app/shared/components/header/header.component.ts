@@ -1,6 +1,9 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {MatDialog, MatDialogRef} from '@angular/material';
 import {Router} from '@angular/router';
 import * as screenfull from 'screenfull';
+
+import {ConfirmDialogComponent} from '../../components/dialog/confirm/confirm-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +14,7 @@ export class HeaderComponent implements OnInit {
 
   isShowNotification: boolean = true;
   isShowSettingsFab: boolean = true;
+  private dialogRef: MatDialogRef<ConfirmDialogComponent>;
 
   @Output()
   toggleMenu: EventEmitter<void> = new EventEmitter<void>();
@@ -22,7 +26,8 @@ export class HeaderComponent implements OnInit {
   toggleNotification: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
   }
 
@@ -50,5 +55,20 @@ export class HeaderComponent implements OnInit {
   toggleOptionsFabStatus() {
     this.isShowSettingsFab = !this.isShowSettingsFab;
     this.toggleOptionsFab.emit(this.isShowSettingsFab);
+  }
+
+  confirmLogout() {
+
+    this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        content: '您确定要退出该系统？'
+      }
+    });
+
+    this.dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        console.log('logout:' + data);
+      }
+    });
   }
 }

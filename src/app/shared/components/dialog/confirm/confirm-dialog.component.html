@@ -1,0 +1,8 @@
+<h4 mat-dialog-title>{{  data.title || '提示' }}</h4>
+<div mat-dialog-content>
+  {{data.content}}
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="dialogRef.close(true)">确认</button>
+  <button mat-button (click)="dialogRef.close(false)">取消</button>
+</div>

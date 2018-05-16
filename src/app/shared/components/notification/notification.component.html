@@ -1,12 +1,27 @@
-<mat-tab-group mat-stretch-tabs>
-  <mat-tab label="今天">
-    <div>
-      今天事务
-    </div>
-  </mat-tab>
-  <mat-tab label="通知">
-    <div>
-      通知消息
-    </div>
-  </mat-tab>
-</mat-tab-group>
+<div class="notification">
+  <div class="title">今天事务</div>
+  <mat-list>
+    <mat-list-item fxFill>
+      <div class="today" fxLayout="column" fxFill>
+        <h1 class="week">{{ today | date:'EEEE' }}</h1>
+        <h3 class="date">
+          <span>{{ today | date:'yyyy' }} 年</span>
+          <span>{{ today | date:'MM' }} 月</span>
+          <span>{{ today | date:'dd' }} 日</span>
+        </h3>
+      </div>
+    </mat-list-item>
+  </mat-list>
+  <mat-divider></mat-divider>
+  <div class="sub-title">工作记录</div>
+  <mat-nav-list>
+    <mat-list-item>
+      <p class="label-line" matLine>加班工时统计状态 (0 / 1)</p>
+      <mat-progress-bar matLine mode="determinate" color="warn" value="1"></mat-progress-bar>
+    </mat-list-item>
+    <mat-list-item>
+      <p class="label-line" matLine>工作任务统计状态 (0 / 1)</p>
+      <mat-progress-bar matLine mode="determinate" color="primary" value="1"></mat-progress-bar>
+    </mat-list-item>
+  </mat-nav-list>
+</div>

@@ -12,6 +12,7 @@ import {HeaderComponent} from '../components/header/header.component';
 import {MenuComponent} from '../components/menu/menu.component';
 import {NotificationComponent} from '../components/notification/notification.component';
 import {SettingsComponent} from '../components/settings/settings.component';
+import {ConfirmDialogComponent} from '../components/dialog/confirm/confirm-dialog.component';
 
 const components = [
   NormalLayoutComponent,
@@ -19,7 +20,12 @@ const components = [
   HeaderComponent,
   MenuComponent,
   NotificationComponent,
-  SettingsComponent
+  SettingsComponent,
+  ConfirmDialogComponent
+];
+
+const entryComponents = [
+  ConfirmDialogComponent
 ];
 
 @NgModule({
@@ -36,6 +42,9 @@ const components = [
   ],
   exports: [
     ...components
+  ],
+  entryComponents: [
+    ...entryComponents
   ]
 })
 export class ComponentsModule {

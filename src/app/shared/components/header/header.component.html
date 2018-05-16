@@ -40,7 +40,7 @@
       <button mat-menu-item *ngIf="isShowSettingsFab"  (click)="toggleOptionsFabStatus()">
         <mat-icon>visibility_off</mat-icon> 隐藏悬浮按钮
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="confirmLogout()">
         <mat-icon>exit_to_app</mat-icon> 退出登录
       </button>
     </mat-menu>
