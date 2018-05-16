@@ -14,19 +14,19 @@
     <mat-list>
       <mat-list-item>
         <span fxFlex>折叠式导航菜单</span>
-        <mat-slide-toggle></mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="status.menuCollapsed" (change)="changeSettings()"></mat-slide-toggle>
       </mat-list-item>
       <mat-list-item>
         <span fxFlex>悬浮式导航菜单</span>
-        <mat-slide-toggle></mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="status.menuCompact" (change)="changeSettings()"></mat-slide-toggle>
       </mat-list-item>
       <mat-list-item>
         <span fxFlex>固定宽度排版</span>
-        <mat-slide-toggle></mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="status.appBoxed" (change)="changeSettings()"></mat-slide-toggle>
       </mat-list-item>
       <mat-list-item>
         <span fxFlex>黑夜模式</span>
-        <mat-slide-toggle></mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="status.appDark" (change)="changeSettings()"></mat-slide-toggle>
       </mat-list-item>
     </mat-list>
   </mat-card-content>

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-settings',
@@ -7,11 +7,26 @@ import {Component, Input} from '@angular/core';
 })
 export class SettingsComponent {
 
+  status: any = {
+    menuCollapsed: false,
+    menuCompact: false,
+    appBoxed: false,
+    appDark: false
+  };
+
   @Input()
   isShowSettings: boolean = false;
+
+  @Output()
+  onSettingsChange: EventEmitter<any> = new EventEmitter<any>();
 
   toggleOptionsStatus() {
 
     this.isShowSettings = !this.isShowSettings;
+  }
+
+  changeSettings() {
+
+    this.onSettingsChange.emit(this.status);
   }
 }

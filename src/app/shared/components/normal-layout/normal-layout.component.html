@@ -1,4 +1,9 @@
-<div class="normal-layout">
+<div class="normal-layout" [ngClass]="{
+  'menu-collapsed-mode': settingsStatus.menuCollapsed,
+  'menu-compact-mode': settingsStatus.menuCompact,
+  'app-dark-theme': settingsStatus.appDark,
+  'app-boxed': settingsStatus.appBoxed
+}">
   <ngx-loading-bar></ngx-loading-bar>
   <app-header (toggleMenu)="menu.toggle()" (toggleNotification)="notification.toggle()" (toggleOptionsFab)="toggleOptionsFab($event)"></app-header>
   <mat-sidenav-container>
@@ -14,5 +19,5 @@
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
-  <app-settings *ngIf="isShowSettingsFab"></app-settings>
+  <app-settings *ngIf="isShowSettingsFab" (onSettingsChange)="changeSettings($event)"></app-settings>
 </div>

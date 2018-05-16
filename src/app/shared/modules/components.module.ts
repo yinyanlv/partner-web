@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
+import {FormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {LoadingBarRouterModule} from '@ngx-loading-bar/router';
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
@@ -32,6 +33,7 @@ const entryComponents = [
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     FlexLayoutModule,
     LoadingBarRouterModule,
     PerfectScrollbarModule,

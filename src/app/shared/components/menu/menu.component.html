@@ -9,7 +9,15 @@
     <a [routerLink]="['/work']">
       <mat-icon>event_note</mat-icon>
       <span class="text">工作记录</span>
+      <mat-icon class="menu-caret">arrow_drop_down</mat-icon>
     </a>
+    <mat-nav-list class="sub-menu">
+      <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a [routerLink]="['/work']">
+          <span class="text">工作记录</span>
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
   </mat-list-item>
   <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
     <a [routerLink]="['/user']">

@@ -23,3 +23,8 @@ mat-nav-list{
     color: $lighter-font-color;
   }
 }
+
+mat-nav-list.sub-menu {
+  padding-top: 0;
+  overflow: hidden;
+}

@@ -13,6 +13,13 @@ export class NormalLayoutComponent {
   navMode: string;
   isShowSettingsFab: boolean;
 
+  settingsStatus: any = {
+    menuCollapsed: false,
+    menuCompact: false,
+    appBoxed: false,
+    appDark: false
+  };
+
   constructor(private media: ObservableMedia) {
 
     media.asObservable().subscribe((change: MediaChange) => {
@@ -33,5 +40,10 @@ export class NormalLayoutComponent {
   toggleOptionsFab(isShow) {
 
     this.isShowSettingsFab = isShow;
+  }
+
+  changeSettings(status) {
+
+    this.settingsStatus = status;
   }
 }
