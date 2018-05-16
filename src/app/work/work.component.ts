@@ -5,18 +5,18 @@ import * as startOfDay from 'date-fns/start_of_day';
 
 import {CalendarDialogComponent} from './calendar-dialog/calendar-dialog.component';
 import {CustomCalendarDateFormatter} from '../shared/etc/custom-calendar-date-formatter';
-import {TimeStatisticsService} from './time-statistics.service';
+import {WorkService} from './work.service';
 
 @Component({
-  selector: 'app-time-statistics',
-  templateUrl: './time-statistics.component.html',
-  styleUrls: ['./time-statistics.component.scss'],
+  selector: 'app-work',
+  templateUrl: './work.component.html',
+  styleUrls: ['./work.component.scss'],
   providers: [{
     provide: CalendarDateFormatter,
     useClass: CustomCalendarDateFormatter
   }]
 })
-export class TimeStatisticsComponent implements OnInit {
+export class WorkComponent implements OnInit {
 
   public calendarMode: string = 'month';
   public date: Date = new Date();
@@ -28,7 +28,7 @@ export class TimeStatisticsComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private service: TimeStatisticsService
+    private service: WorkService
   ) {
   }
 

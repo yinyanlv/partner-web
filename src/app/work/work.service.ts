@@ -3,7 +3,7 @@ import {CalendarEvent} from 'angular-calendar';
 import * as startOfDay from 'date-fns/start_of_day';
 
 @Injectable()
-export class TimeStatisticsService {
+export class WorkService {
 
   constructor() { }
 

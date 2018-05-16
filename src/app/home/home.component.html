@@ -1,9 +1,9 @@
-<div class="welcome" [ngStyle.lt-md]="{'font-size': '22px'}" *ngIf="isShowWelcome;else dashboard;">
+<div class="welcome" [ngStyle.lt-md]="{'font-size': '22px'}" *ngIf="isShowWelcome;else charts;">
   欢迎来到PARTNER！
 </div>
 
-<ng-template #dashboard>
-  <div class="panel" fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutGap.lt-md="0px grid" fxLayoutAlign="start start">
+<ng-template #charts>
+  <div class="charts-wrapper" fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutGap.lt-md="0px grid" fxLayoutAlign="start start">
     <div fxFlex="50" fxFlex.lt-md="100">
       <mat-card>
         <mat-card-title>加班工时统计</mat-card-title>

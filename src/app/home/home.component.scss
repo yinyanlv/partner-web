@@ -13,12 +13,11 @@
   height:100%;
 }
 
-.chart-title{
-  font-weight: bold;
-  color: mat-color($mat-red, A200);
-}
-
-.panel{
+.charts-wrapper{
   padding: 10px 0 0 10px;
   width: 100%;
+
+  mat-card-title{
+    font-size: 18px;
+  }
 }

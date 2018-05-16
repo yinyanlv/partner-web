@@ -6,9 +6,9 @@ import {CalendarModule} from 'angular-calendar';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {MaterialModule} from '../shared/modules/material.module';
-import {TimeStatisticsRoutingModule} from './time-statistics.routing';
-import {TimeStatisticsComponent} from './time-statistics.component';
-import {TimeStatisticsService} from './time-statistics.service';
+import {WorkRoutingModule} from './work.routing';
+import {WorkComponent} from './work.component';
+import {WorkService} from './work.service';
 import { CalendarDialogComponent } from './calendar-dialog/calendar-dialog.component';
 
 registerLocaleData(localeZh);
@@ -20,18 +20,18 @@ registerLocaleData(localeZh);
     CalendarModule.forRoot(),
     FlexLayoutModule,
     MaterialModule,
-    TimeStatisticsRoutingModule
+    WorkRoutingModule
   ],
   declarations: [
-    TimeStatisticsComponent,
+    WorkComponent,
     CalendarDialogComponent
   ],
   entryComponents: [
     CalendarDialogComponent
   ],
   providers: [
-    TimeStatisticsService
+    WorkService
   ]
 })
-export class TimeStatisticsModule {
+export class WorkModule {
 }

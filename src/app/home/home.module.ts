@@ -4,20 +4,20 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {ChartsModule} from 'ng2-charts';
 
 import {MaterialModule} from '../shared/modules/material.module';
-import {DashboardRoutingModule} from './dashboard.routing';
-import {DashboardComponent} from './dashboard.component';
+import {HomeRoutingModule} from './home.routing';
+import {HomeComponent} from './home.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FlexLayoutModule,
     ChartsModule,
-    DashboardRoutingModule,
+    HomeRoutingModule,
     MaterialModule
   ],
   declarations: [
-    DashboardComponent
+    HomeComponent
   ]
 })
-export class DashboardModule {
+export class HomeModule {
 }

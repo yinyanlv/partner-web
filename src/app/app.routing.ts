@@ -9,10 +9,10 @@ const routes: Routes = [{
   component: NormalLayoutComponent,
   children: [{
     path: '',
-    loadChildren: './dashboard/dashboard.module#DashboardModule'
+    loadChildren: './home/home.module#HomeModule'
   }, {
-    path: 'time-statistics',
-    loadChildren: './time-statistics/time-statistics.module#TimeStatisticsModule'
+    path: 'work',
+    loadChildren: './work/work.module#WorkModule'
   }, {
     path: 'user',
     loadChildren: './user/user.module#UserModule'
