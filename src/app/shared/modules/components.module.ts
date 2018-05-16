@@ -11,7 +11,7 @@ import {SessionLayoutComponent} from '../components/session-layout/session-layou
 import {HeaderComponent} from '../components/header/header.component';
 import {MenuComponent} from '../components/menu/menu.component';
 import {NotificationComponent} from '../components/notification/notification.component';
-import {OptionsComponent} from '../components/options/options.component';
+import {SettingsComponent} from '../components/settings/settings.component';
 
 const components = [
   NormalLayoutComponent,
@@ -19,7 +19,7 @@ const components = [
   HeaderComponent,
   MenuComponent,
   NotificationComponent,
-  OptionsComponent
+  SettingsComponent
 ];
 
 @NgModule({

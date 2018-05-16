@@ -1,10 +1,10 @@
-<button mat-fab color="warn" class="btn-options" (click)="toggleOptionsStatus()">
+<button mat-fab color="warn" class="btn-settings" (click)="toggleOptionsStatus()">
   <mat-icon>settings</mat-icon>
 </button>
-<mat-card class="options" *ngIf="isShowOptions">
+<mat-card class="settings" *ngIf="isShowSettings">
   <mat-card-title>
     <mat-toolbar color="warn">
-      <span fxFlex>选项</span>
+      <span fxFlex>系统设置</span>
       <button mat-icon-button (click)="toggleOptionsStatus()">
         <mat-icon>close</mat-icon>
       </button>

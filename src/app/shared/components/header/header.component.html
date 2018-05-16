@@ -34,10 +34,10 @@
       <button mat-menu-item *ngIf="isShowNotification"  (click)="toggleNotificationStatus()">
         <mat-icon>notifications_off</mat-icon> 关闭消息
       </button>
-      <button mat-menu-item *ngIf="!isShowOptionsFab" (click)="toggleOptionsFabStatus()">
+      <button mat-menu-item *ngIf="!isShowSettingsFab" (click)="toggleOptionsFabStatus()">
         <mat-icon>visibility</mat-icon> 显示悬浮按钮
       </button>
-      <button mat-menu-item *ngIf="isShowOptionsFab"  (click)="toggleOptionsFabStatus()">
+      <button mat-menu-item *ngIf="isShowSettingsFab"  (click)="toggleOptionsFabStatus()">
         <mat-icon>visibility_off</mat-icon> 隐藏悬浮按钮
       </button>
       <button mat-menu-item>
