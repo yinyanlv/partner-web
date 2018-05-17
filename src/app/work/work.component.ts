@@ -18,13 +18,14 @@ import {WorkService} from './work.service';
 })
 export class WorkComponent implements OnInit {
 
-  public calendarMode: string = 'month';
-  public date: Date = new Date();
-  public locale: string = 'zh';
-  public timeCount: number = 0;
-  public events: Array<CalendarEvent> = [];
+  calendarMode: string = 'month';
+  isOpenActiveDay: boolean = false;
+  date: Date = new Date();
+  locale: string = 'zh';
+  timeCount: number = 0;
+  events: Array<CalendarEvent> = [];
   private dialogRef: MatDialogRef<CalendarDialogComponent>;
-  public isLoading: boolean = false;
+  isLoading: boolean = false;
 
   constructor(
     private dialog: MatDialog,
@@ -38,6 +39,12 @@ export class WorkComponent implements OnInit {
   }
 
   onClickDay(event) {
+
+    this.isOpenActiveDay = !this.isOpenActiveDay;
+    return;
+  }
+
+  openEditDialog() {
 
     this.dialogRef = this.dialog.open(CalendarDialogComponent, {
       data: event

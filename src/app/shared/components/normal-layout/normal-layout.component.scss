@@ -10,12 +10,10 @@
 
   mat-sidenav-content{
     overflow: hidden;
-    transition: margin-left .4s cubic-bezier(.25,.8,.25,1);
   }
 
   .menu-wrapper{
     width: $menu-width;
-    transition: width .4s cubic-bezier(.25, .8, .25, 1), transform .4s cubic-bezier(.25, .8, .25, 1) !important;
     box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0 1px 3px 0px rgba(0, 0, 0, 0.12);
   }
 
@@ -33,6 +31,7 @@
 
 :host ::ng-deep {
 
+
   .menu-collapsed-mode {
 
     app-menu{
@@ -41,27 +40,38 @@
       }
     }
 
+    &.app-menu-closed{
+
+      mat-sidenav-content {
+        margin-left: 0 !important;
+      }
+    }
+
     mat-sidenav-content{
       margin-left: $collapsed-menu-width !important;
     }
 
-    .menu-wrapper:not(:hover) {
-      width:  $collapsed-menu-width;
+    .menu-wrapper{
+      transition: width .4s cubic-bezier(.25, .8, .25, 1), transform .4s cubic-bezier(.25, .8, .25, 1) !important;
 
-      mat-icon{
-        margin-right:0;
-      }
+      &:not(:hover) {
+        width:  $collapsed-menu-width;
 
-      .sub-menu {
-        display: none !important;
-      }
+        mat-icon{
+          margin-right:0;
+        }
 
-      .text{
-        display: none;
-      }
+        .sub-menu {
+          display: none !important;
+        }
 
-      .arrow{
-        display: none;
+        .text{
+          display: none;
+        }
+
+        .arrow{
+          display: none;
+        }
       }
     }
   }
@@ -72,9 +82,17 @@
       margin-left: $compact-menu-width !important;
     }
 
+    &.app-menu-closed{
+
+      mat-sidenav-content {
+        margin-left: 0 !important;
+      }
+    }
+
     .menu-wrapper{
       width: $compact-menu-width !important;
       overflow: visible !important;
+      transition: width .4s cubic-bezier(.25, .8, .25, 1), transform .4s cubic-bezier(.25, .8, .25, 1) !important;
 
       .mat-list-item-content{
         display: block;

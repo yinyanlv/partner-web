@@ -12,6 +12,7 @@ export class NormalLayoutComponent {
 
   navMode: string;
   isShowSettingsFab: boolean;
+  isMenuOpened: boolean = true;
 
   settingsStatus: any = {
     menuCollapsed: false,
