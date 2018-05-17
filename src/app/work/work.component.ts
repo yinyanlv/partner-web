@@ -3,7 +3,7 @@ import {MatDialog, MatDialogRef} from '@angular/material';
 import {CalendarDateFormatter, CalendarEvent} from 'angular-calendar';
 import * as startOfDay from 'date-fns/start_of_day';
 
-import {CalendarDialogComponent} from './calendar-dialog/calendar-dialog.component';
+import {EventEditComponent} from './event-edit/event-edit.component';
 import {CustomCalendarDateFormatter} from '../shared/etc/custom-calendar-date-formatter';
 import {WorkService} from './work.service';
 
@@ -24,7 +24,7 @@ export class WorkComponent implements OnInit {
   locale: string = 'zh';
   timeCount: number = 0;
   events: Array<CalendarEvent> = [];
-  private dialogRef: MatDialogRef<CalendarDialogComponent>;
+  private dialogRef: MatDialogRef<EventEditComponent>;
   isLoading: boolean = false;
 
   constructor(
@@ -46,30 +46,11 @@ export class WorkComponent implements OnInit {
 
   openEditDialog() {
 
-    this.dialogRef = this.dialog.open(CalendarDialogComponent, {
+    this.dialogRef = this.dialog.open(EventEditComponent, {
       data: event
     });
 
     this.dialogRef.afterClosed().subscribe((data) => {
-
-      if (!data) return;
-
-      if (data.isUpdate) {
-
-        if (data.timeCount) {  // 更新
-          event.day.events[0].meta = data.timeCount;
-        } else {  // 删除
-          event.day.events[0] = null;
-          event.day.badgeTotal = 0;
-        }
-      } else {  // 增加
-
-        this.events = this.events.concat({
-          start: startOfDay(data.date),
-          title: data.timeCount + '小时',
-          meta: data.timeCount
-        });
-      }
 
       this.updateTimeCount();
     });

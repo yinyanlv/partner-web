@@ -2,18 +2,18 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
-  selector: 'app-calendar-dialog',
-  templateUrl: './calendar-dialog.component.html',
-  styleUrls: ['./calendar-dialog.component.scss']
+  selector: 'app-event-edit',
+  templateUrl: 'event-edit.component.html',
+  styleUrls: ['event-edit.component.scss']
 })
-export class CalendarDialogComponent implements OnInit {
+export class EventEditComponent implements OnInit {
 
   public timeCount: string | number;
   public date: Date;
   private isUpdate: boolean = false;
 
   constructor(
-    private dialogRef: MatDialogRef<CalendarDialogComponent>,
+    private dialogRef: MatDialogRef<EventEditComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any) {
   }
 

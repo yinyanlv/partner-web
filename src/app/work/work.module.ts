@@ -8,7 +8,7 @@ import {MaterialModule} from '../shared/modules/material.module';
 import {WorkRoutingModule} from './work.routing';
 import {WorkComponent} from './work.component';
 import {WorkService} from './work.service';
-import { CalendarDialogComponent } from './calendar-dialog/calendar-dialog.component';
+import { EventEditComponent } from './event-edit/event-edit.component';
 
 @NgModule({
   imports: [
@@ -21,10 +21,10 @@ import { CalendarDialogComponent } from './calendar-dialog/calendar-dialog.compo
   ],
   declarations: [
     WorkComponent,
-    CalendarDialogComponent
+    EventEditComponent
   ],
   entryComponents: [
-    CalendarDialogComponent
+    EventEditComponent
   ],
   providers: [
     WorkService

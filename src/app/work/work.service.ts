@@ -7,16 +7,13 @@ export class WorkService {
 
   constructor() { }
 
+  // add_circle
   private actions: CalendarEventAction[] = [{
-    label: '<i class="material-icons">add_circle</i>',
+    label: '<i class="material-icons">edit</i> 编辑',
     onClick: ({event}: {event: CalendarEvent}): void => {
     }
   }, {
-    label: '<i class="material-icons">edit</i>',
-    onClick: ({event}: {event: CalendarEvent}): void => {
-    }
-  }, {
-    label: '<i class="material-icons">delete_outline</i>',
+    label: '<i class="material-icons">delete_outline</i> 删除',
     onClick: ({event}: {event: CalendarEvent}): void => {
     }
   }];
