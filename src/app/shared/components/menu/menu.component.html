@@ -5,19 +5,11 @@
       <span class="text" fxFlex>首页</span>
     </a>
   </mat-list-item>
-  <mat-list-item routerLinkActive="active" [ngClass]="{opened: status}" (click)="status = !status" [routerLinkActiveOptions]="{exact: true}" fxLayoutAlign="start start" fxLayout="column">
+  <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >
     <a [routerLink]="['/work']">
       <mat-icon>event_note</mat-icon>
       <span class="text" fxFlex>工作记录</span>
-      <mat-icon class="arrow">arrow_drop_down</mat-icon>
     </a>
-    <mat-nav-list class="sub-menu">
-      <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <a [routerLink]="['/work']">
-          <span class="text" fxFlex>工作记录</span>
-        </a>
-      </mat-list-item>
-    </mat-nav-list>
   </mat-list-item>
   <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
     <a [routerLink]="['/user']">
