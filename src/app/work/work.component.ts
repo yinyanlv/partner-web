@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material';
+import {ActivatedRoute, Router, NavigationEnd, NavigationStart} from "@angular/router";
 import {CalendarDateFormatter, CalendarEvent} from 'angular-calendar';
 import * as startOfDay from 'date-fns/start_of_day';
+import 'rxjs/Rx';
 
 import {EventEditComponent} from './event-edit/event-edit.component';
 import {CustomCalendarDateFormatter} from '../shared/etc/custom-calendar-date-formatter';
@@ -29,11 +31,16 @@ export class WorkComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private service: WorkService
+    private service: WorkService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
+
+    this.activatedRoute.queryParams.subscribe((e) => {
+    });
 
     this.getEvents();
   }
@@ -41,6 +48,10 @@ export class WorkComponent implements OnInit {
   onClickDay(event) {
 
     this.isOpenActiveDay = !this.isOpenActiveDay;
+
+    this.router.navigate(['work'], {queryParams: {
+      a: Math.random()
+    }});
     return;
   }
 

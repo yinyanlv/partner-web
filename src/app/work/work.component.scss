@@ -1,25 +1,25 @@
 @import "~assets/styles/scss/etc/vars";
 
-.active{
- background: mat-color($mat-amber, A200);
- color: $font-color;
+.active {
+  background: mat-color($mat-amber, A200);
+  color: $font-color;
 }
 
-mat-toolbar-row{
- span, button{
-  margin-left: 5px;
- }
+mat-toolbar-row {
+  span, button {
+    margin-left: 5px;
+  }
 
- .time-count{
-  margin-right:30px;
- }
+  .time-count {
+    margin-right: 30px;
+  }
 }
 
-.calendar-container{
+.calendar-container {
   display: flex;
   justify-content: center;
 
-  mat-spinner{
+  mat-spinner {
     margin-top: 40px;
   }
 
@@ -28,90 +28,90 @@ mat-toolbar-row{
   }
 }
 
-.cal-cell-bottom{
+.cal-cell-bottom {
   padding: 10px;
 
-  .dot{
+  .dot {
     display: inline-block;
     width: 10px;
     height: 10px;
     border-radius: 50%;
     background: dodgerblue;
-    margin:2px;
+    margin: 2px;
     vertical-align: middle;
   }
 }
 
 :host ::ng-deep {
 
- a {
-  outline: none;
-  text-decoration: none;
- }
-
- mwl-calendar-open-day-events {
-
-  .cal-event-title{
-   cursor: text;
+  a {
+    outline: none;
+    text-decoration: none;
   }
 
-  .cal-event-actions {
-   position: relative;
+  mwl-calendar-open-day-events {
+
+    .cal-event-title {
+      cursor: text;
+    }
+
+    .cal-event-actions {
+      position: relative;
+    }
+
+    .cal-event-action {
+      display: inline-block;
+      padding: 0 10px;
+      color: #fff;
+      text-decoration: none;
+      vertical-align: middle;
+      font-size: 14px;
+
+      &:first-child {
+        margin-left: 15px;
+      }
+    }
+
+    .material-icons {
+      height: 18px;
+      width: 18px;
+      font-size: 18px;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
   }
 
-  .cal-event-action{
-   display: inline-block;
-   padding: 0 10px;
-   color: #fff;
-   text-decoration: none;
-   vertical-align: middle;
-   font-size:14px;
+  mwl-calendar-week-view-event, mwl-calendar-day-view-event {
 
-   &:first-child{
-    margin-left: 15px;
-   }
+    .cal-event-title {
+      cursor: text;
+    }
+
+    .cal-event {
+      height: auto !important;
+      overflow: auto !important;
+      white-space: normal !important;
+      padding: 0 5px !important;
+    }
+
+    mwl-calendar-event-actions {
+      display: block;
+
+      .cal-event-action {
+        display: inline-block;
+        padding: 0 5px;
+        color: mat-color($primary);
+      }
+    }
+
+    .material-icons {
+      height: 16px;
+      width: 16px;
+      font-size: 16px;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
   }
-
-  .material-icons{
-   height: 18px;
-   width: 18px;
-   font-size: 18px;
-   vertical-align: middle;
-   position: relative;
-   top:-1px;
-  }
- }
-
- mwl-calendar-week-view-event, mwl-calendar-day-view-event{
-
-  cal-event-title{
-   cursor: text;
-  }
-
-  .cal-event{
-   height: auto !important;
-   overflow: auto !important;
-   white-space: normal !important;
-   padding: 0 5px !important;
-  }
-
-  mwl-calendar-event-actions{
-   display: block;
-
-   .cal-event-action{
-    display: inline-block;
-    padding: 0 5px;
-   }
-  }
-
-  .material-icons{
-   color: mat-color($primary);
-   height: 16px;
-   width: 16px;
-   font-size: 16px;
-   vertical-align: middle;
-   position: relative;
-   top: -1px;
-  }
- }
 }
