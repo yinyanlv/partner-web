@@ -1,14 +1,38 @@
-<h4 mat-dialog-title>编辑加班时长</h4>
+<h4 mat-dialog-title>编辑工作记录</h4>
 <mat-dialog-content>
-  <div>
-    日期：{{date | date:'yyyy-MM-dd'}}
+  <div fxLayout="row" fxLayoutGap="20px grid">
+    <div>
+      <label>工作日期：</label>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="请选择工作日期">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <label>加班时长：</label>
+      <mat-form-field>
+        <input matInput type="number" [(ngModel)]="timeCount" min="0" max="24" placeholder="请输入加班时长" />
+      </mat-form-field>
+      <label>小时</label>
+    </div>
   </div>
-  <div class="input-line">
-    加班
-    <mat-form-field>
-      <input matInput type="number" [(ngModel)]="timeCount" min="0" max="24" placeholder="请输入加班时长" />
-    </mat-form-field>
-    小时
+  <mat-divider></mat-divider>
+  <div class="event-list">
+    <div class="event-list-title" fxLayout="row" fxLayoutAlign="space-between center"><span>事务列表：</span><button mat-icon-button matTooltip="增加一条新事务" color="primary" (click)="addEvent()"><mat-icon>add_circle</mat-icon></button></div>
+    <div class="event-list-content">
+      <mat-list>
+        <mat-list-item *ngFor="let item of events; let i = index;">
+          <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px grid">
+            <span class="mb-1-55-em">事务{{i + 1}}：</span>
+            <span><label>开始时间：</label><mat-form-field><input matInput atp-time-picker locale="zh" placeholder="请选择开始时间" /></mat-form-field></span>
+            <span><label>完成时间：</label><mat-form-field><input matInput atp-time-picker locale="zh" placeholder="请选择完成时间" /></mat-form-field></span>
+            <span><label>事务备注：</label><mat-form-field><input matInput placeholder="请输入该事务的备注" /></mat-form-field></span>
+            <span class="mb-1-25-em"><button mat-icon-button matTooltip="删除该条事务" color="primary" (click)="deleteEvent(item, i)"><mat-icon>delete_outline</mat-icon></button></span>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>

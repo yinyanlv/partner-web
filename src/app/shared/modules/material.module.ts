@@ -17,8 +17,11 @@ import {
   MatSlideToggleModule,
   MatDividerModule,
   MatProgressBarModule,
-  MatLineModule
+  MatLineModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
+import {AmazingTimePickerModule} from 'amazing-time-picker';
 
 const modules = [
   MatCardModule,
@@ -38,7 +41,10 @@ const modules = [
   MatSlideToggleModule,
   MatDividerModule,
   MatProgressBarModule,
-  MatLineModule
+  MatLineModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  AmazingTimePickerModule
 ];
 
 @NgModule({

@@ -1,11 +1,19 @@
-h4{
-  font-weight: bold;
+:host ::ng-deep{
+
 }
 
-.input-line{
-  margin: 10px 0;
+.mb-1-55-em{
+  margin-bottom: 1.55em;
+}
 
-  mat-form-field{
-    margin: 0 8px;
+.mb-1-25-em{
+  margin-bottom: 1.25em;
+}
+
+.event-list{
+  padding:10px 0;
+
+  .event-list-title{
+    margin-bottom: 10px;
   }
 }

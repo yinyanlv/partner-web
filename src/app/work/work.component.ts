@@ -21,7 +21,6 @@ import {WorkService} from './work.service';
 export class WorkComponent implements OnInit {
 
   calendarMode: string = 'month';
-  isOpenActiveDay: boolean = false;
   date: Date = new Date();
   locale: string = 'zh';
   timeCount: number = 0;
@@ -47,15 +46,10 @@ export class WorkComponent implements OnInit {
 
   onClickDay(event) {
 
-    this.isOpenActiveDay = !this.isOpenActiveDay;
-
-    this.router.navigate(['work'], {queryParams: {
-      a: Math.random()
-    }});
-    return;
+    this.openEditDialog(event);
   }
 
-  openEditDialog() {
+  openEditDialog(event) {
 
     this.dialogRef = this.dialog.open(EventEditComponent, {
       data: event

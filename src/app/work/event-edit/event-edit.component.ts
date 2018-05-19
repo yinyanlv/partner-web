@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
+import {ConfirmDialogComponent} from '../../shared/components/dialog/confirm/confirm-dialog.component';
 
 @Component({
   selector: 'app-event-edit',
@@ -8,12 +10,15 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class EventEditComponent implements OnInit {
 
-  public timeCount: string | number;
-  public date: Date;
+  timeCount: string | number;
+  date: Date;
+  events: Array<any> = [{}, {}];
   private isUpdate: boolean = false;
+  private confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
 
   constructor(
     private dialogRef: MatDialogRef<EventEditComponent>,
+    private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) private data: any) {
   }
 
@@ -32,6 +37,26 @@ export class EventEditComponent implements OnInit {
       isUpdate: this.isUpdate,
       date: this.date,
       timeCount: this.timeCount
+    });
+  }
+
+  addEvent() {
+    this.events.push({});
+  }
+
+  deleteEvent(event, index) {
+
+    this.confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        content: `您确定要删除事务${index + 1}？`
+      }
+    });
+
+
+    this.confirmDialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        this.events.splice(index, 1);
+      }
     });
   }
 }
