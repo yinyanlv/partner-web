@@ -23,6 +23,8 @@ export class BaseHttp {
     constructor(public http: HttpClient) {
     }
 
+    protected observableCreator: Observable = Observable;
+
     public get(opts: BaseHttpOptions): BaseHttpProxy {
 
         return new BaseHttpProxy(this, 'GET', opts);

@@ -4,11 +4,14 @@ import {Router} from '@angular/router';
 import * as screenfull from 'screenfull';
 
 import {ConfirmDialogComponent} from '../../components/dialog/confirm/confirm-dialog.component';
+import {GlobalStateService} from '../../services/global-state.service';
+import {HeaderService} from './header.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  providers: [HeaderService]
 })
 export class HeaderComponent implements OnInit {
 
@@ -27,7 +30,9 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private globalStateService: GlobalStateService,
+    private headerService: HeaderService
   ) {
   }
 
@@ -66,8 +71,16 @@ export class HeaderComponent implements OnInit {
     });
 
     this.dialogRef.afterClosed().subscribe((data) => {
+
       if (data) {
-        console.log('logout:' + data);
+
+        this.headerService.logout().subscribe((res) => {
+
+          if (res.success) {
+            this.globalStateService.isLogin = false;
+            this.router.navigate(['/login']);
+          }
+        });
       }
     });
   }

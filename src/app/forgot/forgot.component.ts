@@ -8,7 +8,7 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 })
 export class ForgotComponent implements OnInit {
 
-  public form: FormGroup;
+  form: FormGroup;
 
   constructor(
     private fb: FormBuilder
