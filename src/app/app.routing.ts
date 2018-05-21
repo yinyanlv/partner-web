@@ -3,10 +3,12 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {NormalLayoutComponent} from './shared/components/normal-layout/normal-layout.component';
 import {SessionLayoutComponent} from './shared/components/session-layout/session-layout.component';
+import {RouteGuardService} from './shared/services/route-guard.service';
 
 const routes: Routes = [{
   path: '',
   component: NormalLayoutComponent,
+  canActivate: [RouteGuardService],
   children: [{
     path: '',
     loadChildren: './home/home.module#HomeModule'

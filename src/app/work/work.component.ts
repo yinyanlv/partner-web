@@ -51,6 +51,8 @@ export class WorkComponent implements OnInit {
 
   openEditDialog(event) {
 
+    if (event && event.day && !event.day.inMonth) return;
+
     this.dialogRef = this.dialog.open(EventEditComponent, {
       data: event
     });

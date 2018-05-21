@@ -17,7 +17,7 @@ export class EventEditComponent implements OnInit {
   private confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
 
   constructor(
-    private dialogRef: MatDialogRef<EventEditComponent>,
+    public dialogRef: MatDialogRef<EventEditComponent>,
     private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) private data: any) {
   }
@@ -51,7 +51,6 @@ export class EventEditComponent implements OnInit {
         content: `您确定要删除事务${index + 1}？`
       }
     });
-
 
     this.confirmDialogRef.afterClosed().subscribe((data) => {
       if (data) {

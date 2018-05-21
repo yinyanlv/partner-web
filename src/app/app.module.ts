@@ -10,6 +10,10 @@ import {ComponentsModule} from './shared/modules/components.module';
 import {AppRoutingModule} from './app.routing';
 import {AppComponent} from './app.component';
 
+import {SubjectService} from './shared/services/subject.service';
+import {GlobalStateService} from './shared/services/global-state.service';
+import {RouteGuardService} from './shared/services/route-guard.service';
+
 registerLocaleData(localeZh);
 
 @NgModule({
@@ -28,7 +32,11 @@ registerLocaleData(localeZh);
   }, {
     provide: RouteReuseStrategy,
     useClass: AppRouteReuseStrategy
-  }],
+  },
+    SubjectService,
+    GlobalStateService,
+    RouteGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

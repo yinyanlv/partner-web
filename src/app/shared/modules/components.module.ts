@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -32,6 +33,7 @@ const entryComponents = [
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     RouterModule,
     FormsModule,
     FlexLayoutModule,

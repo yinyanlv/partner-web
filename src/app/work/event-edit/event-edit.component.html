@@ -1,10 +1,10 @@
-<h4 mat-dialog-title>编辑工作记录</h4>
+<h4 mat-dialog-title fxLayout fxLayoutAlign="start center"><span fxFlex>编辑工作记录</span><button mat-icon-button (click)="dialogRef.close()"><mat-icon>close</mat-icon></button></h4>
 <mat-dialog-content>
   <div fxLayout="row" fxLayoutGap="20px grid">
     <div>
       <label>工作日期：</label>
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="请选择工作日期">
+        <input matInput [matDatepicker]="picker" (click)="picker.open()" readonly placeholder="请选择工作日期">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -24,11 +24,11 @@
       <mat-list>
         <mat-list-item *ngFor="let item of events; let i = index;">
           <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px grid">
-            <span class="mb-1-55-em">事务{{i + 1}}：</span>
-            <span><label>开始时间：</label><mat-form-field><input matInput atp-time-picker locale="zh" placeholder="请选择开始时间" /></mat-form-field></span>
-            <span><label>完成时间：</label><mat-form-field><input matInput atp-time-picker locale="zh" placeholder="请选择完成时间" /></mat-form-field></span>
+            <span class="mb-1-55-em" fxFlex="80px">事务{{i + 1}}：</span>
+            <span><label>开始时间：</label><mat-form-field><input matInput readonly atp-time-picker locale="ch" placeholder="请选择开始时间" /><button matSuffix mat-icon-button><mat-icon>access_alarm</mat-icon></button></mat-form-field></span>
+            <span><label>完成时间：</label><mat-form-field><input matInput readonly atp-time-picker locale="ch" placeholder="请选择完成时间" /><button matSuffix mat-icon-button><mat-icon>access_alarm</mat-icon></button></mat-form-field></span>
             <span><label>事务备注：</label><mat-form-field><input matInput placeholder="请输入该事务的备注" /></mat-form-field></span>
-            <span class="mb-1-25-em"><button mat-icon-button matTooltip="删除该条事务" color="primary" (click)="deleteEvent(item, i)"><mat-icon>delete_outline</mat-icon></button></span>
+            <span class="mb-1-25-em"><button mat-icon-button matTooltip="删除该条事务" color="primary" (click)="deleteEvent(item, i)"><mat-icon>remove_circle</mat-icon></button></span>
           </div>
         </mat-list-item>
       </mat-list>
