@@ -1,3 +1,4 @@
+import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpHandler, HttpEvent, HttpInterceptor} from '@angular/common/http';
 import {Observable, Subscription, Subject} from 'rxjs';
@@ -148,9 +149,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        return next.handle(req).map((event) => {
+        return next.handle(req).pipe(map((event) => {
 
             return event;
-        });
+        }));
     }
 }

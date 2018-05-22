@@ -9,7 +9,7 @@
   <ngx-loading-bar></ngx-loading-bar>
   <app-header (toggleMenu)="menu.toggle()" (toggleNotification)="notification.toggle()" (toggleOptionsFab)="toggleOptionsFab($event)"></app-header>
   <mat-sidenav-container>
-    <mat-sidenav class="menu-wrapper" #menu [mode]="navMode" [opened]="isMenuOpened" (open)="isMenuOpened = true" (close)="isMenuOpened = false" perfectScrollbar>
+    <mat-sidenav class="menu-wrapper" #menu [mode]="navMode" [opened]="isMenuOpened" (opened)="isMenuOpened = true" (closed)="isMenuOpened = false" perfectScrollbar>
       <app-menu></app-menu>
     </mat-sidenav>
     <mat-sidenav class="notification-wrapper" mode="over" #notification position="end" perfectScrollbar>
