@@ -13,6 +13,8 @@ import {GlobalStateService} from '../shared/services/global-state.service';
 })
 export class LoginComponent extends BaseComponent implements OnInit {
 
+  isShowError: boolean = false;
+  isSubmitting: boolean = false;
   form: FormGroup;
 
   constructor(
@@ -35,6 +37,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
+      this.isSubmitting = true;
       this.loginService.login(this.form.value).subscribe((res) => {
 
         if (res.success) {

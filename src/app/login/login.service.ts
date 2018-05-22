@@ -9,16 +9,18 @@ export class LoginService extends BaseHttp {
 
     return this.observableCreator.create((observer) => {
 
-      if (params.username === 'admin' && params.password === '111111') {
-        observer.next({
-          success: true
-        });
-      } else {
-        observer.next({
-          success: false,
-          message: '用户名或密码错误'
-        });
-      }
+      setTimeout(() => {
+        if (params.username === 'admin' && params.password === '111111') {
+          observer.next({
+            success: true
+          });
+        } else {
+          observer.next({
+            success: false,
+            message: '用户名或密码错误'
+          });
+        }
+      }, 5000);
     });
   }
 }

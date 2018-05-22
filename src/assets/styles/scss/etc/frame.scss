@@ -64,6 +64,23 @@ input {
   margin-left: auto;
 }
 
+// session
+.error-line{
+  color: red;
+  font-size:12px;
+  padding: 3px;
+}
+
+.btn-spinner-wrapper{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  mat-spinner{
+    margin-right: 8px;
+  }
+}
+
 @media (min-width: 320px) {
   .app-boxed {
     max-width: 320px;

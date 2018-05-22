@@ -7,6 +7,10 @@ export class AppRouteReuseStrategy implements RouteReuseStrategy {
   // 决定该路由及其子路由是否允许之后被复用
   shouldDetach(route: ActivatedRouteSnapshot): boolean {  // route，之前的路由
 
+    if (!route.routeConfig || route.routeConfig.loadChildren) {
+      return false;
+    }
+
     // 总是返回true，对所有路由允许复用
     return true;
   }
@@ -29,6 +33,7 @@ export class AppRouteReuseStrategy implements RouteReuseStrategy {
   retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle | null {  // route，当前的路由
 
     if (!route.routeConfig) return null;
+    if (route.routeConfig.loadChildren) return null;
 
     return AppRouteReuseStrategy.handles[this.getKey(route)];
   }
