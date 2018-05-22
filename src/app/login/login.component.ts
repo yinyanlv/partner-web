@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone, ViewChild, ElementRef} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
 import {AutofillMonitor, AutofillEvent} from '@angular/cdk/text-field';
@@ -29,21 +29,27 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
     private globalStateService: GlobalStateService,
     private router: Router,
     private route: ActivatedRoute,
-    private autofill: AutofillMonitor
+    private autofill: AutofillMonitor,
+    private zone: NgZone
   ) {
     super();
   }
 
   ngOnInit() {
 
+    // in Chrome browser: it does not allow access to the value of the password field after autofill (before user click on the page)
     this.autofill.monitor(this.password.nativeElement)
       .subscribe((e: AutofillEvent) => {
 
         if (e.isAutofilled) {
 
-          this.isValid = this.form.valid;
+          this.zone.run(() => {
 
-          console.log(this.isValid);
+            console.log(e.target);
+            console.log(this.password.nativeElement);
+            console.log(this.password.nativeElement.value);
+            this.isValid = this.form.valid;
+          });
         }
       });
 

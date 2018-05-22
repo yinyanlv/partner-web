@@ -16,7 +16,7 @@
             <mat-checkbox formControlName="rememberMe">记住我</mat-checkbox>
           </div>
           <div class="error-line" *ngIf="isShowError">{{errorMessage || '用户名或密码错误'}}</div>
-          <button mat-raised-button color="primary" [disabled]="!form.valid  || isValid" *ngIf="!isSubmitting">登录</button>
+          <button mat-raised-button color="primary" [disabled]="!isValid" *ngIf="!isSubmitting">登录</button>
           <button *ngIf="isSubmitting" [disabled]="isSubmitting" mat-raised-button color="primary"><span class="btn-spinner-wrapper"><mat-spinner diameter="18" color="primary"></mat-spinner> 登录中...</span></button>
         </mat-card-content>
         <mat-card-footer>
