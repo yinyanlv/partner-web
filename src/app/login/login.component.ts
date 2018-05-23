@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, NgZone, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, NgZone} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
 import {AutofillMonitor, AutofillEvent} from '@angular/cdk/text-field';
@@ -14,11 +14,14 @@ import {GlobalStateService} from '../shared/services/global-state.service';
 })
 export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
 
-  isValid: boolean;
+  hasAutofilled: boolean = false;
   isShowError: boolean = false;
   isSubmitting: boolean = false;
   errorMessage: string = '';
   form: FormGroup;
+
+  @ViewChild('username', {read: ElementRef})
+  username: ElementRef;
 
   @ViewChild('password', {read: ElementRef})
   password: ElementRef;
@@ -37,39 +40,34 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    // in Chrome browser: it does not allow access to the value of the password field after autofill (before user click on the page)
-    this.autofill.monitor(this.password.nativeElement)
-      .subscribe((e: AutofillEvent) => {
-
-        if (e.isAutofilled) {
-
-          this.zone.run(() => {
-
-            console.log(e.target);
-            console.log(this.password.nativeElement);
-            console.log(this.password.nativeElement.value);
-            this.isValid = this.form.valid;
-          });
-        }
-      });
-
     this.form = this.fb.group({
       username: [null, Validators.required],
       password: [null, Validators.required],
       rememberMe: [null]
     });
+
+    // fix: in Chrome browser, it does not allow access to the value of the password field after autofill (before user click on the page)
+    this.autofill.monitor(this.password.nativeElement)
+      .subscribe((e: AutofillEvent) => {
+
+        if (e.isAutofilled) {
+
+          this.hasAutofilled = true;
+        }
+      });
   }
 
   onSubmit() {
+
+    this.isShowError = false;
 
     if (this.form.valid) {
       this.isSubmitting = true;
       this.loginService.login(this.form.value).subscribe((res) => {
 
-        if (res.success) {
+        this.isSubmitting = false;
 
-          this.isShowError = false;
-          this.errorMessage = '';
+        if (res.success) {
 
           this.globalStateService.isLogin = true;
 
@@ -85,6 +83,6 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
 
-    // this.autofill.stopMonitoring(this.password.nativeElement);
+    this.autofill.stopMonitoring(this.password.nativeElement);
   }
 }

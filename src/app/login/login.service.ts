@@ -20,7 +20,7 @@ export class LoginService extends BaseHttp {
             message: '用户名或密码错误'
           });
         }
-      }, 5000);
+      }, 3000);
     });
   }
 }
