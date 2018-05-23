@@ -8,8 +8,12 @@
         <mat-card-content>
           <mat-form-field class="input-line">
             <input matInput placeholder="请输入用户的注册邮箱" formControlName="email" />
+            <mat-error *ngIf="checkErrorMatch('email', 'required')">邮箱是必填项</mat-error>
+            <mat-error *ngIf="checkErrorMatch('email', 'pattern')">邮箱格式不正确</mat-error>
+            <mat-error *ngIf="checkErrorMatch('email', 'notExists')">{{form.controls['email'].getError('notExists')}}</mat-error>
           </mat-form-field>
-          <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">找回密码</button>
+          <button mat-raised-button color="primary" [disabled]="form.invalid" *ngIf="!isSubmitting">找回密码</button>
+          <button *ngIf="isSubmitting" [disabled]="isSubmitting" mat-raised-button color="primary"><span class="btn-spinner-wrapper"><mat-spinner diameter="18" color="primary"></mat-spinner> 提交中...</span></button>
         </mat-card-content>
         <mat-card-footer>
           <a [routerLink]="['/login']">登录用户</a>

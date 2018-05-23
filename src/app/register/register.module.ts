@@ -6,6 +6,7 @@ import {RouterModule} from '@angular/router';
 import {MaterialModule} from '../shared/modules/material.module';
 import {RegisterRoutingModule} from './register.routing';
 import {RegisterComponent} from './register.component';
+import {RegisterService} from './register.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,9 @@ import {RegisterComponent} from './register.component';
   ],
   exports: [
     RegisterComponent
+  ],
+  providers: [
+    RegisterService
   ]
 })
 export class RegisterModule { }

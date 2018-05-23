@@ -5,6 +5,7 @@ import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {LoadingBarRouterModule} from '@ngx-loading-bar/router';
+import {LoadingBarHttpClientModule} from '@ngx-loading-bar/http-client';
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 
 import {MaterialModule} from './material.module';
@@ -38,6 +39,7 @@ const entryComponents = [
     FormsModule,
     FlexLayoutModule,
     LoadingBarRouterModule,
+    // LoadingBarHttpClientModule,
     PerfectScrollbarModule,
     MaterialModule
   ],

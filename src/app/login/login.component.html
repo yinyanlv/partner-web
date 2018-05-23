@@ -7,15 +7,22 @@
         </mat-card-header>
         <mat-card-content>
           <mat-form-field class="input-line">
-            <input matInput placeholder="请输入用户名" #username formControlName="username"  />
+            <input matInput placeholder="请输入用户名" required formControlName="username" />
+            <mat-error *ngIf="checkErrorMatch('username', 'required')">用户名为必填项</mat-error>
+            <mat-error *ngIf="checkErrorMatch('username', 'pattern')">用户名只能由字母、数字和下划线组成</mat-error>
+            <mat-error *ngIf="checkErrorMatch('username', 'minlength')">用户名最少2个字符</mat-error>
+            <mat-error *ngIf="checkErrorMatch('username', 'maxlength')">用户名最多20个字符</mat-error>
           </mat-form-field>
-          <mat-form-field  class="input-line">
-            <input matInput placeholder="请输入密码" #password type="password" autocomplete="off" formControlName="password" />
+          <mat-form-field class="input-line">
+            <input matInput placeholder="请输入密码" #password required type="password" autocomplete="off" formControlName="password" />
+            <mat-error *ngIf="checkErrorMatch('password', 'required')">密码为必填项</mat-error>
+            <mat-error *ngIf="checkErrorMatch('password', 'minlength')">密码最少6位</mat-error>
+            <mat-error *ngIf="checkErrorMatch('password', 'maxlength')">密码最多20位</mat-error>
           </mat-form-field>
           <div class="input-line">
             <mat-checkbox formControlName="rememberMe">记住我</mat-checkbox>
           </div>
-          <div class="error-line" *ngIf="isShowError">{{errorMessage || '用户名或密码错误'}}</div>
+          <div class="error-line" *ngIf="isShowError"><mat-error>{{errorMessage || '用户名或密码错误'}}</mat-error></div>
           <button mat-raised-button color="primary" [disabled]="form.untouched && form.pristine ? !hasAutofilled : form.invalid" *ngIf="!isSubmitting">登录</button>
           <button *ngIf="isSubmitting" [disabled]="isSubmitting" mat-raised-button color="primary"><span class="btn-spinner-wrapper"><mat-spinner diameter="18" color="primary"></mat-spinner> 登录中...</span></button>
         </mat-card-content>

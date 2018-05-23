@@ -6,6 +6,7 @@ import {AutofillMonitor, AutofillEvent} from '@angular/cdk/text-field';
 import {BaseComponent} from '../shared/etc/base-component';
 import {LoginService} from './login.service';
 import {GlobalStateService} from '../shared/services/global-state.service';
+import {USERNAME_REGEX} from '../shared/etc/regex';
 
 @Component({
   selector: 'login',
@@ -19,9 +20,6 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
   isSubmitting: boolean = false;
   errorMessage: string = '';
   form: FormGroup;
-
-  @ViewChild('username', {read: ElementRef})
-  username: ElementRef;
 
   @ViewChild('password', {read: ElementRef})
   password: ElementRef;
@@ -41,8 +39,8 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.form = this.fb.group({
-      username: [null, Validators.required],
-      password: [null, Validators.required],
+      username: [null, [Validators.required, Validators.pattern(USERNAME_REGEX), Validators.minLength(2), Validators.maxLength(20)]],
+      password: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
       rememberMe: [null]
     });
 
@@ -62,7 +60,9 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
     this.isShowError = false;
 
     if (this.form.valid) {
+
       this.isSubmitting = true;
+
       this.loginService.login(this.form.value).subscribe((res) => {
 
         this.isSubmitting = false;
@@ -70,13 +70,16 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
         if (res.success) {
 
           this.globalStateService.isLogin = true;
-
           this.router.navigate([this.route.snapshot.queryParams.redirectTo || '']);
         } else {
 
           this.isShowError = true;
           this.errorMessage = res.message;
         }
+
+      }, null, () => {
+
+        this.isSubmitting = false;
       });
     }
   }
@@ -84,5 +87,10 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
 
     this.autofill.stopMonitoring(this.password.nativeElement);
+  }
+
+  checkErrorMatch(name: string, type: string): boolean {
+
+    return this.form.controls[name].touched && this.form.controls[name].hasError(type);
   }
 }
