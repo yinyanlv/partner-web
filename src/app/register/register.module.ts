@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
+import {CustomFormsModule} from 'ng2-validation';
 
 import {MaterialModule} from '../shared/modules/material.module';
 import {RegisterRoutingModule} from './register.routing';
@@ -13,6 +14,7 @@ import {RegisterService} from './register.service';
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
+    CustomFormsModule,
     MaterialModule,
     RegisterRoutingModule
   ],

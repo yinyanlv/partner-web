@@ -7,18 +7,33 @@
         </mat-card-header>
         <mat-card-content>
           <mat-form-field class="input-line">
-            <input matInput placeholder="请输入用户名" formControlName="username" />
+            <input matInput placeholder="请输入用户名" required formControlName="username" />
+            <mat-error *ngIf="checkErrorMatch('username', 'required')">用户名为必填项</mat-error>
+            <mat-error *ngIf="checkErrorMatch('username', 'pattern')">用户名只能由字母、数字和下划线组成</mat-error>
+            <mat-error *ngIf="checkErrorMatch('username', 'minlength')">用户名最少2个字符</mat-error>
+            <mat-error *ngIf="checkErrorMatch('username', 'maxlength')">用户名最多20个字符</mat-error>
           </mat-form-field>
           <mat-form-field class="input-line">
-            <input matInput placeholder="请输入邮箱" formControlName="email" />
+            <input matInput placeholder="请输入邮箱" required formControlName="email" />
+            <mat-error *ngIf="checkErrorMatch('email', 'required')">邮箱是必填项</mat-error>
+            <mat-error *ngIf="checkErrorMatch('email', 'pattern')">邮箱格式不正确</mat-error>
           </mat-form-field>
           <mat-form-field  class="input-line">
-            <input matInput placeholder="请输入密码" type="password" autocomplete="off" formControlName="password" />
+            <input matInput placeholder="请输入密码" required type="password" autocomplete="off" formControlName="password" />
+            <mat-error *ngIf="checkErrorMatch('password', 'required')">密码为必填项</mat-error>
+            <mat-error *ngIf="checkErrorMatch('password', 'minlength')">密码最少6位</mat-error>
+            <mat-error *ngIf="checkErrorMatch('password', 'maxlength')">密码最多20位</mat-error>
           </mat-form-field>
           <mat-form-field  class="input-line">
-            <input matInput placeholder="请再次输入密码" type="password" autocomplete="off" formControlName="confirmPassword" />
+            <input matInput placeholder="请再次输入密码" required type="password" autocomplete="off" formControlName="confirmPassword" />
+            <mat-error *ngIf="checkErrorMatch('confirmPassword', 'required')">密码为必填项</mat-error>
+            <mat-error *ngIf="checkErrorMatch('confirmPassword', 'minlength')">密码最少6位</mat-error>
+            <mat-error *ngIf="checkErrorMatch('confirmPassword', 'maxlength')">密码最多20位</mat-error>
+            <mat-error *ngIf="checkErrorMatch('confirmPassword', 'equalTo')">两次输入的密码不一致</mat-error>
           </mat-form-field>
-          <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">注册</button>
+          <div class="error-line" *ngIf="isShowError && form.valid"><mat-error>{{errorMessage || '该用户名已被注册'}}</mat-error></div>
+          <button mat-raised-button color="primary" [disabled]="form.invalid" *ngIf="!isSubmitting">注册</button>
+          <button *ngIf="isSubmitting" [disabled]="isSubmitting" mat-raised-button color="primary"><span class="btn-spinner-wrapper"><mat-spinner diameter="18" color="primary"></mat-spinner> 注册中...</span></button>
         </mat-card-content>
         <mat-card-footer>
           <a [routerLink]="['/forgot']">忘记密码？</a>

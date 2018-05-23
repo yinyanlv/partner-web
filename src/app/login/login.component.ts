@@ -16,8 +16,8 @@ import {USERNAME_REGEX} from '../shared/etc/regex';
 export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
 
   hasAutofilled: boolean = false;
-  isShowError: boolean = false;
   isSubmitting: boolean = false;
+  isShowError: boolean = false;
   errorMessage: string = '';
   form: FormGroup;
 
