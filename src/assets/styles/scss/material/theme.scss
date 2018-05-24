@@ -1,23 +1,53 @@
+// this includes all vars, mixins...
 @import "~@angular/material/theming";
 
+// $typography-config: mat-typography-config(  // typography(排版)
+//   $font-family: 'Roboto, monospace',
+//   $headline: mat-typography-level(32px, 48px, 700),  // font-size, line-height, font-weight
+//   $body-1: mat-typography-level(16px, 24px, 500)
+//   ...
+// );
+
+// mat-font-size($typography-config, headline), gets the font-size from config
+// mat-font-family($typography-config)
+// mat-line-height($typography-config, title)
+// mat-font-weight($typography-config, headline)
+// mat-typography-level-to-styles($typography-config, title), get all of the typography styles from the `title` level
+
+// 生成的css类名, e.g., mat-typography, mat-subheading-2...
+// @include angular-material-typography($typography-config);  // override typography for all Angular Material, including mat-base-typography and all components
+// alternatively
+// @include mat-base-typography($typography-config);  // override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
+// @include mat-checkbox-typography($typography-config);  // override typography for a specific angular material component
+// @include mat-core($typography-config);
+
+// this includes all common styles that are used by multiple components. should only be included once
 @include mat-core();
-$config: mat-typography-config();
 
-$primary: mat-palette($mat-indigo);
-$accent: mat-palette($mat-amber, A200, A100, A400);
-$warn: mat-palette($mat-red);
-$theme: mat-light-theme($primary, $accent, $warn);
-$background: mat-get($theme, background);
-$foreground: mat-get($theme, foreground);
+// mat-get(), extract palette from theme
+// mat-color(), extract color from palette, mat-color($primary), mat-color($primary, A400), mat-color($primary, darker-contrast), mat-color($primary, '100-contrast'), contrast(对比度), 使用数字时需加引号
 
+// 变量名为自定义的变量名
+$primary: mat-palette($mat-indigo);  // colors most widely used across all screens and components
+$accent: mat-palette($mat-amber, A200, A100, A400);  // colors used for the floating action button and interactive elements, A200, A100, A400, default, lighter, and darker hue(色调)
+$warn: mat-palette($mat-red);  // colors used to convey error state
+$theme: mat-light-theme($primary, $accent, $warn);  // create the theme object (a sass map containing all of the palettes)
+$foreground: mat-get($theme, foreground);  // colors for text and icons
+$background: mat-get($theme, background);  // colors used for element backgrounds
+
+// include theme styles for core and each component used in your app, can include the angular-material-theme mixin multiple times to generate multiple themes
 @include angular-material-theme($theme);
+// alternatively, you can import and @include the theme mixins for each component that you are using
+// @include mat-core-theme($theme);  // must be included
+// @include mat-button-theme($theme);
+// @include mat-checkbox-theme($theme);
 
 $dark-primary: mat-palette($mat-blue-grey);
 $dark-accent: mat-palette($mat-amber, A200, A100, A400);
 $dark-warn: mat-palette($mat-deep-orange);
 $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
-$dark-background: mat-get($theme, background);
 $dark-foreground: mat-get($theme, foreground);
+$dark-background: mat-get($theme, background);
 
 .app-dark-theme{
   @include angular-material-theme($dark-theme);
