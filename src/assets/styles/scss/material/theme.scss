@@ -1,5 +1,12 @@
-// this includes all vars, mixins...
-@import "~@angular/material/theming";
+@import "~@angular/material/theming";  // import all vars, mixins...
+
+// mat-get(), extract palette from theme
+// mat-color(), extract color from palette, mat-color($primary), mat-color($primary, A400), mat-color($primary, darker-contrast), mat-color($primary, '100-contrast'), contrast(对比度), 使用数字时需加引号
+// mat-font-size($typography-config, headline), gets the font-size from config
+// mat-font-family($typography-config)
+// mat-line-height($typography-config, title)
+// mat-font-weight($typography-config, headline)
+// mat-typography-level-to-styles($typography-config, title), get all of the typography styles from the `title` level
 
 // $typography-config: mat-typography-config(  // typography(排版)
 //   $font-family: 'Roboto, monospace',
@@ -8,24 +15,16 @@
 //   ...
 // );
 
-// mat-font-size($typography-config, headline), gets the font-size from config
-// mat-font-family($typography-config)
-// mat-line-height($typography-config, title)
-// mat-font-weight($typography-config, headline)
-// mat-typography-level-to-styles($typography-config, title), get all of the typography styles from the `title` level
-
 // 生成的css类名, e.g., mat-typography, mat-subheading-2...
 // @include angular-material-typography($typography-config);  // override typography for all Angular Material, including mat-base-typography and all components
 // alternatively
 // @include mat-base-typography($typography-config);  // override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
 // @include mat-checkbox-typography($typography-config);  // override typography for a specific angular material component
+
 // @include mat-core($typography-config);
 
 // this includes all common styles that are used by multiple components. should only be included once
 @include mat-core();
-
-// mat-get(), extract palette from theme
-// mat-color(), extract color from palette, mat-color($primary), mat-color($primary, A400), mat-color($primary, darker-contrast), mat-color($primary, '100-contrast'), contrast(对比度), 使用数字时需加引号
 
 // 变量名为自定义的变量名
 $primary: mat-palette($mat-indigo);  // colors most widely used across all screens and components
@@ -52,3 +51,8 @@ $dark-background: mat-get($theme, background);
 .app-dark-theme{
   @include angular-material-theme($dark-theme);
 }
+
+// material elevation(高度)
+// css 类名: mat-elevation-z{index}, index, 0-24
+// mixins, mat-elevation-transition, mat-elevation(2), mat-elevation(2, #e91e63, 0.8)
+
