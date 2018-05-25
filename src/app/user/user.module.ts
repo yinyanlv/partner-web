@@ -5,6 +5,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from '../shared/modules/material.module';
 import { UserComponent } from './user.component';
 import {UserRoutingModule} from './user.routing';
+import { InfoComponent } from './info/info.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   imports: [
@@ -13,6 +15,10 @@ import {UserRoutingModule} from './user.routing';
     FlexLayoutModule,
     UserRoutingModule
   ],
-  declarations: [UserComponent]
+  declarations: [
+    UserComponent,
+    InfoComponent,
+    SettingsComponent
+  ]
 })
 export class UserModule { }

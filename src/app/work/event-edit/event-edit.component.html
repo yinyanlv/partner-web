@@ -2,9 +2,9 @@
 <mat-dialog-content>
   <div fxLayout="row" fxLayoutGap="20px grid">
     <div>
-      <label>工作日期：</label>
+      <label>日期：</label>
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" (click)="picker.open()" readonly placeholder="请选择工作日期">
+        <input matInput [matDatepicker]="picker" (click)="picker.open()" readonly disabled />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>

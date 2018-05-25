@@ -1,0 +1,22 @@
+<div fxLayout="row wrap" fxLayoutAlign="center start">
+  <mat-card fxFlex.gt-sm="55" fxFlex="100">
+    <mat-tab-group>
+      <mat-tab label="用户信息">
+        <form fxLayout="column" novalidate>
+          <mat-form-field>
+            <input matInput placeholder="用户名" disabled />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="用户昵称" disabled />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="注册邮箱" disabled />
+          </mat-form-field>
+          <div>
+            <button mat-raised-button type="text" color="primary" [routerLink]="['/user/settings']">编辑</button>
+          </div>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

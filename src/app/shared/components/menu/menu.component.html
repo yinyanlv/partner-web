@@ -11,10 +11,23 @@
       <span class="text" fxFlex>工作记录</span>
     </a>
   </mat-list-item>
-  <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-    <a [routerLink]="['/user']">
+  <mat-list-item routerLinkActive="active" [ngClass]="{opened: status}" (click)="status = !status"  [routerLinkActiveOptions]="{exact: true}">
+    <a>
       <mat-icon>person</mat-icon>
       <span class="text" fxFlex>用户中心</span>
+      <mat-icon class="arrow">arrow_drop_down</mat-icon>
     </a>
+    <mat-nav-list class="sub-menu" (click)="onClickSubMenu($event)">
+      <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a [routerLink]="['/user/info']">
+          <span class="text" fxFlex>用户信息</span>
+        </a>
+      </mat-list-item>
+      <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a [routerLink]="['/user/settings']">
+          <span class="text" fxFlex>用户设置</span>
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
   </mat-list-item>
 </mat-nav-list>

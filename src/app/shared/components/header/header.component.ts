@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
 
   goToUserCenter() {
 
-    this.router.navigateByUrl('/user');
+    this.router.navigateByUrl('/user/info');
   }
 
   toggleNotificationStatus() {

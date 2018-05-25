@@ -2,43 +2,4 @@
   <mat-toolbar-row></mat-toolbar-row>
   <mat-toolbar-row></mat-toolbar-row>
 </mat-toolbar>
-<div fxLayout="row wrap" fxLayoutAlign="center start">
-  <mat-card fxFlex.gt-sm="55" fxFlex="100">
-    <mat-tab-group>
-      <mat-tab label="用户信息设置">
-          <form fxLayout="column" novalidate>
-            <mat-form-field>
-              <input matInput placeholder="用户名">
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput placeholder="用户昵称">
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput placeholder="注册邮箱">
-            </mat-form-field>
-            <div>
-              <button mat-raised-button color="primary">保存</button>
-              <button mat-raised-button>取消</button>
-            </div>
-          </form>
-      </mat-tab>
-      <mat-tab label="密码设置">
-        <form fxLayout="column" novalidate>
-          <mat-form-field>
-            <input matInput type="password" placeholder="请输入原密码">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput type="password" autocomplete="off" placeholder="请输入新密码">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput type="password" autocomplete="off" placeholder="请再次输入新密码">
-          </mat-form-field>
-          <div>
-            <button mat-raised-button color="primary">保存</button>
-            <button mat-raised-button>取消</button>
-          </div>
-        </form>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
-</div>
+<router-outlet></router-outlet>

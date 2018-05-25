@@ -11,4 +11,8 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  onClickSubMenu(e: MouseEvent) {
+    console.log(e.stopPropagation());
+  }
 }
