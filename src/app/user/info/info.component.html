@@ -2,7 +2,7 @@
   <mat-card fxFlex.gt-sm="55" fxFlex="100">
     <mat-tab-group>
       <mat-tab label="用户信息">
-        <form fxLayout="column" novalidate>
+        <div class="user-info" fxLayout="column" novalidate>
           <mat-form-field>
             <input matInput placeholder="用户名" disabled />
           </mat-form-field>
@@ -15,7 +15,7 @@
           <div>
             <button mat-raised-button type="text" color="primary" [routerLink]="['/user/settings']">编辑</button>
           </div>
-        </form>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </mat-card>

@@ -1,31 +1,18 @@
 <mat-nav-list>
-  <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-    <a [routerLink]="['/']">
-      <mat-icon>apps</mat-icon>
-      <span class="text" fxFlex>首页</span>
+  <mat-list-item *ngFor="let item of menuList;" routerLinkActive="active" [ngClass]="{opened: item.isOpened}" (click)="item.isOpened = !item.isOpened"  [routerLinkActiveOptions]="{exact: true}">
+    <a *ngIf="item.type !== 'sub-menu'" [routerLink]="[item.path]">
+      <mat-icon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+      <span class="text" fxFlex>{{ item.text }}</span>
     </a>
-  </mat-list-item>
-  <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >
-    <a [routerLink]="['/work']">
-      <mat-icon>event_note</mat-icon>
-      <span class="text" fxFlex>工作记录</span>
-    </a>
-  </mat-list-item>
-  <mat-list-item routerLinkActive="active" [ngClass]="{opened: status}" (click)="status = !status"  [routerLinkActiveOptions]="{exact: true}">
-    <a>
-      <mat-icon>person</mat-icon>
-      <span class="text" fxFlex>用户中心</span>
+    <a *ngIf="item.type === 'sub-menu'">
+      <mat-icon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+      <span class="text" fxFlex>{{ item.text }}</span>
       <mat-icon class="arrow">arrow_drop_down</mat-icon>
     </a>
-    <mat-nav-list class="sub-menu" (click)="onClickSubMenu($event)">
-      <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <a [routerLink]="['/user/info']">
-          <span class="text" fxFlex>用户信息</span>
-        </a>
-      </mat-list-item>
-      <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <a [routerLink]="['/user/settings']">
-          <span class="text" fxFlex>用户设置</span>
+    <mat-nav-list *ngIf="item.type === 'sub-menu'" class="sub-menu" (click)="onClickSubMenu($event)">
+      <mat-list-item *ngFor="let subItem of item.children" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a [routerLink]="[subItem.path]">
+          <span class="text" fxFlex>{{ subItem.text }}</span>
         </a>
       </mat-list-item>
     </mat-nav-list>
