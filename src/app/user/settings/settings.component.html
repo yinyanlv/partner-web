@@ -23,7 +23,7 @@
           <div class="btn-line">
             <button mat-raised-button color="primary" [disabled]="userInfoForm.invalid" (click)="saveUserInfo()" *ngIf="!isUserInfoSubmitting">保存</button>
             <button *ngIf="isUserInfoSubmitting" [disabled]="isUserInfoSubmitting" mat-raised-button color="primary"><span class="btn-spinner-wrapper"><mat-spinner diameter="18" color="primary"></mat-spinner> 保存中...</span></button>
-            <button mat-raised-button (click)="resetUserInfo()">重置</button>
+            <button mat-raised-button (click)="resetUserInfo()" [disabled]="isUserInfoSubmitting">重置</button>
           </div>
         </form>
       </mat-tab>
@@ -42,7 +42,7 @@
           <div class="btn-line">
             <button mat-raised-button color="primary" [disabled]="passwordForm.invalid" (click)="savePassword()" *ngIf="!isPasswordSubmitting">保存</button>
             <button *ngIf="isPasswordSubmitting" [disabled]="isPasswordSubmitting" mat-raised-button color="primary"><span class="btn-spinner-wrapper"><mat-spinner diameter="18" color="primary"></mat-spinner> 保存中...</span></button>
-            <button mat-raised-button (click)="resetPasswordForm()">重置</button>
+            <button mat-raised-button (click)="resetPasswordForm()" [disabled]="isPasswordSubmitting">重置</button>
           </div>
         </form>
       </mat-tab>
