@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import * as format from 'date-fns/format';
 
 import {ConfirmDialogComponent} from '../../shared/components/dialog/confirm/confirm-dialog.component';
 
@@ -12,7 +13,7 @@ export class EventEditComponent implements OnInit {
 
   timeCount: string | number;
   date: Date;
-  events: Array<any> = [{}, {}];
+  events: Array<any>;
   private isUpdate: boolean = false;
   private confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
 
@@ -24,24 +25,31 @@ export class EventEditComponent implements OnInit {
 
   ngOnInit() {
 
-    this.date = this.data.day.date;
-    this.timeCount = this.data.day.events && this.data.day.events[0] && this.data.day.events[0].meta;
+    this.date = this.data.date;
+    this.events = this.getTime(this.data.events);
+    this.timeCount = this.data.meta;
 
-    if (this.timeCount) {
+    if (this.events && this.events.length > 0 || this.timeCount > 0) {
       this.isUpdate = true;
     }
   }
 
   updateEvent() {
+
     this.dialogRef.close({
       isUpdate: this.isUpdate,
       date: this.date,
+      events: this.setTime(this.date, this.events),
       timeCount: this.timeCount
     });
   }
 
   addEvent() {
-    this.events.push({});
+    this.events.push({
+      start: new Date(),
+      end: new Date(),
+      title: ''
+    });
   }
 
   deleteEvent(event, index) {
@@ -56,6 +64,39 @@ export class EventEditComponent implements OnInit {
       if (data) {
         this.events.splice(index, 1);
       }
+    });
+  }
+
+  getTime(events: Array<any>) {
+
+    if (!events) return [];
+
+    return events.map((item) => {
+
+      return {
+        start: format(item.start, 'hh:mm'),
+        end: format(item.end, 'hh:mm'),
+        title: item.title
+      };
+    });
+  }
+
+  setTime(date: Date, events: Array<any>) {
+
+    let copiedDate = new Date(date.getTime());
+
+    if (!events) return [];
+
+    return events.map((item) => {
+
+      let [startHour, startMinute] = item.start.split(':');
+      let [endHour, endMinute] = item.end.split(':');
+
+      return {
+        start: date.setHours(startHour, startMinute),
+        end: copiedDate.setHours(endHour, endMinute),
+        title: item.title
+      };
     });
   }
 }

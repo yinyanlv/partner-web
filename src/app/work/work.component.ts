@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {ActivatedRoute, Router, NavigationEnd, NavigationStart} from "@angular/router";
 import {CalendarDateFormatter, CalendarEvent} from 'angular-calendar';
-import * as startOfDay from 'date-fns/start_of_day';
+import * as startOfHour from 'date-fns/start_of_hour';
 import 'rxjs/Rx';
 
 import {EventEditComponent} from './event-edit/event-edit.component';
@@ -54,12 +54,17 @@ export class WorkComponent implements OnInit {
     if (event && event.day && !event.day.inMonth) return;
 
     this.dialogRef = this.dialog.open(EventEditComponent, {
-      data: event
+      data: {
+        date: event.day.date,
+        events: event.day.events,
+        meta: event.day.meta
+      }
     });
 
     this.dialogRef.afterClosed().subscribe((data) => {
 
-      this.updateTimeCount();
+      this.events = data.events;
+      // this.updateTimeCount();
     });
   }
 

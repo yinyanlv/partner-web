@@ -4,7 +4,7 @@
     <div>
       <label>日期：</label>
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" (click)="picker.open()" readonly disabled />
+        <input matInput [matDatepicker]="picker" [(ngModel)]="date" readonly disabled />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -25,9 +25,25 @@
         <mat-list-item *ngFor="let item of events; let i = index;">
           <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px grid">
             <span class="mb-1-55-em" fxFlex="80px">事务{{i + 1}}：</span>
-            <span><label>开始时间：</label><mat-form-field><input matInput readonly atp-time-picker locale="ch" placeholder="请选择开始时间" /><button matSuffix mat-icon-button><mat-icon>access_alarm</mat-icon></button></mat-form-field></span>
-            <span><label>完成时间：</label><mat-form-field><input matInput readonly atp-time-picker locale="ch" placeholder="请选择完成时间" /><button matSuffix mat-icon-button><mat-icon>access_alarm</mat-icon></button></mat-form-field></span>
-            <span><label>事务备注：</label><mat-form-field><input matInput placeholder="请输入该事务的备注" /></mat-form-field></span>
+            <span>
+              <label>开始时间：</label>
+              <mat-form-field>
+                <input matInput readonly atp-time-picker locale="ch" placeholder="请选择开始时间" required [(ngModel)]="item.start" /><button matSuffix mat-icon-button>
+                <mat-icon>access_alarm</mat-icon></button>
+              </mat-form-field>
+            </span>
+            <span>
+              <label>完成时间：</label>
+              <mat-form-field>
+                <input matInput readonly atp-time-picker locale="ch" placeholder="请选择完成时间" required [(ngModel)]="item.end" /><button matSuffix mat-icon-button><mat-icon>access_alarm</mat-icon></button>
+              </mat-form-field>
+            </span>
+            <span>
+              <label>事务备注：</label>
+              <mat-form-field>
+                <input matInput placeholder="请输入该事务的备注" required [(ngModel)]="item.title" />
+              </mat-form-field>
+            </span>
             <span class="mb-1-25-em"><button mat-icon-button matTooltip="删除该条事务" color="primary" (click)="deleteEvent(item, i)"><mat-icon>remove_circle</mat-icon></button></span>
           </div>
         </mat-list-item>
