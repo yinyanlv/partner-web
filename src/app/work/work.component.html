@@ -6,9 +6,7 @@
     <span fxFlex fxShow="false" fxShow.gt-xs>{{date | calendarDate:(calendarMode + 'ViewTitle'):'zh'}}</span>
     <span class="time-count">总计加班：{{timeCount}}小时</span>
     <div fxShow="false" fxShow.gt-xs>
-      <button mat-button (click)="changeCalendarMode('month')" [class.active]="calendarMode === 'month'">月视图</button>
-      <button mat-button (click)="changeCalendarMode('week')" [class.active]="calendarMode === 'week'">周视图</button>
-      <button mat-button (click)="changeCalendarMode('day')" [class.active]="calendarMode === 'day'">日视图</button>
+      <button mat-button [class.active]="calendarMode === 'month'">月视图</button>
     </div>
     <button mat-icon-button matTooltip="上一页" mwlCalendarPreviousView (viewDateChange)="getEvents()" [view]="calendarMode" [(viewDate)]="date"><mat-icon>chevron_left</mat-icon></button>
     <button mat-icon-button matTooltip="今天" mwlCalendarToday [(viewDate)]="date"><mat-icon>today</mat-icon></button>
@@ -34,7 +32,6 @@
 
   <mat-card *ngIf="!isLoading; else loading;">
     <div [ngSwitch]="calendarMode">
-
       <mwl-calendar-month-view
         *ngSwitchCase="'month'"
         [viewDate]="date"
@@ -42,20 +39,6 @@
         [events]="events"
         (dayClicked)="onClickDay($event)"
       ></mwl-calendar-month-view>
-
-      <mwl-calendar-week-view
-        *ngSwitchCase="'week'"
-        [viewDate]="date"
-        [locale]="locale"
-        [events]="events"
-      ></mwl-calendar-week-view>
-
-      <mwl-calendar-day-view
-        *ngSwitchCase="'day'"
-        [viewDate]="date"
-        [locale]="locale"
-        [events]="events"
-      ></mwl-calendar-day-view>
     </div>
   </mat-card>
 

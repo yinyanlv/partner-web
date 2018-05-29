@@ -27,7 +27,7 @@ export class EventEditComponent implements OnInit {
 
     this.date = this.data.date;
     this.events = this.getTime(this.data.events);
-    this.timeCount = this.data.meta;
+    this.timeCount = this.data.timeCount;
 
     if (this.events && this.events.length > 0 || this.timeCount > 0) {
       this.isUpdate = true;

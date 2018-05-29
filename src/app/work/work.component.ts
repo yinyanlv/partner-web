@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material';
-import {ActivatedRoute, Router, NavigationEnd, NavigationStart} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CalendarDateFormatter, CalendarEvent} from 'angular-calendar';
-import * as startOfHour from 'date-fns/start_of_hour';
 import 'rxjs/Rx';
 
 import {EventEditComponent} from './event-edit/event-edit.component';
@@ -57,7 +56,7 @@ export class WorkComponent implements OnInit {
       data: {
         date: event.day.date,
         events: event.day.events,
-        meta: event.day.meta
+        timeCount: this.timeCount
       }
     });
 
@@ -77,12 +76,6 @@ export class WorkComponent implements OnInit {
     });
 
     this.timeCount = sum;
-  }
-
-  changeCalendarMode(mode: string) {
-
-    this.calendarMode = mode;
-    this.getEvents();
   }
 
   getEvents() {
