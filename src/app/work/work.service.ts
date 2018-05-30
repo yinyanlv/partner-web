@@ -9,11 +9,17 @@ export class WorkService {
   private events: Array<CalendarEvent> = [{
     start: new Date(),
     end: new Date(),
-    title: '王大崔'
+    title: '王大崔',
+    meta: {
+      timeCount: 2
+    }
   }, {
     start: new Date(),
     end: new Date(),
-    title: '呵呵'
+    title: '呵呵',
+    meta: {
+      timeCount: 2
+    }
   }];
 
   getEvents() {

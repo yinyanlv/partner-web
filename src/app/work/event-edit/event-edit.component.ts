@@ -76,7 +76,8 @@ export class EventEditComponent implements OnInit {
       return {
         start: format(item.start, 'hh:mm'),
         end: format(item.end, 'hh:mm'),
-        title: item.title
+        title: item.title,
+        meta: item.meta
       };
     });
   }
@@ -95,7 +96,10 @@ export class EventEditComponent implements OnInit {
       return {
         start: date.setHours(startHour, startMinute),
         end: copiedDate.setHours(endHour, endMinute),
-        title: item.title
+        title: item.title,
+        meta: {
+          timeCount: this.timeCount
+        }
       };
     });
   }
