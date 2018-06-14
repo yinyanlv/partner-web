@@ -20,7 +20,7 @@
             <mat-error *ngIf="checkErrorMatch('password', 'maxlength')">密码最多20位</mat-error>
           </mat-form-field>
           <div class="input-line">
-            <mat-checkbox formControlName="rememberMe">记住我</mat-checkbox>
+            <mat-checkbox formControlName="remember">记住我</mat-checkbox>
           </div>
           <div class="error-line" *ngIf="isShowError && form.valid"><mat-error>{{errorMessage || '用户名或密码错误'}}</mat-error></div>
           <button mat-raised-button color="primary" [disabled]="form.untouched && form.pristine ? !hasAutofilled : form.invalid" *ngIf="!isSubmitting">登录</button>

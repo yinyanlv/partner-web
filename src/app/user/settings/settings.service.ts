@@ -29,7 +29,7 @@ export class SettingsService extends BaseHttp {
     return this.observableCreator.create((observer) => {
 
       setTimeout(() => {
-        if (params.oldPassword === '111111') {
+        if (params.password === '111111') {
           observer.next({
             success: true
           });

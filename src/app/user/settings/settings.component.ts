@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import {CustomValidators} from 'ng2-validation';
 
-import {USERNAME_REGEX, EMAIL_REGEX} from '../../shared/etc/regex';
+import {EMAIL_REGEX, PHONE_REGEX} from '../../shared/etc/regex';
 import {SettingsService} from './settings.service';
 
 let newPassword = new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]);
@@ -33,13 +33,13 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
 
     this.userInfoForm = this.fb.group({
-        username: [null, [Validators.required, Validators.pattern(USERNAME_REGEX), Validators.minLength(2), Validators.maxLength(20)]],
         nickname: [null, [Validators.maxLength(50)]],
-        email: [null, [Validators.required, Validators.pattern(EMAIL_REGEX)]]
+        email: [null, [Validators.required, Validators.pattern(EMAIL_REGEX)]],
+        phone: [null, [Validators.pattern(PHONE_REGEX)]]
       });
 
     this.passwordForm = this.fb.group({
-      oldPassword: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+      password: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
       newPassword: newPassword,
       confirmNewPassword: confirmNewPassword
     });

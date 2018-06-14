@@ -4,11 +4,7 @@
       <mat-tab label="用户信息设置">
         <form fxLayout="column" novalidate [formGroup]="userInfoForm">
           <mat-form-field>
-            <input matInput placeholder="用户名" required formControlName="username" />
-            <mat-error *ngIf="checkErrorMatch(userInfoForm, 'username', 'required')">用户名为必填项</mat-error>
-            <mat-error *ngIf="checkErrorMatch(userInfoForm, 'username', 'pattern')">用户名只能由字母、数字和下划线组成</mat-error>
-            <mat-error *ngIf="checkErrorMatch(userInfoForm, 'username', 'minlength')">用户名最少2个字符</mat-error>
-            <mat-error *ngIf="checkErrorMatch(userInfoForm, 'username', 'maxlength')">用户名最多20个字符</mat-error>
+            <input matInput placeholder="用户名" disabled />
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="用户昵称" formControlName="nickname" />
@@ -18,6 +14,10 @@
             <input matInput placeholder="注册邮箱" required formControlName="email" />
             <mat-error *ngIf="checkErrorMatch(userInfoForm, 'email', 'required')">邮箱是必填项</mat-error>
             <mat-error *ngIf="checkErrorMatch(userInfoForm, 'email', 'pattern')">邮箱格式不正确</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="手机" formControlName="phone" />
+            <mat-error *ngIf="checkErrorMatch(userInfoForm, 'phone', 'pattern')">手机号格式不正确</mat-error>
           </mat-form-field>
           <div class="error-line" *ngIf="isShowUserInfoError && userInfoForm.valid"><mat-error>{{userInfoErrorMessage || '该用户名已被注册'}}</mat-error></div>
           <div class="btn-line">
@@ -30,7 +30,7 @@
       <mat-tab label="密码设置">
         <form fxLayout="column" novalidate [formGroup]="passwordForm">
           <mat-form-field>
-            <input matInput type="password" required placeholder="请输入原密码" formControlName="oldPassword" />
+            <input matInput type="password" required placeholder="请输入原密码" formControlName="password" />
           </mat-form-field>
           <mat-form-field>
             <input matInput type="password" required autocomplete="off" placeholder="请输入新密码" formControlName="newPassword" />
