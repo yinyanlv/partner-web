@@ -22,7 +22,6 @@ export class WorkComponent implements OnInit {
   calendarMode: string = 'month';
   date: Date = new Date();
   locale: string = 'zh';
-  timeCount: number = 0;
   events: Array<CalendarEvent> = [];
   private dialogRef: MatDialogRef<RecordEditComponent>;
   isLoading: boolean = false;
@@ -36,10 +35,6 @@ export class WorkComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.activatedRoute.queryParams.subscribe((e) => {
-    });
-
     this.getRecords();
   }
 
@@ -56,27 +51,22 @@ export class WorkComponent implements OnInit {
       width: '1100px',
       data: {
         date: event.day.date,
-        events: event.day.events,
-        timeCount: this.timeCount
+        events: event.day.events
       }
     });
 
     this.dialogRef.afterClosed().subscribe((data) => {
-
-      this.events = data.events;
-      // this.updateTimeCount();
     });
   }
 
   updateTimeCount() {
     let sum = 0;
 
-    this.events.forEach((item) => {
+    this.events.forEach((item: any) => {
 
-      sum += item.meta;
+      sum += item.meta.overtime;
     });
 
-    this.timeCount = sum;
   }
 
   getRecords() {
