@@ -1,26 +1,13 @@
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
 
 import {BaseHttp} from '../shared/etc/base-http';
 
 @Injectable()
 export class LoginService extends BaseHttp {
 
-  login(params: any) {
-
-    return this.observableCreator.create((observer) => {
-
-      setTimeout(() => {
-        if (params.username === 'admin' && params.password === '111111') {
-          observer.next({
-            success: true
-          });
-        } else {
-          observer.next({
-            success: false,
-            message: '用户名或密码错误'
-          });
-        }
-      }, 3000);
-    });
+  login(params: any): Observable<any> {
+    params.remember = !!params.remember;
+    return this.http.post(this.apiPrefix + '/login', params);
   }
 }

@@ -65,8 +65,6 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
 
       this.loginService.login(this.form.value).subscribe((res) => {
 
-        this.isSubmitting = false;
-
         if (res.success) {
 
           this.globalStateService.isLogin = true;
@@ -76,8 +74,11 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
           this.isShowError = true;
           this.errorMessage = res.message;
         }
+      }, (res) => {
 
-      }, null, () => {
+        this.isShowError = true;
+        this.errorMessage = res.message;
+      }, () => {
 
         this.isSubmitting = false;
       });

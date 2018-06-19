@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
 import {CustomValidators} from 'ng2-validation';
 
 import {RegisterService} from './register.service';
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private snackBar: MatSnackBar
   ) {
   }
 
@@ -46,17 +48,23 @@ export class RegisterComponent implements OnInit {
 
       this.registerService.register(this.form.value).subscribe((res) => {
 
-        this.isSubmitting = false;
-
         if (res.success) {
 
+          this.snackBar.open(res.data || '注册成功，请前往登录页登录', '知道了', {
+            duration: 3000,
+            verticalPosition: 'top'
+          });
         } else {
 
           this.isShowError = true;
           this.errorMessage = res.message;
         }
 
-      }, null, () => {
+      }, (res) => {
+
+        this.isShowError = true;
+        this.errorMessage = res.message;
+      }, () => {
 
         this.isSubmitting = false;
       });
