@@ -18,9 +18,9 @@
     </div>
   </div>
   <mat-divider></mat-divider>
-  <div class="event-list">
-    <div class="event-list-title" fxLayout="row" fxLayoutAlign="space-between center"><span>事务列表：</span><button mat-icon-button matTooltip="增加一条新事务" color="primary" (click)="addEvent()"><mat-icon>add_circle</mat-icon></button></div>
-    <div class="event-list-content">
+  <div class="record-list">
+    <div class="record-list-title" fxLayout="row" fxLayoutAlign="space-between center"><span>事务列表：</span><button mat-icon-button matTooltip="增加一条新事务" color="primary" (click)="addEvent()"><mat-icon>add_circle</mat-icon></button></div>
+    <div class="record-list-content">
       <mat-list>
         <mat-list-item *ngFor="let item of events; let i = index;">
           <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px grid">
@@ -52,6 +52,6 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-raised-button color="primary" (click)="updateEvent()">保存</button>
+  <button mat-raised-button color="primary" (click)="updateRecord()">保存</button>
   <button mat-raised-button mat-dialog-close>关闭</button>
 </mat-dialog-actions>

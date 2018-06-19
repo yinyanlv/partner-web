@@ -8,7 +8,8 @@ import {MaterialModule} from '../shared/modules/material.module';
 import {WorkRoutingModule} from './work.routing';
 import {WorkComponent} from './work.component';
 import {WorkService} from './work.service';
-import { EventEditComponent } from './event-edit/event-edit.component';
+import {RecordEditService} from './record-edit/record-edit.service';
+import { RecordEditComponent } from './record-edit/record-edit.component';
 
 @NgModule({
   imports: [
@@ -21,13 +22,14 @@ import { EventEditComponent } from './event-edit/event-edit.component';
   ],
   declarations: [
     WorkComponent,
-    EventEditComponent
+    RecordEditComponent
   ],
   entryComponents: [
-    EventEditComponent
+    RecordEditComponent
   ],
   providers: [
-    WorkService
+    WorkService,
+    RecordEditService
   ]
 })
 export class WorkModule {

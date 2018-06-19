@@ -2,14 +2,15 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import * as format from 'date-fns/format';
 
+import {RecordEditService} from './record-edit.service';
 import {ConfirmDialogComponent} from '../../shared/components/dialog/confirm/confirm-dialog.component';
 
 @Component({
   selector: 'app-event-edit',
-  templateUrl: 'event-edit.component.html',
-  styleUrls: ['event-edit.component.scss']
+  templateUrl: 'record-edit.component.html',
+  styleUrls: ['record-edit.component.scss']
 })
-export class EventEditComponent implements OnInit {
+export class RecordEditComponent implements OnInit {
 
   timeCount: string | number;
   date: Date;
@@ -18,9 +19,11 @@ export class EventEditComponent implements OnInit {
   private confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
 
   constructor(
-    public dialogRef: MatDialogRef<EventEditComponent>,
+    public dialogRef: MatDialogRef<RecordEditComponent>,
     private dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) private data: any) {
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private eventEditService: RecordEditService
+  ) {
   }
 
   ngOnInit() {
@@ -34,7 +37,7 @@ export class EventEditComponent implements OnInit {
     }
   }
 
-  updateEvent() {
+  updateRecord() {
 
     this.dialogRef.close({
       isUpdate: this.isUpdate,

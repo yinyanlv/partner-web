@@ -8,9 +8,9 @@
     <div fxShow="false" fxShow.gt-xs>
       <button mat-button [class.active]="calendarMode === 'month'">月视图</button>
     </div>
-    <button mat-icon-button matTooltip="上一页" mwlCalendarPreviousView (viewDateChange)="getEvents()" [view]="calendarMode" [(viewDate)]="date"><mat-icon>chevron_left</mat-icon></button>
+    <button mat-icon-button matTooltip="上个月" mwlCalendarPreviousView (viewDateChange)="getEvents()" [view]="calendarMode" [(viewDate)]="date"><mat-icon>chevron_left</mat-icon></button>
     <button mat-icon-button matTooltip="今天" mwlCalendarToday [(viewDate)]="date"><mat-icon>today</mat-icon></button>
-    <button mat-icon-button matTooltip="下一页" mwlCalendarNextView [view]="calendarMode" [(viewDate)]="date" (viewDateChange)="getEvents()"><mat-icon>chevron_right</mat-icon></button>
+    <button mat-icon-button matTooltip="下个月" mwlCalendarNextView [view]="calendarMode" [(viewDate)]="date" (viewDateChange)="getEvents()"><mat-icon>chevron_right</mat-icon></button>
   </mat-toolbar-row>
 </mat-toolbar>
 

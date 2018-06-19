@@ -22,7 +22,7 @@ export class WorkService {
     }
   }];
 
-  getEvents() {
+  getRecords() {
 
     return this.events;
   }

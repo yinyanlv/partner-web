@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CalendarDateFormatter, CalendarEvent} from 'angular-calendar';
 import 'rxjs/Rx';
 
-import {EventEditComponent} from './event-edit/event-edit.component';
+import {RecordEditComponent} from './record-edit/record-edit.component';
 import {CustomCalendarDateFormatter} from '../shared/etc/custom-calendar-date-formatter';
 import {WorkService} from './work.service';
 
@@ -24,12 +24,12 @@ export class WorkComponent implements OnInit {
   locale: string = 'zh';
   timeCount: number = 0;
   events: Array<CalendarEvent> = [];
-  private dialogRef: MatDialogRef<EventEditComponent>;
+  private dialogRef: MatDialogRef<RecordEditComponent>;
   isLoading: boolean = false;
 
   constructor(
     private dialog: MatDialog,
-    private service: WorkService,
+    private workService: WorkService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
@@ -40,7 +40,7 @@ export class WorkComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((e) => {
     });
 
-    this.getEvents();
+    this.getRecords();
   }
 
   onClickDay(event) {
@@ -52,7 +52,7 @@ export class WorkComponent implements OnInit {
 
     if (event && event.day && !event.day.inMonth) return;
 
-    this.dialogRef = this.dialog.open(EventEditComponent, {
+    this.dialogRef = this.dialog.open(RecordEditComponent, {
       width: '1100px',
       data: {
         date: event.day.date,
@@ -79,12 +79,12 @@ export class WorkComponent implements OnInit {
     this.timeCount = sum;
   }
 
-  getEvents() {
+  getRecords() {
 
     this.isLoading = true;
 
     setTimeout(() => {
-      this.events = this.service.getEvents();
+      this.events = this.workService.getRecords();
       this.updateTimeCount();
       this.isLoading = false;
     }, 1000);
