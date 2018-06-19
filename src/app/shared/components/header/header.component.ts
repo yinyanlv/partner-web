@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
 
   isShowNotification: boolean = true;
   isShowSettingsFab: boolean = true;
+  userInfo: any;
   private dialogRef: MatDialogRef<ConfirmDialogComponent>;
 
   @Output()
@@ -38,6 +39,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
+    this.userInfo = this.globalStateService.userInfo;
     this.toggleOptionsFab.emit(this.isShowSettingsFab);
   }
 
@@ -78,6 +80,7 @@ export class HeaderComponent implements OnInit {
 
           if (res.success) {
             this.globalStateService.isLogin = false;
+            this.globalStateService.userInfo = null;
             this.router.navigate(['/login']);
           }
         });

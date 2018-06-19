@@ -4,7 +4,7 @@
       <mat-tab label="用户信息设置">
         <form fxLayout="column" novalidate [formGroup]="userInfoForm">
           <mat-form-field>
-            <input matInput placeholder="用户名" disabled />
+            <input matInput placeholder="用户名" disabled value="{{userInfo.username}}" />
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="用户昵称" formControlName="nickname" />

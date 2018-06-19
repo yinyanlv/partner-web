@@ -4,16 +4,16 @@
       <mat-tab label="用户信息">
         <div class="user-info" fxLayout="column" novalidate>
           <mat-form-field>
-            <input matInput placeholder="用户名" disabled />
+            <input matInput placeholder="用户名" disabled value="{{userInfo.username}}" />
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="用户昵称" disabled />
+            <input matInput placeholder="用户昵称" disabled value="{{userInfo.nickname}}" />
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="注册邮箱" disabled />
+            <input matInput placeholder="注册邮箱" disabled value="{{userInfo.email}}" />
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="手机" disabled />
+            <input matInput placeholder="手机" disabled value="{{userInfo.phone}}" />
           </mat-form-field>
           <div>
             <button mat-raised-button type="text" color="primary" [routerLink]="['/user/settings']">编辑</button>

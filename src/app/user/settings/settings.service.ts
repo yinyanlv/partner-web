@@ -5,41 +5,17 @@ import {BaseHttp} from '../../shared/etc/base-http';
 @Injectable()
 export class SettingsService extends BaseHttp {
 
-  updateUserInfo(params: any) {
+  updateUserInfo(username: string, params: any) {
 
-    return this.observableCreator.create((observer) => {
+    params.username = username;
 
-      setTimeout(() => {
-        if (params.username !== 'admin') {
-          observer.next({
-            success: true
-          });
-        } else {
-          observer.next({
-            success: false,
-            message: '该用户名已被注册'
-          });
-        }
-      }, 3000);
-    });
+    return this.http.put(this.apiPrefix + '/user/update', params);
   }
 
-  updatePassword(params: any) {
+  updatePassword(username: string, params: any) {
 
-    return this.observableCreator.create((observer) => {
+    params.username = username;
 
-      setTimeout(() => {
-        if (params.password === '111111') {
-          observer.next({
-            success: true
-          });
-        } else {
-          observer.next({
-            success: false,
-            message: '输入的原密码不正确'
-          });
-        }
-      }, 3000);
-    });
+    return this.http.put(this.apiPrefix + '/modify-password', params);
   }
 }

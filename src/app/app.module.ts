@@ -29,10 +29,11 @@ registerLocaleData(localeZh);
   providers: [{
     provide: LOCALE_ID,
     useValue: 'zh'
-  }, {
-    provide: RouteReuseStrategy,
-    useClass: AppRouteReuseStrategy
   },
+  // {
+  //   provide: RouteReuseStrategy,
+  //   useClass: AppRouteReuseStrategy
+  // },
     SubjectService,
     GlobalStateService,
     RouteGuardService

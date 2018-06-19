@@ -21,7 +21,7 @@
     </button>
     <button mat-button  class="ml-8-px" [matMenuTriggerFor]="user" matTooltip="用户信息">
       <mat-icon>person</mat-icon>
-      <span class="user">欢迎您，admin</span>
+      <span class="user">欢迎您，{{userInfo.username}}</span>
     </button>
 
     <mat-menu #user="matMenu" x-position="end">
