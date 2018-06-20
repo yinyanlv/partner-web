@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {CalendarDateFormatter, CalendarEvent} from 'angular-calendar';
-import * as getYear from 'date-fns/get_year';
-import * as getMonth from 'date-fns/get_month';
+import * as startOfMonth from 'date-fns/start_of_month';
+import * as endOfMonth from 'date-fns/end_of_month';
 
 import {GlobalStateService} from '../shared/services/global-state.service';
 import {RecordEditComponent} from './record-edit/record-edit.component';
@@ -76,10 +76,10 @@ export class WorkComponent implements OnInit {
 
     this.workService.originalData.forEach((item: any) => {
 
-      sum += item.overtime;
+      sum += item.overtime * 100;
     });
 
-    this.overtimeCount = sum;
+    this.overtimeCount = sum / 100;
   }
 
   loadRecords() {
@@ -88,8 +88,8 @@ export class WorkComponent implements OnInit {
 
     this.workService.getRecords({
       username: username,
-      year: getYear(this.date),
-      month: getMonth(this.date) + 1
+      startDate: startOfMonth(this.date),
+      endDate: endOfMonth(this.date)
     }).subscribe((res) => {
 
       this.events = res.data;

@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import * as format from 'date-fns/format';
+import * as startOfDay from 'date-fns/start_of_day';
 
 import {GlobalStateService} from '../../shared/services/global-state.service';
 import {RecordEditService} from './record-edit.service';
@@ -134,11 +135,13 @@ export class RecordEditComponent implements OnInit {
       this.recordId = this.data.events[0].meta.recordId;
       this.overtime = this.data.events[0].meta.overtime;
 
-      this.events = this.data.events.map((item) => {
+      let eventList = this.data.events.slice(1, this.data.events.length);
+
+      this.events = eventList.map((item) => {
         let temp: any = {};
 
-        temp.startTime = format(item.start, 'hh:mm');
-        temp.endTime = format(item.end, 'hh:mm');
+        temp.startTime = format(item.start, 'HH:mm');
+        temp.endTime = format(item.end, 'HH:mm');
         temp.note = item.meta.note;
 
         return temp;
@@ -155,7 +158,7 @@ export class RecordEditComponent implements OnInit {
 
     params.id = this.recordId;
     params.username = this.globalStateService.userInfo.username;
-    params.date = this.date;
+    params.date = startOfDay(this.date);
     params.overtime = this.overtime;
     params.events = this.events.map((item) => {
       let temp: any = {};

@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {CalendarEvent} from 'angular-calendar';
+import {utc} from 'moment';
+import * as format from 'date-fns/format';
 
 import {BaseHttp} from '../shared/etc/base-http';
 
@@ -12,38 +14,48 @@ export class WorkService extends BaseHttp {
 
   getRecords(params): Observable<any> {
 
-    return this.http.get(this.apiPrefix + '/work-record/get-records', {
-      params: params
-    }).pipe(map((res: any) => {
-      if (res.success) {
+    return this.http.post(this.apiPrefix + '/work-record/get-records', params)
+      .pipe(map((res: any) => {
+        if (res.success) {
 
-        let events = [];
+          let events = [];
 
-        this.originalData = res.data;
+          this.originalData = res.data;
 
-        res.data.forEach((item: any) => {
+          res.data.forEach((item: any) => {
 
-          item.events.forEach((event) => {
-
-            let temp: CalendarEvent = {
-              start: new Date(event.startTime),
-              end: new Date(event.endTime),
+            events.push({
+              start: utc(item.date).local().toDate(),
+              end: utc(item.date).local().toDate(),
               title: '',
               meta: {
                 recordId: item.id,
                 overtime: item.overtime,
-                note: event.note
+                note: ''
               }
-            };
+            });
 
-            events.push(temp);
+            item.events.forEach((event) => {
+
+              let temp: CalendarEvent = {
+                start: utc(event.startTime).local().toDate(),
+                end: utc(event.endTime).local().toDate(),
+                title: '',
+                meta: {
+                  recordId: item.id,
+                  overtime: item.overtime,
+                  note: event.note
+                }
+              };
+
+              events.push(temp);
+            });
           });
-        });
 
-        res.data = events;
-      }
+          res.data = events;
+        }
 
-      return res;
-    }));
+        return res;
+      }));
   }
 }
