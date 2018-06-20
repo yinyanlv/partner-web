@@ -53,5 +53,6 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-raised-button color="primary" (click)="doSave()">保存</button>
+  <button mat-raised-button color="warn" *ngIf="isShowDeleteBtn" (click)="deleteRecord()">删除</button>
   <button mat-raised-button mat-dialog-close>关闭</button>
 </mat-dialog-actions>

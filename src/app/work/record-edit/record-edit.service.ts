@@ -18,6 +18,11 @@ export class RecordEditService extends BaseHttp {
 
   deleteRecord(params): Observable<any> {
 
-    return this.http.delete(this.apiPrefix + '/work-record/delete', params);
+    return this.http.delete(this.apiPrefix + '/work-record/delete', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      params: params
+    });
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import * as format from 'date-fns/format';
 
 import {GlobalStateService} from '../../shared/services/global-state.service';
@@ -18,11 +18,13 @@ export class RecordEditComponent implements OnInit {
   date: Date;
   events: Array<any>;
   originData: any = null;
+  isShowDeleteBtn: boolean = false;
   private confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
 
   constructor(
     public dialogRef: MatDialogRef<RecordEditComponent>,
     private dialog: MatDialog,
+    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private recordEditService: RecordEditService,
     private globalStateService: GlobalStateService
@@ -32,6 +34,7 @@ export class RecordEditComponent implements OnInit {
   ngOnInit() {
     this.originData = Object.assign({}, this.data);
     this.initData();
+    this.isShowDeleteBtn = this.events.length > 0 || this.overtime > 0;
   }
 
   doSave() {
@@ -39,18 +42,11 @@ export class RecordEditComponent implements OnInit {
 
     if (params.id) {
 
-      if (params.overtime || params.events.length > 0) {
-
-        this.updateRecord(params);
-      } else {
-
-        this.deleteRecord(params);
-      }
+      this.updateRecord(params);
     } else {
 
       this.createRecord(params);
     }
-
   }
 
   createRecord(params) {
@@ -59,7 +55,18 @@ export class RecordEditComponent implements OnInit {
 
     this.recordEditService.createRecord(params).subscribe((res) => {
 
-      console.log(res);
+      if (res.success) {
+
+        this.dialogRef.close({
+          message: '记录创建成功'
+        });
+      } else {
+
+        this.snackBar.open(res.message, '知道了', {
+          duration: 3000,
+          verticalPosition: 'top'
+        });
+      }
     });
   }
 
@@ -67,15 +74,54 @@ export class RecordEditComponent implements OnInit {
 
     this.recordEditService.updateRecord(params).subscribe((res) => {
 
-      console.log(res);
+      if (res.success) {
+
+        this.dialogRef.close({
+          message: '记录更新成功'
+        });
+      } else {
+
+        this.snackBar.open(res.message, '知道了', {
+          duration: 3000,
+          verticalPosition: 'top'
+        });
+      }
     });
   }
 
-  deleteRecord(params) {
+  deleteRecord() {
 
-    this.recordEditService.deleteRecord(params).subscribe((res) => {
+    this.confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        content: `您确定要删除该条工作记录？`
+      }
+    });
 
-      console.log(res);
+    this.confirmDialogRef.afterClosed().subscribe((data) => {
+
+      if (data) {
+
+        let params = this.getParams();
+
+        this.recordEditService.deleteRecord({
+          recordId: params.id,
+          username: params.username
+        }).subscribe((res) => {
+
+          if (res.success) {
+
+            this.dialogRef.close({
+              message: '记录删除成功'
+            });
+          } else {
+
+            this.snackBar.open(res.message, '知道了', {
+              duration: 3000,
+              verticalPosition: 'top'
+            });
+          }
+        });
+      }
     });
   }
 
@@ -147,28 +193,6 @@ export class RecordEditComponent implements OnInit {
       if (data) {
         this.events.splice(index, 1);
       }
-    });
-  }
-
-  setTime(date: Date, events: Array<any>) {
-
-    let copiedDate = new Date(date.getTime());
-
-    if (!events) return [];
-
-    return events.map((item) => {
-
-      let [startHour, startMinute] = item.start.split(':');
-      let [endHour, endMinute] = item.end.split(':');
-
-      return {
-        start: date.setHours(startHour, startMinute),
-        end: copiedDate.setHours(endHour, endMinute),
-        note: item.note,
-        meta: {
-          overtime: this.overtime
-        }
-      };
     });
   }
 }

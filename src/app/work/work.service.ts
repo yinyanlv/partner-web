@@ -1,33 +1,49 @@
 import { Injectable } from '@angular/core';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {CalendarEvent} from 'angular-calendar';
 
+import {BaseHttp} from '../shared/etc/base-http';
+
 @Injectable()
-export class WorkService {
+export class WorkService extends BaseHttp {
 
-  constructor() { }
+  originalData: any = [];
 
-  private events: Array<CalendarEvent> = [{
-    start: new Date(),
-    end: new Date(),
-    title: '',
-    meta: {
-      recordId: '',
-      overtime: 2,
-      note: '王大崔'
-    }
-  }, {
-    start: new Date(),
-    end: new Date(),
-    title: '',
-    meta: {
-      recordId: '',
-      overtime: 2,
-      note: 'hhe'
-    }
-  }];
+  getRecords(params): Observable<any> {
 
-  getRecords() {
+    return this.http.get(this.apiPrefix + '/work-record/get-records', {
+      params: params
+    }).pipe(map((res: any) => {
+      if (res.success) {
 
-    return this.events;
+        let events = [];
+
+        this.originalData = res.data;
+
+        res.data.forEach((item: any) => {
+
+          item.events.forEach((event) => {
+
+            let temp: CalendarEvent = {
+              start: new Date(event.startTime),
+              end: new Date(event.endTime),
+              title: '',
+              meta: {
+                recordId: item.id,
+                overtime: item.overtime,
+                note: event.note
+              }
+            };
+
+            events.push(temp);
+          });
+        });
+
+        res.data = events;
+      }
+
+      return res;
+    }));
   }
 }

@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog, MatDialogRef} from '@angular/material';
-import {ActivatedRoute, Router} from "@angular/router";
+import {MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {CalendarDateFormatter, CalendarEvent} from 'angular-calendar';
-import 'rxjs/Rx';
+import * as getYear from 'date-fns/get_year';
+import * as getMonth from 'date-fns/get_month';
 
+import {GlobalStateService} from '../shared/services/global-state.service';
 import {RecordEditComponent} from './record-edit/record-edit.component';
 import {CustomCalendarDateFormatter} from '../shared/etc/custom-calendar-date-formatter';
 import {WorkService} from './work.service';
@@ -23,19 +24,20 @@ export class WorkComponent implements OnInit {
   date: Date = new Date();
   locale: string = 'zh';
   events: Array<CalendarEvent> = [];
+  overtimeCount: number = 0;
   private dialogRef: MatDialogRef<RecordEditComponent>;
-  isLoading: boolean = false;
 
   constructor(
     private dialog: MatDialog,
+    private snackBar: MatSnackBar,
     private workService: WorkService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router
+    private globalStateService: GlobalStateService
   ) {
   }
 
   ngOnInit() {
-    this.getRecords();
+
+    this.loadRecords();
   }
 
   onClickDay(event) {
@@ -56,27 +58,49 @@ export class WorkComponent implements OnInit {
     });
 
     this.dialogRef.afterClosed().subscribe((data) => {
+
+      if (data) {
+
+        this.snackBar.open(data.message, '知道了', {
+          duration: 3000,
+          verticalPosition: 'top'
+        });
+
+        this.loadRecords();
+      }
     });
   }
 
   updateTimeCount() {
     let sum = 0;
 
-    this.events.forEach((item: any) => {
+    this.workService.originalData.forEach((item: any) => {
 
-      sum += item.meta.overtime;
+      sum += item.overtime;
     });
 
+    this.overtimeCount = sum;
   }
 
-  getRecords() {
+  loadRecords() {
 
-    this.isLoading = true;
+    let username = this.globalStateService.userInfo.username;
 
-    setTimeout(() => {
-      this.events = this.workService.getRecords();
+    this.workService.getRecords({
+      username: username,
+      year: getYear(this.date),
+      month: getMonth(this.date) + 1
+    }).subscribe((res) => {
+
+      this.events = res.data;
+
       this.updateTimeCount();
-      this.isLoading = false;
-    }, 1000);
+    }, (res) => {
+
+      this.snackBar.open(res.message, '知道了', {
+        duration: 3000,
+        verticalPosition: 'top'
+      });
+    });
   }
 }
