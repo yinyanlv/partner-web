@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 
+import {SnackBarService} from '../shared/services/snack-bar.service';
 import {ForgotService} from './forgot.service';
 import {EMAIL_REGEX} from '../shared/etc/regex';
 
@@ -16,8 +17,10 @@ export class ForgotComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private snackBarService: SnackBarService,
     private forgotService: ForgotService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
 
@@ -32,25 +35,7 @@ export class ForgotComponent implements OnInit {
 
     if (this.form.valid) {
 
-      this.isSubmitting = true;
-
-      this.forgotService.forgot(this.form.value).subscribe((res) => {
-
-        this.isSubmitting = false;
-
-        if (res.success) {
-
-        } else {
-
-          this.form.controls['email'].setErrors({
-            notExists: res.message || '该邮箱未曾在本站注册'
-          });
-        }
-
-      }, null, () => {
-
-        this.isSubmitting = false;
-      });
+      return this.snackBarService.show('该功能尚未实现，敬请期待');
     }
   }
 

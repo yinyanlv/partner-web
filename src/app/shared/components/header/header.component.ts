@@ -15,8 +15,8 @@ import {HeaderService} from './header.service';
 })
 export class HeaderComponent implements OnInit {
 
-  isShowNotification: boolean = true;
-  isShowSettingsFab: boolean = true;
+  isShowNotification: boolean;
+  isShowSettingsFab: boolean;
   userInfo: any;
 
   @Output()
@@ -40,7 +40,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
 
     this.userInfo = this.globalStateService.userInfo;
-    this.toggleOptionsFab.emit(this.isShowSettingsFab);
+    this.isShowNotification = this.globalStateService.options.isShowNotification;
+    this.isShowSettingsFab = this.globalStateService.options.isShowSettingsFab;
   }
 
   doSearch(e) {
@@ -62,10 +63,12 @@ export class HeaderComponent implements OnInit {
 
   toggleNotificationStatus() {
     this.isShowNotification = !this.isShowNotification;
+    this.globalStateService.setOptionsItem('isShowNotification', this.isShowNotification);
   }
 
   toggleOptionsFabStatus() {
     this.isShowSettingsFab = !this.isShowSettingsFab;
+    this.globalStateService.setOptionsItem('isShowSettingsFab', this.isShowSettingsFab);
     this.toggleOptionsFab.emit(this.isShowSettingsFab);
   }
 

@@ -1,5 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
+
+import {GlobalStateService} from '../../services/global-state.service';
 
 @Component({
   selector: 'normal-layout',
@@ -8,9 +10,9 @@ import {MediaChange, ObservableMedia} from '@angular/flex-layout';
     './normal-layout.component.scss'
   ]
 })
-export class NormalLayoutComponent {
+export class NormalLayoutComponent implements OnInit {
 
-  navMode: string;
+  navMode: string = 'side';
   isShowSettingsFab: boolean;
   isMenuOpened: boolean = true;
 
@@ -21,21 +23,27 @@ export class NormalLayoutComponent {
     appDark: false
   };
 
-  constructor(private media: ObservableMedia) {
+  constructor(
+    private media: ObservableMedia,
+    private globalStateService: GlobalStateService
+  ){
+  }
 
-    media.asObservable().subscribe((change: MediaChange) => {
+  ngOnInit() {
+
+    this.media.asObservable().subscribe((change: MediaChange) => {
 
       if (change.mqAlias === 'sm' || change.mqAlias === 'xs') {
 
         this.navMode = 'over';
       } else {
+
         this.navMode = 'side';
       }
     });
-  }
 
-  ngOnInit() {
-
+    this.settingsStatus = this.globalStateService.status;
+    this.isShowSettingsFab = this.globalStateService.options.isShowSettingsFab;
   }
 
   toggleOptionsFab(isShow) {

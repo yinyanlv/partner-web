@@ -1,23 +1,23 @@
 .btn-settings {
- position: fixed;
- z-index: 100;
- bottom: 20px;
- right: 20px;
+  position: fixed;
+  z-index: 100;
+  bottom: 20px;
+  right: 20px;
 }
 
 .settings {
- position: fixed;
- bottom: 6px;
- right: 6px;
- width: 220px;
- z-index: 100;
- padding: 0;
+  position: fixed;
+  bottom: 6px;
+  right: 6px;
+  width: 220px;
+  z-index: 100;
+  padding: 0;
 
- mat-card-title {
-  margin-bottom: 0;
- }
+  mat-card-title {
+    margin-bottom: 0;
+  }
 
- mat-card-content{
-  padding-bottom: .5rem;
- }
+  mat-card-content {
+    padding-bottom: .5rem;
+  }
 }
