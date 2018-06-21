@@ -41,7 +41,7 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       username: [null, [Validators.required, Validators.pattern(USERNAME_REGEX), Validators.minLength(2), Validators.maxLength(20)]],
       password: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
-      remember: [null]
+      remember: [true]
     });
 
     // fix: in Chrome browser, it does not allow access to the value of the password field after autofill (before user click on the page)

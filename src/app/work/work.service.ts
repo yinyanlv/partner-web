@@ -14,7 +14,9 @@ export class WorkService extends BaseHttp {
 
   getRecords(params): Observable<any> {
 
-    return this.http.post(this.apiPrefix + '/work-record/get-records', params)
+    return this.http.post(this.apiPrefix + '/work-record/get-records', params, {
+      withCredentials: true
+    })
       .pipe(map((res: any) => {
         if (res.success) {
 

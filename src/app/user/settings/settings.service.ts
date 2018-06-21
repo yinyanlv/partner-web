@@ -9,13 +9,17 @@ export class SettingsService extends BaseHttp {
 
     params.username = username;
 
-    return this.http.put(this.apiPrefix + '/user/update', params);
+    return this.http.put(this.apiPrefix + '/user/update', params, {
+      withCredentials: true
+    });
   }
 
   updatePassword(username: string, params: any) {
 
     params.username = username;
 
-    return this.http.put(this.apiPrefix + '/modify-password', params);
+    return this.http.put(this.apiPrefix + '/modify-password', params, {
+      withCredentials: true
+    });
   }
 }

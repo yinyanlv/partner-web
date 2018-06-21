@@ -8,6 +8,8 @@ export class LoginService extends BaseHttp {
 
   login(params: any): Observable<any> {
     params.remember = !!params.remember;
-    return this.http.post(this.apiPrefix + '/login', params);
+    return this.http.post(this.apiPrefix + '/login', params, {
+      withCredentials: true
+    });
   }
 }

@@ -8,6 +8,8 @@ export class RegisterService extends BaseHttp {
 
   register(params: any): Observable<any> {
 
-    return this.http.post(this.apiPrefix + '/register', params);
+    return this.http.post(this.apiPrefix + '/register', params, {
+      withCredentials: true
+    });
   }
 }

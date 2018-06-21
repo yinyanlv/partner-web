@@ -8,12 +8,16 @@ export class RecordEditService extends BaseHttp {
 
   createRecord(params): Observable<any> {
 
-    return this.http.post(this.apiPrefix + '/work-record/create', params);
+    return this.http.post(this.apiPrefix + '/work-record/create', params, {
+      withCredentials: true
+    });
   }
 
   updateRecord(params): Observable<any> {
 
-    return this.http.put(this.apiPrefix + '/work-record/update', params);
+    return this.http.put(this.apiPrefix + '/work-record/update', params, {
+      withCredentials: true
+    });
   }
 
   deleteRecord(params): Observable<any> {
@@ -22,6 +26,7 @@ export class RecordEditService extends BaseHttp {
       headers: {
         'Content-Type': 'application/json'
       },
+      withCredentials: true,
       params: params
     });
   }

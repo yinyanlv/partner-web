@@ -1,16 +1,15 @@
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
 
 import {BaseHttp} from '../../etc/base-http';
 
 @Injectable()
 export class HeaderService extends BaseHttp {
 
-  logout() {
+  logout(): Observable<any> {
 
-    return this.observableCreator.create((observer) => {
-      observer.next({
-        success: true
-      });
+    return this.http.get(this.apiPrefix + '/logout', {
+      withCredentials: true
     });
   }
 }
