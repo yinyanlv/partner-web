@@ -1,12 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import * as format from 'date-fns/format';
 import * as startOfDay from 'date-fns/start_of_day';
 
 import {GlobalStateService} from '../../shared/services/global-state.service';
+import {ConfirmDialogService} from '../../shared/services/confirm-dialog.service';
 import {SnackBarService} from '../../shared/services/snack-bar.service';
 import {RecordEditService} from './record-edit.service';
-import {ConfirmDialogComponent} from '../../shared/components/dialog/confirm/confirm-dialog.component';
 
 @Component({
   selector: 'app-event-edit',
@@ -21,14 +21,13 @@ export class RecordEditComponent implements OnInit {
   events: Array<any>;
   originData: any = null;
   isShowDeleteBtn: boolean = false;
-  private confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
 
   constructor(
     public dialogRef: MatDialogRef<RecordEditComponent>,
-    private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private globalStateService: GlobalStateService,
     private snackBarService: SnackBarService,
+    private confirmDialogService: ConfirmDialogService,
     private recordEditService: RecordEditService,
   ) {
   }
@@ -87,13 +86,9 @@ export class RecordEditComponent implements OnInit {
 
   deleteRecord() {
 
-    this.confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: {
-        content: `您确定要删除该条工作记录？`
-      }
-    });
-
-    this.confirmDialogRef.afterClosed().subscribe((data) => {
+    this.confirmDialogService.show({
+      content: `您确定要删除该条工作记录？`
+    }, (data) => {
 
       if (data) {
 
@@ -178,13 +173,10 @@ export class RecordEditComponent implements OnInit {
 
   deleteEvent(event, index) {
 
-    this.confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: {
-        content: `您确定要删除事务${index + 1}？`
-      }
-    });
+    this.confirmDialogService.show({
+      content: `您确定要删除事务${index + 1}？`
+    }, (data) => {
 
-    this.confirmDialogRef.afterClosed().subscribe((data) => {
       if (data) {
         this.events.splice(index, 1);
       }

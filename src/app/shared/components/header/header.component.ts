@@ -1,11 +1,10 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {MatDialog, MatDialogRef} from '@angular/material';
 import {Router} from '@angular/router';
 import * as screenfull from 'screenfull';
 
 import {GlobalStateService} from '../../services/global-state.service';
 import {SnackBarService} from '../../services/snack-bar.service';
-import {ConfirmDialogComponent} from '../../components/dialog/confirm/confirm-dialog.component';
+import {ConfirmDialogService} from '../../services/confirm-dialog.service';
 import {HeaderService} from './header.service';
 
 @Component({
@@ -19,7 +18,6 @@ export class HeaderComponent implements OnInit {
   isShowNotification: boolean = true;
   isShowSettingsFab: boolean = true;
   userInfo: any;
-  private dialogRef: MatDialogRef<ConfirmDialogComponent>;
 
   @Output()
   toggleMenu: EventEmitter<void> = new EventEmitter<void>();
@@ -32,9 +30,9 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private dialog: MatDialog,
     private globalStateService: GlobalStateService,
     private snackBarService: SnackBarService,
+    private confirmDialogService: ConfirmDialogService,
     private headerService: HeaderService
   ) {
   }
@@ -73,13 +71,9 @@ export class HeaderComponent implements OnInit {
 
   confirmLogout() {
 
-    this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: {
-        content: '您确定要退出该系统？'
-      }
-    });
-
-    this.dialogRef.afterClosed().subscribe((data) => {
+    this.confirmDialogService.show({
+      content: '您确定要退出该系统？'
+    }, (data) => {
 
       if (data) {
 

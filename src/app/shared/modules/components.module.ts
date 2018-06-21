@@ -16,6 +16,7 @@ import {MenuComponent} from '../components/menu/menu.component';
 import {NotificationComponent} from '../components/notification/notification.component';
 import {SettingsComponent} from '../components/settings/settings.component';
 import {ConfirmDialogComponent} from '../components/dialog/confirm/confirm-dialog.component';
+import {ConfirmDialogService} from '../services/confirm-dialog.service';
 
 const components = [
   NormalLayoutComponent,
@@ -51,6 +52,9 @@ const entryComponents = [
   ],
   entryComponents: [
     ...entryComponents
+  ],
+  providers: [
+    ConfirmDialogService
   ]
 })
 export class ComponentsModule {

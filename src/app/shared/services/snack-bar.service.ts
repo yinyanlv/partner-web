@@ -21,8 +21,8 @@ export class SnackBarService {
     let snackBarRef = this.snackBar.open(message, this.actionText, this.options);
 
     if (callback) {
-      snackBarRef.afterDismissed().subscribe(() => {
-        callback();
+      snackBarRef.afterDismissed().subscribe((data) => {
+        callback(data);
       });
     }
   }
