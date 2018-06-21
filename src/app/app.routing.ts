@@ -2,7 +2,7 @@ import {ModuleWithProviders} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {NormalLayoutComponent} from './shared/components/normal-layout/normal-layout.component';
-import {SessionLayoutComponent} from './shared/components/session-layout/session-layout.component';
+import {SessionLayoutComponent} from './shared/components/auth-layout/auth-layout.component';
 import {RouteGuardService} from './shared/services/route-guard.service';
 
 const routes: Routes = [{

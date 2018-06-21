@@ -10,7 +10,7 @@ import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 
 import {MaterialModule} from './material.module';
 import {NormalLayoutComponent} from '../components/normal-layout/normal-layout.component';
-import {SessionLayoutComponent} from '../components/session-layout/session-layout.component';
+import {SessionLayoutComponent} from '../components/auth-layout/auth-layout.component';
 import {HeaderComponent} from '../components/header/header.component';
 import {MenuComponent} from '../components/menu/menu.component';
 import {NotificationComponent} from '../components/notification/notification.component';

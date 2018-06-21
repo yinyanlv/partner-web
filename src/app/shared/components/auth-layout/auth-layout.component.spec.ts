@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SessionLayoutComponent } from './session-layout.component';
+import { SessionLayoutComponent } from './auth-layout.component';
 
 describe('SessionLayoutComponent', () => {
   let component: SessionLayoutComponent;
