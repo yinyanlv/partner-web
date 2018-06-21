@@ -7,7 +7,7 @@
     <div class="search-form-wrapper" fxFlex.gt-sm fxHide="false" fxHide.lt-md>
       <form class="search-form" novalidate>
         <mat-icon>search</mat-icon>
-        <input type="text" placeholder="请输入关键字" />
+        <input type="text" placeholder="请输入关键字" (keyup.enter)="doSearch($event)" />
       </form>
     </div>
   </div>
@@ -15,9 +15,9 @@
     <button mat-icon-button (click)="toggleFullScreen()" matTooltip="全屏" fxHide="false" fxHide.lt-md>
       <mat-icon>fullscreen</mat-icon>
     </button>
-    <button mat-icon-button class="visible ml-8-px" *ngIf="isShowNotification" (click)="toggleNotification.emit()" matTooltip="消息">
+    <button mat-icon-button class="visible ml-8-px" *ngIf="isShowNotification" (click)="toggleNotification.emit()" matTooltip="通知">
       <mat-icon>notifications</mat-icon>
-      <span class="number">5</span>
+      <span class="number"></span>
     </button>
     <button mat-button  class="ml-8-px" [matMenuTriggerFor]="user" matTooltip="用户信息">
       <mat-icon>person</mat-icon>
@@ -29,10 +29,10 @@
         <mat-icon>person</mat-icon> 用户中心
       </button>
       <button mat-menu-item *ngIf="!isShowNotification" (click)="toggleNotificationStatus()">
-        <mat-icon>notifications_on</mat-icon> 开启消息
+        <mat-icon>notifications_on</mat-icon> 开启通知
       </button>
       <button mat-menu-item *ngIf="isShowNotification"  (click)="toggleNotificationStatus()">
-        <mat-icon>notifications_off</mat-icon> 关闭消息
+        <mat-icon>notifications_off</mat-icon> 关闭通知
       </button>
       <button mat-menu-item *ngIf="!isShowSettingsFab" (click)="toggleOptionsFabStatus()">
         <mat-icon>visibility</mat-icon> 显示悬浮按钮

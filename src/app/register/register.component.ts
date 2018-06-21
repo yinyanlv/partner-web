@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
-import {MatSnackBar} from '@angular/material';
+import {Router} from '@angular/router';
 import {CustomValidators} from 'ng2-validation';
 
+import {SnackBarService} from '../shared/services/snack-bar.service';
 import {RegisterService} from './register.service';
 import {USERNAME_REGEX, EMAIL_REGEX} from '../shared/etc/regex';
 
@@ -23,8 +24,9 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private registerService: RegisterService,
-    private snackBar: MatSnackBar
+    private router: Router,
+    private snackBarService: SnackBarService,
+    private registerService: RegisterService
   ) {
   }
 
@@ -50,10 +52,11 @@ export class RegisterComponent implements OnInit {
 
         if (res.success) {
 
-          this.snackBar.open(res.data || '注册成功，请前往登录页登录', '知道了', {
-            duration: 3000,
-            verticalPosition: 'top'
+          this.snackBarService.show('注册成功，即将前往登录页登录', () => {
+
+            this.router.navigate(['/login']);
           });
+
         } else {
 
           this.isShowError = true;

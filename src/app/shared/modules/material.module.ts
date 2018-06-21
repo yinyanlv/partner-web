@@ -23,6 +23,7 @@ import {
   MatSnackBarModule
 } from '@angular/material';
 import {AmazingTimePickerModule} from 'amazing-time-picker';
+import {SnackBarService} from '../services/snack-bar.service';
 
 const modules = [
   MatCardModule,
@@ -55,6 +56,9 @@ const modules = [
   ],
   exports: [
     ...modules
+  ],
+  providers: [
+    SnackBarService
   ]
 })
 export class MaterialModule {

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
-import {MatSnackBar} from '@angular/material';
 import {CustomValidators} from 'ng2-validation';
 
 import {GlobalStateService} from '../../shared/services/global-state.service';
+import {SnackBarService} from '../../shared/services/snack-bar.service';
 import {EMAIL_REGEX, PHONE_REGEX} from '../../shared/etc/regex';
 import {SettingsService} from './settings.service';
 
@@ -31,9 +31,9 @@ export class SettingsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private settingsService: SettingsService,
     private globalStateService: GlobalStateService,
-    private snackBar: MatSnackBar
+    private snackBarService: SnackBarService,
+    private settingsService: SettingsService,
   ) {
   }
 
@@ -69,10 +69,7 @@ export class SettingsComponent implements OnInit {
         if (res.success) {
 
           this.globalStateService.userInfo = res.data;
-          this.snackBar.open('用户信息修改成功', '知道了', {
-            duration: 3000,
-            verticalPosition: 'top'
-          });
+          this.snackBarService.show('用户信息修改成功');
         } else {
 
           this.isShowUserInfoError = true;
@@ -110,14 +107,10 @@ export class SettingsComponent implements OnInit {
           this.globalStateService.isLogin = false;
           this.globalStateService.userInfo = null;
 
-          this.snackBar.open('用户密码修改成功，请重新登录', '知道了', {
-            duration: 3000,
-            verticalPosition: 'top'
+          this.snackBarService.show('用户密码修改成功，请重新登录', () => {
+            this.router.navigate(['/login']);
           });
 
-          setTimeout(() => {
-            this.router.navigate(['/login']);
-          }, 4000)
         } else {
 
           this.isShowPasswordError = true;

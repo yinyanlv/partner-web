@@ -3,8 +3,9 @@ import {MatDialog, MatDialogRef} from '@angular/material';
 import {Router} from '@angular/router';
 import * as screenfull from 'screenfull';
 
-import {ConfirmDialogComponent} from '../../components/dialog/confirm/confirm-dialog.component';
 import {GlobalStateService} from '../../services/global-state.service';
+import {SnackBarService} from '../../services/snack-bar.service';
+import {ConfirmDialogComponent} from '../../components/dialog/confirm/confirm-dialog.component';
 import {HeaderService} from './header.service';
 
 @Component({
@@ -33,6 +34,7 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private globalStateService: GlobalStateService,
+    private snackBarService: SnackBarService,
     private headerService: HeaderService
   ) {
   }
@@ -41,6 +43,11 @@ export class HeaderComponent implements OnInit {
 
     this.userInfo = this.globalStateService.userInfo;
     this.toggleOptionsFab.emit(this.isShowSettingsFab);
+  }
+
+  doSearch(e) {
+
+    this.snackBarService.show('该功能尚未实现，敬请期待');
   }
 
   toggleFullScreen() {

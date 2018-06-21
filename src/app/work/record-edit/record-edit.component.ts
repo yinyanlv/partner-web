@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import * as format from 'date-fns/format';
 import * as startOfDay from 'date-fns/start_of_day';
 
 import {GlobalStateService} from '../../shared/services/global-state.service';
+import {SnackBarService} from '../../shared/services/snack-bar.service';
 import {RecordEditService} from './record-edit.service';
 import {ConfirmDialogComponent} from '../../shared/components/dialog/confirm/confirm-dialog.component';
 
@@ -25,10 +26,10 @@ export class RecordEditComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<RecordEditComponent>,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) private data: any,
+    private globalStateService: GlobalStateService,
+    private snackBarService: SnackBarService,
     private recordEditService: RecordEditService,
-    private globalStateService: GlobalStateService
   ) {
   }
 
@@ -63,10 +64,7 @@ export class RecordEditComponent implements OnInit {
         });
       } else {
 
-        this.snackBar.open(res.message, '知道了', {
-          duration: 3000,
-          verticalPosition: 'top'
-        });
+        this.snackBarService.show(res.message);
       }
     });
   }
@@ -82,10 +80,7 @@ export class RecordEditComponent implements OnInit {
         });
       } else {
 
-        this.snackBar.open(res.message, '知道了', {
-          duration: 3000,
-          verticalPosition: 'top'
-        });
+        this.snackBarService.show(res.message);
       }
     });
   }
@@ -116,10 +111,7 @@ export class RecordEditComponent implements OnInit {
             });
           } else {
 
-            this.snackBar.open(res.message, '知道了', {
-              duration: 3000,
-              verticalPosition: 'top'
-            });
+            this.snackBarService.show(res.message);
           }
         });
       }
