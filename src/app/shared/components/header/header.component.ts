@@ -15,8 +15,8 @@ import {HeaderService} from './header.service';
 })
 export class HeaderComponent implements OnInit {
 
-  isShowNotification: boolean;
-  isShowSettingsFab: boolean;
+  isHideNotification: boolean;
+  isHideSettingsFab: boolean;
   userInfo: any;
 
   @Output()
@@ -40,8 +40,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
 
     this.userInfo = this.globalStateService.userInfo;
-    this.isShowNotification = this.globalStateService.options.isShowNotification;
-    this.isShowSettingsFab = this.globalStateService.options.isShowSettingsFab;
+    this.isHideNotification = this.globalStateService.options.isHideNotification;
+    this.isHideSettingsFab = this.globalStateService.options.isHideSettingsFab;
   }
 
   doSearch(e) {
@@ -62,14 +62,14 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleNotificationStatus() {
-    this.isShowNotification = !this.isShowNotification;
-    this.globalStateService.setOptionsItem('isShowNotification', this.isShowNotification);
+    this.isHideNotification = !this.isHideNotification;
+    this.globalStateService.setOptionsItem('isHideNotification', this.isHideNotification);
   }
 
   toggleOptionsFabStatus() {
-    this.isShowSettingsFab = !this.isShowSettingsFab;
-    this.globalStateService.setOptionsItem('isShowSettingsFab', this.isShowSettingsFab);
-    this.toggleOptionsFab.emit(this.isShowSettingsFab);
+    this.isHideSettingsFab = !this.isHideSettingsFab;
+    this.globalStateService.setOptionsItem('isHideSettingsFab', this.isHideSettingsFab);
+    this.toggleOptionsFab.emit(this.isHideSettingsFab);
   }
 
   confirmLogout() {

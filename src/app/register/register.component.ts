@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef} from '@angular/core';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CustomValidators} from 'ng2-validation';
@@ -22,9 +22,13 @@ export class RegisterComponent implements OnInit {
   errorMessage: string = '';
   form: FormGroup;
 
+  @ViewChild('formWrapper', {read: ElementRef})
+  private formWrapper: ElementRef;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private renderer: Renderer2,
     private snackBarService: SnackBarService,
     private registerService: RegisterService
   ) {
@@ -38,11 +42,18 @@ export class RegisterComponent implements OnInit {
       password: password,
       confirmPassword: confirmPassword
     });
+
+    this.renderer.listen(this.formWrapper.nativeElement, 'click', () => {
+
+      this.isShowError = false;
+      this.errorMessage = '';
+    });
   }
 
   onSubmit() {
 
     this.isShowError = false;
+    this.errorMessage = '';
 
     if (this.form.valid) {
 

@@ -13,7 +13,7 @@ import {GlobalStateService} from '../../services/global-state.service';
 export class NormalLayoutComponent implements OnInit {
 
   navMode: string = 'side';
-  isShowSettingsFab: boolean;
+  isHideSettingsFab: boolean;
   isMenuOpened: boolean = true;
 
   settingsStatus: any = {
@@ -43,12 +43,12 @@ export class NormalLayoutComponent implements OnInit {
     });
 
     this.settingsStatus = this.globalStateService.status;
-    this.isShowSettingsFab = this.globalStateService.options.isShowSettingsFab;
+    this.isHideSettingsFab = this.globalStateService.options.isHideSettingsFab;
   }
 
-  toggleOptionsFab(isShow) {
+  toggleOptionsFab(isHide) {
 
-    this.isShowSettingsFab = isShow;
+    this.isHideSettingsFab = isHide;
   }
 
   changeSettings(status) {

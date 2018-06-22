@@ -15,7 +15,7 @@
     <button mat-icon-button (click)="toggleFullScreen()" matTooltip="全屏" fxHide="false" fxHide.lt-md>
       <mat-icon>fullscreen</mat-icon>
     </button>
-    <button mat-icon-button class="visible ml-8-px" *ngIf="isShowNotification" (click)="toggleNotification.emit()" matTooltip="通知">
+    <button mat-icon-button class="visible ml-8-px" *ngIf="!isHideNotification" (click)="toggleNotification.emit()" matTooltip="通知">
       <mat-icon>notifications</mat-icon>
       <span class="number"></span>
     </button>
@@ -28,16 +28,16 @@
       <button mat-menu-item (click)="goToUserCenter()">
         <mat-icon>person</mat-icon> 用户中心
       </button>
-      <button mat-menu-item *ngIf="!isShowNotification" (click)="toggleNotificationStatus()">
+      <button mat-menu-item *ngIf="isHideNotification" (click)="toggleNotificationStatus()">
         <mat-icon>notifications_on</mat-icon> 开启通知
       </button>
-      <button mat-menu-item *ngIf="isShowNotification"  (click)="toggleNotificationStatus()">
+      <button mat-menu-item *ngIf="!isHideNotification"  (click)="toggleNotificationStatus()">
         <mat-icon>notifications_off</mat-icon> 关闭通知
       </button>
-      <button mat-menu-item *ngIf="!isShowSettingsFab" (click)="toggleOptionsFabStatus()">
+      <button mat-menu-item *ngIf="isHideSettingsFab" (click)="toggleOptionsFabStatus()">
         <mat-icon>visibility</mat-icon> 显示悬浮按钮
       </button>
-      <button mat-menu-item *ngIf="isShowSettingsFab"  (click)="toggleOptionsFabStatus()">
+      <button mat-menu-item *ngIf="!isHideSettingsFab"  (click)="toggleOptionsFabStatus()">
         <mat-icon>visibility_off</mat-icon> 隐藏悬浮按钮
       </button>
       <button mat-menu-item (click)="confirmLogout()">

@@ -21,5 +21,5 @@
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
-  <app-settings *ngIf="isShowSettingsFab" (onSettingsChange)="changeSettings($event)"></app-settings>
+  <app-settings *ngIf="!isHideSettingsFab" (onSettingsChange)="changeSettings($event)"></app-settings>
 </div>

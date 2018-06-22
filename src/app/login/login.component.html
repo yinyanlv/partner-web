@@ -1,5 +1,5 @@
 <div class="app-container auth-container">
-  <section class="auth-box">
+  <section class="auth-box" #formWrapper>
     <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
       <mat-card>
         <mat-card-header>

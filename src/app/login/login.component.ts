@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, NgZone} from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Renderer2} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
 import {AutofillMonitor, AutofillEvent} from '@angular/cdk/text-field';
@@ -24,14 +24,17 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
   @ViewChild('password', {read: ElementRef})
   password: ElementRef;
 
+  @ViewChild('formWrapper', {read: ElementRef})
+  private formWrapper: ElementRef;
+
   constructor(
     private fb: FormBuilder,
+    private renderer: Renderer2,
     private loginService: LoginService,
     private globalStateService: GlobalStateService,
     private router: Router,
     private route: ActivatedRoute,
-    private autofill: AutofillMonitor,
-    private zone: NgZone
+    private autofill: AutofillMonitor
   ) {
     super();
   }
@@ -53,11 +56,17 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
           this.hasAutofilled = true;
         }
       });
+
+    this.renderer.listen(this.formWrapper.nativeElement, 'click', () => {
+      this.isShowError = false;
+      this.errorMessage = '';
+    });
   }
 
   onSubmit() {
 
     this.isShowError = false;
+    this.errorMessage = '';
 
     if (this.form.valid) {
 

@@ -2,7 +2,7 @@
   <mat-card fxFlex.gt-sm="55" fxFlex="100">
     <mat-tab-group>
       <mat-tab label="用户信息设置">
-        <form fxLayout="column" novalidate [formGroup]="userInfoForm">
+        <form fxLayout="column" novalidate [formGroup]="userInfoForm" #userInfoFormWrapper>
           <mat-form-field>
             <input matInput placeholder="用户名" disabled value="{{userInfo.username}}" />
           </mat-form-field>
@@ -28,9 +28,9 @@
         </form>
       </mat-tab>
       <mat-tab label="密码设置">
-        <form fxLayout="column" novalidate [formGroup]="passwordForm">
+        <form fxLayout="column" novalidate [formGroup]="passwordForm" #passwordFormWrapper>
           <mat-form-field>
-            <input matInput type="password" required placeholder="请输入原密码" formControlName="password" />
+            <input matInput type="password" required autocomplete="off" placeholder="请输入原密码" formControlName="password" />
           </mat-form-field>
           <mat-form-field>
             <input matInput type="password" required autocomplete="off" placeholder="请输入新密码" formControlName="newPassword" />

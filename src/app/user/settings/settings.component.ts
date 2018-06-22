@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import {CustomValidators} from 'ng2-validation';
@@ -28,9 +28,16 @@ export class SettingsComponent implements OnInit {
   passwordErrorMessage: string = '';
   passwordForm: FormGroup;
 
+  @ViewChild('userInfoFormWrapper', {read: ElementRef})
+  userInfoFormWrapper: ElementRef;
+
+  @ViewChild('passwordFormWrapper', {read: ElementRef})
+  passwordFormWrapper: ElementRef;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private renderer: Renderer2,
     private globalStateService: GlobalStateService,
     private snackBarService: SnackBarService,
     private settingsService: SettingsService,
@@ -52,11 +59,22 @@ export class SettingsComponent implements OnInit {
       newPassword: newPassword,
       confirmNewPassword: confirmNewPassword
     });
+
+    this.renderer.listen(this.userInfoFormWrapper.nativeElement, 'click', () => {
+      this.isShowUserInfoError = false;
+      this.userInfoErrorMessage = '';
+    });
+
+    this.renderer.listen(this.passwordFormWrapper.nativeElement, 'click', () => {
+      this.isShowPasswordError = false;
+      this.passwordErrorMessage = '';
+    });
   }
 
   saveUserInfo() {
 
     this.isShowUserInfoError = false;
+    this.userInfoErrorMessage = '';
 
     if (this.userInfoForm.valid) {
 
@@ -93,6 +111,7 @@ export class SettingsComponent implements OnInit {
   savePassword() {
 
     this.isShowPasswordError = false;
+    this.passwordErrorMessage = '';
 
     if (this.passwordForm.valid) {
 
