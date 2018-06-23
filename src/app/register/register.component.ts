@@ -3,7 +3,6 @@ import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CustomValidators} from 'ng2-validation';
 
-import {SnackBarService} from '../shared/services/snack-bar.service';
 import {RegisterService} from './register.service';
 import {USERNAME_REGEX, EMAIL_REGEX} from '../shared/etc/regex';
 
@@ -29,7 +28,6 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private renderer: Renderer2,
-    private snackBarService: SnackBarService,
     private registerService: RegisterService
   ) {
   }
@@ -63,7 +61,7 @@ export class RegisterComponent implements OnInit {
 
         if (res.success) {
 
-          this.snackBarService.show('注册成功，即将前往登录页登录', () => {
+          this.registerService.showMessage('注册成功，即将前往登录页登录', () => {
 
             this.router.navigate(['/login']);
           });

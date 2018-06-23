@@ -5,7 +5,6 @@ import * as startOfDay from 'date-fns/start_of_day';
 
 import {GlobalStateService} from '../../shared/services/global-state.service';
 import {ConfirmDialogService} from '../../shared/services/confirm-dialog.service';
-import {SnackBarService} from '../../shared/services/snack-bar.service';
 import {RecordEditService} from './record-edit.service';
 
 @Component({
@@ -26,7 +25,6 @@ export class RecordEditComponent implements OnInit {
     public dialogRef: MatDialogRef<RecordEditComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private globalStateService: GlobalStateService,
-    private snackBarService: SnackBarService,
     private confirmDialogService: ConfirmDialogService,
     private recordEditService: RecordEditService,
   ) {
@@ -63,7 +61,7 @@ export class RecordEditComponent implements OnInit {
         });
       } else {
 
-        this.snackBarService.show(res.message);
+        this.recordEditService.showMessage(res.message);
       }
     });
   }
@@ -79,7 +77,7 @@ export class RecordEditComponent implements OnInit {
         });
       } else {
 
-        this.snackBarService.show(res.message);
+        this.recordEditService.showMessage(res.message);
       }
     });
   }
@@ -106,7 +104,7 @@ export class RecordEditComponent implements OnInit {
             });
           } else {
 
-            this.snackBarService.show(res.message);
+            this.recordEditService.showMessage(res.message);
           }
         });
       }

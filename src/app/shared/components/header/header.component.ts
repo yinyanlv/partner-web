@@ -3,7 +3,6 @@ import {Router} from '@angular/router';
 import * as screenfull from 'screenfull';
 
 import {GlobalStateService} from '../../services/global-state.service';
-import {SnackBarService} from '../../services/snack-bar.service';
 import {ConfirmDialogService} from '../../services/confirm-dialog.service';
 import {HeaderService} from './header.service';
 
@@ -31,7 +30,6 @@ export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
     private globalStateService: GlobalStateService,
-    private snackBarService: SnackBarService,
     private confirmDialogService: ConfirmDialogService,
     private headerService: HeaderService
   ) {
@@ -46,7 +44,7 @@ export class HeaderComponent implements OnInit {
 
   doSearch(e) {
 
-    this.snackBarService.show('该功能尚未实现，敬请期待');
+    this.headerService.showMessage('该功能尚未实现，敬请期待');
   }
 
   toggleFullScreen() {
@@ -86,6 +84,9 @@ export class HeaderComponent implements OnInit {
             this.globalStateService.isLogin = false;
             this.globalStateService.userInfo = null;
             this.router.navigate(['/login']);
+          } else {
+
+            this.headerService.showMessage(res.message);
           }
         });
       }

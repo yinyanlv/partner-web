@@ -4,7 +4,6 @@ import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import {CustomValidators} from 'ng2-validation';
 
 import {GlobalStateService} from '../../shared/services/global-state.service';
-import {SnackBarService} from '../../shared/services/snack-bar.service';
 import {EMAIL_REGEX, PHONE_REGEX} from '../../shared/etc/regex';
 import {SettingsService} from './settings.service';
 
@@ -39,7 +38,6 @@ export class SettingsComponent implements OnInit {
     private router: Router,
     private renderer: Renderer2,
     private globalStateService: GlobalStateService,
-    private snackBarService: SnackBarService,
     private settingsService: SettingsService,
   ) {
   }
@@ -82,22 +80,16 @@ export class SettingsComponent implements OnInit {
 
       this.settingsService.updateUserInfo(this.userInfo.username, this.userInfoForm.value).subscribe((res: any) => {
 
-        this.isShowUserInfoError = false;
-
         if (res.success) {
 
           this.globalStateService.userInfo = res.data;
-          this.snackBarService.show('用户信息修改成功');
+          this.settingsService.showMessage('用户信息修改成功');
         } else {
 
           this.isShowUserInfoError = true;
           this.userInfoErrorMessage = res.message;
         }
-      }, (res) => {
-
-        this.isShowUserInfoError = true;
-        this.userInfoErrorMessage = res.message;
-      }, () => {
+      }, null, () => {
 
         this.isUserInfoSubmitting = false;
       });
@@ -119,14 +111,12 @@ export class SettingsComponent implements OnInit {
 
       this.settingsService.updatePassword(this.userInfo.username, this.passwordForm.value).subscribe((res: any) => {
 
-        this.isShowPasswordError = false;
-
         if (res.success) {
 
           this.globalStateService.isLogin = false;
           this.globalStateService.userInfo = null;
 
-          this.snackBarService.show('用户密码修改成功，请重新登录', () => {
+          this.settingsService.showMessage('用户密码修改成功，请重新登录', () => {
             this.router.navigate(['/login']);
           });
 
@@ -135,11 +125,7 @@ export class SettingsComponent implements OnInit {
           this.isShowPasswordError = true;
           this.passwordErrorMessage = res.message;
         }
-      }, (res) => {
-
-        this.isShowPasswordError = true;
-        this.passwordErrorMessage = res.message;
-      }, () => {
+      }, null, () => {
 
         this.isPasswordSubmitting = false;
       });

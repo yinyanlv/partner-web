@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 
-import {SnackBarService} from '../shared/services/snack-bar.service';
 import {ForgotService} from './forgot.service';
 import {EMAIL_REGEX} from '../shared/etc/regex';
 
@@ -17,7 +16,6 @@ export class ForgotComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private snackBarService: SnackBarService,
     private forgotService: ForgotService
   ) {
   }
@@ -35,7 +33,7 @@ export class ForgotComponent implements OnInit {
 
     if (this.form.valid) {
 
-      return this.snackBarService.show('该功能尚未实现，敬请期待');
+      return this.forgotService.showMessage('该功能尚未实现，敬请期待');
     }
   }
 

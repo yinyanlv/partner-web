@@ -5,7 +5,6 @@ import * as startOfMonth from 'date-fns/start_of_month';
 import * as endOfMonth from 'date-fns/end_of_month';
 
 import {GlobalStateService} from '../shared/services/global-state.service';
-import {SnackBarService} from '../shared/services/snack-bar.service';
 import {RecordEditComponent} from './record-edit/record-edit.component';
 import {CustomCalendarDateFormatter} from '../shared/etc/custom-calendar-date-formatter';
 import {WorkService} from './work.service';
@@ -31,7 +30,6 @@ export class WorkComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private globalStateService: GlobalStateService,
-    private snackBarService: SnackBarService,
     private workService: WorkService
   ) {
   }
@@ -62,7 +60,7 @@ export class WorkComponent implements OnInit {
 
       if (data) {
 
-        this.snackBarService.show(data.message);
+        this.workService.showMessage(data.message);
 
         this.loadRecords();
       }
@@ -90,12 +88,13 @@ export class WorkComponent implements OnInit {
       endDate: endOfMonth(this.date)
     }).subscribe((res) => {
 
-      this.events = res.data;
+      if (res.success) {
 
-      this.updateTimeCount();
-    }, (res) => {
-
-      this.snackBarService.show(res.message);
+        this.events = res.data;
+        this.updateTimeCount();
+      } else {
+        this.workService.showMessage(res.message);
+      }
     });
   }
 }
