@@ -86,7 +86,9 @@ export class HeaderComponent implements OnInit {
             this.router.navigate(['/login']);
           } else {
 
-            this.headerService.showMessage(res.message);
+            this.headerService.showMessage(res.message, () => {
+              this.router.navigate(['/login']);
+            });
           }
         });
       }
