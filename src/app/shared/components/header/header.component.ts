@@ -81,9 +81,11 @@ export class HeaderComponent implements OnInit {
         this.headerService.logout().subscribe((res) => {
 
           if (res.success) {
-            this.globalStateService.isLogin = false;
-            this.globalStateService.userInfo = null;
-            this.router.navigate(['/login']);
+            this.headerService.showMessage('退出登录成功', () => {
+              this.globalStateService.isLogin = false;
+              this.globalStateService.userInfo = null;
+              this.router.navigate(['/login']);
+            });
           } else {
 
             this.headerService.showMessage(res.message, () => {
