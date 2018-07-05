@@ -1,19 +1,40 @@
-import {Injectable} from '@angular/core';
+import {Injectable, PLATFORM_ID, Inject} from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
 
 @Injectable()
 export class GlobalStateService {
 
+  public isPlatformBrowser: boolean;
+
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+  ) {
+    this.isPlatformBrowser = isPlatformBrowser(platformId);
+  }
+
   set isLogin(state: boolean) {
+
+    if (!this.isPlatformBrowser) {
+      return;
+    }
 
     localStorage.setItem('isLogin', state.toString());
   }
 
   get isLogin() {
 
+    if (!this.isPlatformBrowser) {
+      return;
+    }
+
     return localStorage.getItem('isLogin') && localStorage.getItem('isLogin') !== 'false';
   }
 
   get userInfo() {
+
+    if (!this.isPlatformBrowser) {
+      return;
+    }
 
     let user = localStorage.getItem('userInfo');
 
@@ -22,10 +43,18 @@ export class GlobalStateService {
 
   set userInfo(user: any) {
 
+    if (!this.isPlatformBrowser) {
+      return;
+    }
+
     localStorage.setItem('userInfo', user ? JSON.stringify(user) : '');
   }
 
   get options() {
+
+    if (!this.isPlatformBrowser) {
+      return;
+    }
 
     let options = localStorage.getItem('options');
 
@@ -34,10 +63,18 @@ export class GlobalStateService {
 
   set options(options: any) {
 
+    if (!this.isPlatformBrowser) {
+      return;
+    }
+
     localStorage.setItem('options', options ? JSON.stringify(options) : '');
   }
 
   setOptionsItem(key: string, value: any) {
+
+    if (!this.isPlatformBrowser) {
+      return;
+    }
 
     let options = this.options;
 
@@ -47,6 +84,10 @@ export class GlobalStateService {
   }
 
   getOptionsItem(key: string) {
+
+    if (!this.isPlatformBrowser) {
+      return;
+    }
 
     let options = this.options;
     let value = options[key];
@@ -62,12 +103,20 @@ export class GlobalStateService {
 
   get status() {
 
+    if (!this.isPlatformBrowser) {
+      return;
+    }
+
     let status = localStorage.getItem('status');
 
     return status ? JSON.parse(status) : {};
   }
 
   set status(status: any) {
+
+    if (!this.isPlatformBrowser) {
+      return;
+    }
 
     localStorage.setItem('status', status ? JSON.stringify(status) : '');
   }

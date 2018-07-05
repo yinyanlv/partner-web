@@ -7,10 +7,10 @@ import {AppComponent} from './app.component';
 
 @NgModule({
   imports: [
+    AppModule,
     ServerModule,
     ServerTransferStateModule,
     ModuleMapLoaderModule,
-    AppModule
   ],
   bootstrap: [
     AppComponent

@@ -5,7 +5,16 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "ssr": "npm run build:ssr && npm run serve:ssr",
+    "prerender": "npm run build:prerender && npm run serve:prerender",
     "build": "ng build --prod",
+    "build:client-and-server-bundles": "ng build --prod && ng run partner-client:server:production",
+    "build:prerender": "npm run build:client-and-server-bundles && npm run webpack:server && npm run generate:prerender",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
+    "generate:prerender": "cd dist && node prerender",
+    "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
+    "serve:prerender": "cd dist/browser && http-server",
+    "serve:ssr": "node dist/server",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -69,6 +78,7 @@
     "ts-loader": "^4.4.2",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
-    "typescript": "^2.7.2"
+    "typescript": "^2.7.2",
+    "webpack-cli": "^3.0.8"
   }
 }
