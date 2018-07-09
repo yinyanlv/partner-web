@@ -25,25 +25,7 @@
         <mat-list-item *ngFor="let item of events; let i = index;">
           <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px grid">
             <span class="mb-1-55-em" fxFlex="80px">事务{{i + 1}}：</span>
-            <span>
-              <label>开始时间：</label>
-              <mat-form-field>
-                <input matInput readonly atp-time-picker locale="ch" placeholder="请选择开始时间" required [(ngModel)]="item.startTime" /><button matSuffix mat-icon-button>
-                <mat-icon>access_alarm</mat-icon></button>
-              </mat-form-field>
-            </span>
-            <span>
-              <label>完成时间：</label>
-              <mat-form-field>
-                <input matInput readonly atp-time-picker locale="ch" placeholder="请选择完成时间" required [(ngModel)]="item.endTime" /><button matSuffix mat-icon-button><mat-icon>access_alarm</mat-icon></button>
-              </mat-form-field>
-            </span>
-            <span>
-              <label>事务备注：</label>
-              <mat-form-field>
-                <input matInput placeholder="请输入该事务的备注" required [(ngModel)]="item.note" />
-              </mat-form-field>
-            </span>
+            <event [(ngModel)]="item"></event>
             <span class="mb-1-25-em"><button mat-icon-button matTooltip="删除该条事务" color="primary" (click)="deleteEvent(item, i)"><mat-icon>remove_circle</mat-icon></button></span>
           </div>
         </mat-list-item>

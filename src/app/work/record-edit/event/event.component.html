@@ -1,0 +1,21 @@
+<span>
+    <label>开始时间：</label>
+    <mat-form-field>
+      <input matInput readonly atp-time-picker locale="ch" placeholder="请选择开始时间" required
+             [(ngModel)]="startTime"/><button matSuffix mat-icon-button>
+      <mat-icon>access_alarm</mat-icon></button>
+    </mat-form-field>
+</span>
+<span>
+  <label>完成时间：</label>
+  <mat-form-field>
+    <input matInput readonly atp-time-picker locale="ch" placeholder="请选择完成时间" required
+           [(ngModel)]="endTime"/><button matSuffix mat-icon-button><mat-icon>access_alarm</mat-icon></button>
+  </mat-form-field>
+</span>
+<span>
+  <label>事务备注：</label>
+  <mat-form-field>
+    <input matInput placeholder="请输入该事务的备注" required [(ngModel)]="note"/>
+  </mat-form-field>
+</span>

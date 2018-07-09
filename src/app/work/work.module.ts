@@ -10,6 +10,7 @@ import {WorkComponent} from './work.component';
 import {WorkService} from './work.service';
 import {RecordEditService} from './record-edit/record-edit.service';
 import { RecordEditComponent } from './record-edit/record-edit.component';
+import { EventComponent } from './record-edit/event/event.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { RecordEditComponent } from './record-edit/record-edit.component';
   ],
   declarations: [
     WorkComponent,
-    RecordEditComponent
+    RecordEditComponent,
+    EventComponent
   ],
   entryComponents: [
     RecordEditComponent
