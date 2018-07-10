@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject, forwardRef} from '@angular/core';
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import { Component, OnInit, Inject} from '@angular/core';
+import {FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import * as format from 'date-fns/format';
 import * as startOfDay from 'date-fns/start_of_day';
@@ -7,19 +7,11 @@ import * as startOfDay from 'date-fns/start_of_day';
 import {GlobalStateService} from '../../shared/services/global-state.service';
 import {ConfirmDialogService} from '../../shared/services/confirm-dialog.service';
 import {RecordEditService} from './record-edit.service';
-import {EventComponent} from './event/event.component';
 
 @Component({
   selector: 'app-event-edit',
   templateUrl: 'record-edit.component.html',
-  styleUrls: ['record-edit.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => {
-      EventComponent
-    }),
-    multi: true
-  }]
+  styleUrls: ['record-edit.component.scss']
 })
 export class RecordEditComponent implements OnInit {
 
@@ -29,10 +21,11 @@ export class RecordEditComponent implements OnInit {
   events: Array<any>;
   originData: any = null;
   isShowDeleteBtn: boolean = false;
-  aaa = {};
+  form: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<RecordEditComponent>,
+    private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private globalStateService: GlobalStateService,
     private confirmDialogService: ConfirmDialogService,
@@ -44,18 +37,30 @@ export class RecordEditComponent implements OnInit {
     this.originData = Object.assign({}, this.data);
     this.initData();
     this.isShowDeleteBtn = this.events.length > 0 || this.overtime > 0;
+
+    this.form = this.fb.group({
+      date: [{value: this.date, disabled: true}],
+      overtime: [this.overtime, [Validators.min(0), Validators.max(24)]],
+      events: this.fb.array(this.events)
+    });
   }
 
   doSave() {
-    let params = this.getParams();
 
-    if (params.id) {
-
-      this.updateRecord(params);
-    } else {
-
-      this.createRecord(params);
-    }
+    console.log(this.form);
+    console.log(this.form.valid);
+    console.log(this.form.value);
+    return;
+    //
+    // let params = this.getParams();
+    //
+    // if (params.id) {
+    //
+    //   this.updateRecord(params);
+    // } else {
+    //
+    //   this.createRecord(params);
+    // }
   }
 
   createRecord(params) {
@@ -172,21 +177,22 @@ export class RecordEditComponent implements OnInit {
   }
 
   addEvent() {
-    this.events.push({
-      startTime: '',
-      endTime: '',
-      note: ''
-    });
+
+    let events = this.form.get('events') as FormArray;
+
+    events.push(this.fb.control(null));
   }
 
-  deleteEvent(event, index) {
+  deleteEvent(index) {
 
     this.confirmDialogService.show({
       content: `您确定要删除事务${index + 1}？`
     }, (data) => {
 
       if (data) {
-        this.events.splice(index, 1);
+        let events = this.form.get('events') as FormArray;
+
+        events.removeAt(index);
       }
     });
   }

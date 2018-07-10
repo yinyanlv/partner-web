@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CalendarModule} from 'angular-calendar';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
@@ -16,6 +16,7 @@ import { EventComponent } from './record-edit/event/event.component';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     CalendarModule.forRoot(),
     FlexLayoutModule,
     MaterialModule,

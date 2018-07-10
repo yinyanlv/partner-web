@@ -1,37 +1,39 @@
 <h4 mat-dialog-title fxLayout fxLayoutAlign="start center"><span fxFlex>编辑工作记录</span><button mat-icon-button (click)="dialogRef.close()"><mat-icon>close</mat-icon></button></h4>
 <mat-dialog-content>
-  <div fxLayout="row" fxLayoutGap="20px grid">
-    <div>
-      <label>日期：</label>
-      <mat-form-field>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="date" readonly disabled />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+  <form [formGroup]="form">
+    <div fxLayout="row" fxLayoutGap="20px grid">
+      <div>
+        <label>日期：</label>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" formControlName="date" readonly />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <label>加班时长：</label>
+        <mat-form-field>
+          <input matInput type="number" formControlName="overtime" placeholder="请输入加班时长" />
+        </mat-form-field>
+        <label>小时</label>
+      </div>
     </div>
-    <div>
-      <label>加班时长：</label>
-      <mat-form-field>
-        <input matInput type="number" [(ngModel)]="overtime" min="0" max="24" placeholder="请输入加班时长" />
-      </mat-form-field>
-      <label>小时</label>
+    <mat-divider></mat-divider>
+    <div class="record-list">
+      <div class="record-list-title" fxLayout="row" fxLayoutAlign="space-between center"><span>事务列表：</span><button mat-icon-button matTooltip="增加一条新事务" color="primary" (click)="addEvent()"><mat-icon>add_circle</mat-icon></button></div>
+      <div class="record-list-content" formArrayName="events">
+        <mat-list>
+          <mat-list-item *ngFor="let item of form.get('events').controls; let i = index;">
+            <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px grid">
+              <span class="mb-1-55-em" fxFlex="80px">事务{{i + 1}}：</span>
+              <event [formControlName]="i"></event>
+              <span class="mb-1-25-em"><button mat-icon-button matTooltip="删除该条事务" color="primary" (click)="deleteEvent(i)"><mat-icon>remove_circle</mat-icon></button></span>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </div>
     </div>
-  </div>
-  <mat-divider></mat-divider>
-  <div class="record-list">
-    <div class="record-list-title" fxLayout="row" fxLayoutAlign="space-between center"><span>事务列表：</span><button mat-icon-button matTooltip="增加一条新事务" color="primary" (click)="addEvent()"><mat-icon>add_circle</mat-icon></button></div>
-    <div class="record-list-content">
-      <mat-list>
-        <mat-list-item *ngFor="let item of events; let i = index;">
-          <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px grid">
-            <span class="mb-1-55-em" fxFlex="80px">事务{{i + 1}}：</span>
-            <event name="{{ 'event' + i }}" [(ngModel)]="events[i]" ngDefaultControl></event>
-            <span class="mb-1-25-em"><button mat-icon-button matTooltip="删除该条事务" color="primary" (click)="deleteEvent(item, i)"><mat-icon>remove_circle</mat-icon></button></span>
-          </div>
-        </mat-list-item>
-      </mat-list>
-    </div>
-  </div>
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-raised-button color="primary" (click)="doSave()">保存</button>
