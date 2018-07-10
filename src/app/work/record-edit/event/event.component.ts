@@ -6,14 +6,7 @@ import {MatFormFieldControl} from '@angular/material';
 @Component({
   selector: 'event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => {
-      EventComponent
-    }),
-    multi: true
-  }]
+  styleUrls: ['./event.component.scss']
 })
 export class EventComponent implements OnInit, ControlValueAccessor {
 
@@ -23,35 +16,29 @@ export class EventComponent implements OnInit, ControlValueAccessor {
   onChangeCallback = (value) => {};
   onTouchedCallback = (value) => {};
 
+  private originalData: any;
+
   constructor() { }
 
   ngOnInit() {
   }
 
   get startTime() {
-    return this._startTime;
+    return this.originalData.startTime;
   }
 
   set startTime(value: string) {
-    this._startTime = value;
-    this.onChangeCallback({
-      startTime: this._startTime,
-      endTime: this._endTime,
-      note: this._note
-    });
+    this.originalData.startTime = value;
+    this.onChangeCallback(this.originalData);
   }
 
   get endTime() {
-    return this._endTime;
+    return this.originalData.endTime;
   }
 
   set endTime(value: string) {
-    this._endTime = value;
-    this.onChangeCallback({
-      startTime: this._startTime,
-      endTime: this._endTime,
-      note: this._note
-    });
+    this.originalData.endTime = value;
+    this.onChangeCallback(this.originalData);
   }
 
   get note() {
@@ -59,19 +46,14 @@ export class EventComponent implements OnInit, ControlValueAccessor {
   }
 
   set note(value: string) {
-    this._note = value;
-    this.onChangeCallback({
-      startTime: this._startTime,
-      endTime: this._endTime,
-      note: this._note
-    });
+    this.originalData.note = value;
+    this.onChangeCallback(this.originalData);
   }
 
-  writeValue(value: any) {
+  writeValue(data: any) {
 
-    this._startTime = value.startTime;
-    this._endTime = value.endTime;
-    this._note = value.note;
+    console.log(data);
+    this.originalData = data;
   }
 
   registerOnChange(fn) {

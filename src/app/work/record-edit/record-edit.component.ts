@@ -1,4 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, forwardRef} from '@angular/core';
+import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import * as format from 'date-fns/format';
 import * as startOfDay from 'date-fns/start_of_day';
@@ -6,11 +7,19 @@ import * as startOfDay from 'date-fns/start_of_day';
 import {GlobalStateService} from '../../shared/services/global-state.service';
 import {ConfirmDialogService} from '../../shared/services/confirm-dialog.service';
 import {RecordEditService} from './record-edit.service';
+import {EventComponent} from './event/event.component';
 
 @Component({
   selector: 'app-event-edit',
   templateUrl: 'record-edit.component.html',
-  styleUrls: ['record-edit.component.scss']
+  styleUrls: ['record-edit.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => {
+      EventComponent
+    }),
+    multi: true
+  }]
 })
 export class RecordEditComponent implements OnInit {
 
@@ -20,6 +29,7 @@ export class RecordEditComponent implements OnInit {
   events: Array<any>;
   originData: any = null;
   isShowDeleteBtn: boolean = false;
+  aaa = {};
 
   constructor(
     public dialogRef: MatDialogRef<RecordEditComponent>,

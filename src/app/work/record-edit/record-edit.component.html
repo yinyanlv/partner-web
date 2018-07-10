@@ -25,7 +25,7 @@
         <mat-list-item *ngFor="let item of events; let i = index;">
           <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px grid">
             <span class="mb-1-55-em" fxFlex="80px">事务{{i + 1}}：</span>
-            <event [(ngModel)]="item"></event>
+            <event name="{{ 'event' + i }}" [(ngModel)]="events[i]" ngDefaultControl></event>
             <span class="mb-1-25-em"><button mat-icon-button matTooltip="删除该条事务" color="primary" (click)="deleteEvent(item, i)"><mat-icon>remove_circle</mat-icon></button></span>
           </div>
         </mat-list-item>
