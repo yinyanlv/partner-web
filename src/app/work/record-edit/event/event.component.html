@@ -2,22 +2,42 @@
   <span>
     <label>开始时间：</label>
     <mat-form-field>
-      <input matInput readonly atp-time-picker locale="ch" placeholder="请选择开始时间"
-             formControlName="startTime"/><button matSuffix mat-icon-button>
-      <mat-icon>access_alarm</mat-icon></button>
+      <input
+          matInput
+          readonly
+          placeholder="请选择开始时间"
+          formControlName="startTime"
+          (click)="openStartTimePicker()"
+          value="{{startTime}}"
+      />
+      <button matSuffix mat-icon-button (click)="openStartTimePicker()">
+        <mat-icon>access_alarm</mat-icon>
+      </button>
+      <mat-error *ngIf="form.get('startTime').hasError('required')">开始时间为必填项</mat-error>
     </mat-form-field>
   </span>
   <span>
   <label>结束时间：</label>
   <mat-form-field>
-    <input matInput readonly atp-time-picker locale="ch" placeholder="请选择结束时间"
-           formControlName="endTime"/><button matSuffix mat-icon-button><mat-icon>access_alarm</mat-icon></button>
+    <input
+        matInput
+        readonly
+        placeholder="请选择结束时间"
+        formControlName="endTime"
+        (click)="openEndTimePicker()"
+        value="{{endTime}}"
+    />
+    <button matSuffix mat-icon-button (click)="openEndTimePicker()">
+      <mat-icon>access_alarm</mat-icon>
+    </button>
+    <mat-error *ngIf="form.get('startTime').hasError('required')">结束时间为必填项</mat-error>
   </mat-form-field>
 </span>
-  <span>
+<span>
   <label>事务备注：</label>
   <mat-form-field>
-    <input matInput placeholder="请输入该事务的备注" formControlName="note"/>
+    <input matInput placeholder="请输入该事务的备注" formControlName="note" (change)="onNoteChange($event)"/>
   </mat-form-field>
 </span>
+<mat-error class="error-line" *ngIf="form.hasError('timeRange')">开始时间需早于结束时间</mat-error>
 </div>

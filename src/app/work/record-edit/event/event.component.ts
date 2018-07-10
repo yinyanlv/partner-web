@@ -1,7 +1,16 @@
-import {Component, OnInit, forwardRef, Input} from '@angular/core';
-import {FormBuilder, FormGroup, FormControl, AbstractControl, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators, Validator} from '@angular/forms';
+import {Component, OnInit, forwardRef} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  AbstractControl,
+  NG_VALUE_ACCESSOR,
+  NG_VALIDATORS,
+  Validators,
+  Validator
+} from '@angular/forms';
 import {ControlValueAccessor} from '@angular/forms/src/directives';
-import {MatFormFieldControl} from '@angular/material';
+import {AmazingTimePickerService} from 'amazing-time-picker';
 
 @Component({
   selector: 'event',
@@ -19,81 +28,83 @@ import {MatFormFieldControl} from '@angular/material';
 })
 export class EventComponent implements OnInit, ControlValueAccessor, Validator {
 
-  private _startTime: string = '';
-  private _endTime: string = '';
-  private _note: string = '';
-  onChange = (_: any) => {};
-  onTouched = (_: any) => {};
+  startTime: string = '';
+  endTime: string = '';
+  propagateChange = (_: any) => {
+  };
+  propagateTouched = (_: any) => {
+  };
   form: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-  ) { }
+  constructor(private fb: FormBuilder,
+              private timePicker: AmazingTimePickerService) {
+  }
 
   ngOnInit() {
     this.form = this.fb.group({
-      startTime: [this._startTime, [Validators.required]],
-      endTime: [this._endTime, [Validators.required]],
-      note: [this._note]
+      startTime: ['', [Validators.required]],
+      endTime: ['', [Validators.required]],
+      note: ['']
     }, {
       validator: this.validateTime()
     });
   }
 
-  get startTime() {
-    return this._startTime;
+  openStartTimePicker() {
+
+    let amazingTimePicker = this.timePicker.open({
+      time: this.startTime,
+      locale: 'ch'
+    });
+
+    amazingTimePicker.afterClose().subscribe((time) => {
+      this.startTime = time;
+      this.form.get('startTime').patchValue(this.startTime, {
+        emitModelToViewChange: false
+      });
+      this.propagateChange(this.getData());
+    });
   }
 
-  set startTime(value: string) {
-    this._startTime = value;
-    this.onChange(this.getData());
+  openEndTimePicker() {
+
+    let amazingTimePicker = this.timePicker.open({
+      time: this.endTime,
+      locale: 'ch'
+    });
+    amazingTimePicker.afterClose().subscribe((time) => {
+      this.endTime = time;
+      this.form.get('endTime').patchValue(this.endTime, {
+        emitModelToViewChange: false
+      });
+      this.propagateChange(this.getData());
+    });
   }
 
-  get endTime() {
-    return this._endTime;
+  onNoteChange() {
+    this.propagateChange(this.getData());
   }
 
-  set endTime(value: string) {
-    this._endTime = value;
-    this.onChange(this.getData());
-  }
-
-  get note() {
-    return this._note;
-  }
-
-  set note(value: string) {
-    this._note = value;
-    this.onChange(this.getData());
-  }
-
-  private getData() {
-
-    return {
-      startTime: this._startTime,
-      endTime: this._endTime,
-      note: this._note
-    };
+  getData() {
+    return this.form.value;
   }
 
   private validateTime() {
 
     return (group: FormGroup) => {
-      let startTime = group.controls['startTime'].value;
-      let endTime = group.controls['endTime'].value;
 
-      if (!startTime || !endTime) return;
+      if (!this.startTime || !this.endTime) return;
 
       let date = new Date();
-      let startTimeList = startTime.split(':');
-      let endTimeList = endTime.split(':');
+      let startTimeList: Array<string> = this.startTime.split(':');
+      let endTimeList: Array<string> = this.endTime.split(':');
 
-      startTime = new Date(date.setHours(startTimeList[0], startTimeList[1]));
-      endTime = new Date(date.setHours(endTimeList[0], endTimeList[1]));
+      let startTime = new Date(date.setHours(startTimeList['0'], startTimeList['1']));
+      let endTime = new Date(date.setHours(endTimeList['0'], endTimeList['1']));
 
       if (endTime < startTime) {
         return {
-          time: '结束时间早于开始时间'
+          timeRange: true
         };
       }
     };
@@ -102,29 +113,39 @@ export class EventComponent implements OnInit, ControlValueAccessor, Validator {
   writeValue(data: any) {
 
     if (data) {
-      this._startTime = data.startTime || '';
-      this._endTime = data.endTime || '';
-      this._note = data.startTime || '';
+
+      this.startTime = data.startTime;
+      this.endTime = data.endTime;
+      this.form.patchValue(data);
     }
   }
 
   registerOnChange(fn) {
 
-    this.onChange = fn;
+    this.propagateChange = fn;
   }
 
   registerOnTouched(fn) {
 
-    this.onTouched = fn;
+    this.propagateTouched = fn;
   }
 
   validate(control: AbstractControl) {
 
-    if (this.form.valid) {
-      return null;
-    } else {
+    if (this.form.get('startTime').hasError('required')) {
+
       return {
-        event: true
+        startRequired: true
+      };
+    } else if (this.form.get('endTime').hasError('required')) {
+
+      return {
+        endRequired: true
+      };
+    } else if (this.form.hasError('timeRange')) {
+
+      return {
+        timeRange: true
       };
     }
   }

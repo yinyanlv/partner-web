@@ -15,10 +15,10 @@ import {RecordEditService} from './record-edit.service';
 })
 export class RecordEditComponent implements OnInit {
 
-  recordId: string;
-  overtime: string | number;
-  date: Date;
-  events: Array<any>;
+  private recordId: string;
+  private overtime: string | number;
+  private date: Date;
+  private events: Array<any>;
   originData: any = null;
   isShowDeleteBtn: boolean = false;
   form: FormGroup;
@@ -47,20 +47,19 @@ export class RecordEditComponent implements OnInit {
 
   doSave() {
 
-    console.log(this.form);
-    console.log(this.form.valid);
-    console.log(this.form.value);
-    return;
-    //
-    // let params = this.getParams();
-    //
-    // if (params.id) {
-    //
-    //   this.updateRecord(params);
-    // } else {
-    //
-    //   this.createRecord(params);
-    // }
+    if (this.form.valid) {
+      let params = this.getParams();
+
+      if (params.id) {
+
+        this.updateRecord(params);
+      } else {
+
+        this.createRecord(params);
+      }
+    } else {
+      this.form.updateValueAndValidity();
+    }
   }
 
   createRecord(params) {
@@ -155,12 +154,13 @@ export class RecordEditComponent implements OnInit {
 
   getParams() {
     let params: any = {};
+    let formValue = this.form.value;
 
     params.id = this.recordId;
     params.username = this.globalStateService.userInfo.username;
     params.date = startOfDay(this.date);
-    params.overtime = this.overtime;
-    params.events = this.events.map((item) => {
+    params.overtime = formValue.overtime;
+    params.events = formValue.events.map((item) => {
       let temp: any = {};
       let startTime = item.startTime.split(':');
       let endTime = item.endTime.split(':');
