@@ -44,7 +44,7 @@ export class EventComponent implements OnInit, ControlValueAccessor, Validator {
     this.form = this.fb.group({
       startTime: ['', [Validators.required]],
       endTime: ['', [Validators.required]],
-      note: ['']
+      note: ['', [Validators.required]]
     }, {
       validator: this.validateTime()
     });

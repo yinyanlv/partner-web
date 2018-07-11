@@ -48,6 +48,11 @@ export class RecordEditComponent implements OnInit {
   doSave() {
 
     if (this.form.valid) {
+
+      if (!this.form.value.overtime && this.form.value.overtime != '0' && this.form.value.events.length === 0) {
+        return this.recordEditService.showMessage('加班时长不能为空');
+      }
+
       let params = this.getParams();
 
       if (params.id) {
@@ -57,8 +62,6 @@ export class RecordEditComponent implements OnInit {
 
         this.createRecord(params);
       }
-    } else {
-      this.form.updateValueAndValidity();
     }
   }
 
