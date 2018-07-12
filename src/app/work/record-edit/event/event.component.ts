@@ -44,7 +44,7 @@ export class EventComponent implements OnInit, ControlValueAccessor, Validator {
     this.form = this.fb.group({
       startTime: [null, [Validators.required]],
       endTime: [null, [Validators.required]],
-      note: [null]
+      note: [null, [Validators.required]]
     }, {
       validator: this.validateTime()
     });
@@ -59,9 +59,7 @@ export class EventComponent implements OnInit, ControlValueAccessor, Validator {
 
     amazingTimePicker.afterClose().subscribe((time) => {
       this.startTime = time;
-      this.form.get('startTime').patchValue(this.startTime, {
-        emitModelToViewChange: false
-      });
+      this.form.get('startTime').patchValue(this.startTime);
       this.propagateChange(this.getData());
     });
   }
@@ -74,9 +72,7 @@ export class EventComponent implements OnInit, ControlValueAccessor, Validator {
     });
     amazingTimePicker.afterClose().subscribe((time) => {
       this.endTime = time;
-      this.form.get('endTime').patchValue(this.endTime, {
-        emitModelToViewChange: false
-      });
+      this.form.get('endTime').patchValue(this.endTime);
       this.propagateChange(this.getData());
     });
   }
@@ -113,7 +109,6 @@ export class EventComponent implements OnInit, ControlValueAccessor, Validator {
   writeValue(data: any) {
 
     if (data) {
-
       this.startTime = data.startTime;
       this.endTime = data.endTime;
       this.form.patchValue(data);
@@ -132,42 +127,43 @@ export class EventComponent implements OnInit, ControlValueAccessor, Validator {
 
   validate(control: AbstractControl) {
 
+    let result = {};
+
+    if (this.form.get('startTime').hasError('required')) {
+
+      Object.assign(result, {
+        startTimeRequired: true
+      });
+    }
+
+    if (this.form.get('endTime').hasError('required')) {
+
+      Object.assign(result, {
+        endTimeRequired: true
+      });
+    }
+
+    if (this.form.get('note').hasError('required')) {
+
+      Object.assign(result, {
+        noteRequired: true
+      });
+    }
+
     if (this.form.hasError('timeRange')) {
 
-      return {
+      Object.assign(result, {
         timeRange: true
-      };
-    } else {
-
-      let startTime = this.form.get('startTime');
-      let endTime = this.form.get('endTime');
-
-      if (startTime.hasError('required') && endTime.hasError('required')) {
-
-        return {
-          startRequired: true,
-          endRequired: true
-        };
-      }
-
-      if (startTime.hasError('required')) {
-
-        return {
-          startRequired: true
-        };
-      }
-
-      if (endTime.hasError('required')) {
-
-        return {
-          endRequired: true
-        };
-      }
+      });
     }
+
+    return Object.keys(result).length > 0 ? result : null;
   }
 
   markAsTouched() {
+
     this.form.get('startTime').markAsTouched();
     this.form.get('endTime').markAsTouched();
+    this.form.get('note').markAsTouched();
   }
 }

@@ -37,6 +37,7 @@
   <label>事务备注：</label>
   <mat-form-field>
     <input matInput placeholder="请输入该事务的备注" formControlName="note" (change)="onNoteChange()"/>
+    <mat-error *ngIf="form.get('note').hasError('required')">事务备注为必填项</mat-error>
   </mat-form-field>
 </span>
 <mat-error class="error-line" *ngIf="form.hasError('timeRange')">开始时间需早于结束时间</mat-error>

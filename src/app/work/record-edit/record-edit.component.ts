@@ -40,11 +40,11 @@ export class RecordEditComponent implements OnInit {
   ngOnInit() {
     this.originData = Object.assign({}, this.data);
     this.initData();
-    this.isShowDeleteBtn = this.events.length > 0 || typeof this.overtime === 'number';
+    this.isShowDeleteBtn = !!this.recordId;
 
     this.form = this.fb.group({
       date: [{value: this.date, disabled: true}],
-      overtime: [this.overtime, [Validators.min(0), Validators.max(24)]],
+      overtime: [this.overtime, [Validators.required, Validators.min(0), Validators.max(24)]],
       events: this.fb.array(this.events)
     });
   }
@@ -54,13 +54,6 @@ export class RecordEditComponent implements OnInit {
     if (this.form.valid) {
 
       let value = this.form.value;
-
-      if (!value.overtime && value.overtime !== 0 && value.events.length === 0) {
-        let overtime = this.form.get('overtime');
-        overtime.setErrors({required: true});
-        overtime.markAsTouched();
-        return;
-      }
 
       let params = this.getParams();
 
@@ -73,6 +66,7 @@ export class RecordEditComponent implements OnInit {
       }
     } else {
 
+      this.form.get('overtime').markAsTouched();
       this.eventCmpList.forEach((item) => {
 
         item.markAsTouched();
@@ -165,7 +159,7 @@ export class RecordEditComponent implements OnInit {
       });
     } else {
       this.recordId = '';
-      this.overtime = '';
+      this.overtime = null;
       this.events = [];
     }
   }
@@ -177,7 +171,7 @@ export class RecordEditComponent implements OnInit {
     params.id = this.recordId;
     params.username = this.globalStateService.userInfo.username;
     params.date = startOfDay(this.date);
-    params.overtime = formValue.overtime;
+    params.overtime = formValue.overtime ? formValue.overtime : 0;
     params.events = formValue.events.map((item) => {
       let temp: any = {};
       let startTime = item.startTime.split(':');
@@ -198,11 +192,7 @@ export class RecordEditComponent implements OnInit {
 
     let events = this.form.get('events') as FormArray;
 
-    events.push(this.fb.group({
-      startTime: null,
-      endTime: null,
-      note: null
-    }));
+    events.push(this.fb.control(null));
   }
 
   deleteEvent(index) {
@@ -217,23 +207,5 @@ export class RecordEditComponent implements OnInit {
         events.removeAt(index);
       }
     });
-  }
-
-  static markAllTouched(control: AbstractControl) {
-
-    if (control.hasOwnProperty('controls')) {
-
-      control.markAsTouched();
-
-      let ctrl = <any>control;
-
-      for (let inner in ctrl.controls) {
-        RecordEditComponent.markAllTouched(ctrl.controls[inner] as AbstractControl);
-      }
-
-    } else {
-      (<FormControl>(control)).setErrors({required: true});
-      (<FormControl>(control)).markAsTouched();
-    }
   }
 }
