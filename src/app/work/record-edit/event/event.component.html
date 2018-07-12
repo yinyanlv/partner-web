@@ -30,7 +30,7 @@
     <button matSuffix mat-icon-button (click)="openEndTimePicker()">
       <mat-icon>access_alarm</mat-icon>
     </button>
-    <mat-error *ngIf="form.get('startTime').hasError('required')">结束时间为必填项</mat-error>
+    <mat-error *ngIf="form.get('endTime').hasError('required')">结束时间为必填项</mat-error>
   </mat-form-field>
 </span>
 <span>

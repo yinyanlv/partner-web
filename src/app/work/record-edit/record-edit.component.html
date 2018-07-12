@@ -14,6 +14,7 @@
         <label>加班时长：</label>
         <mat-form-field>
           <input matInput type="number" formControlName="overtime" placeholder="请输入加班时长" />
+          <mat-error *ngIf="form.get('overtime').hasError('required')">请输入加班时长</mat-error>
           <mat-error *ngIf="form.get('overtime').hasError('min')">加班时长最小为0</mat-error>
           <mat-error *ngIf="form.get('overtime').hasError('max')">加班时长最大为24</mat-error>
         </mat-form-field>
@@ -28,7 +29,7 @@
           <mat-list-item *ngFor="let item of form.get('events')['controls']; let i = index;">
             <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px grid">
               <span class="mb-1-55-em" fxFlex="80px">事务{{i + 1}}：</span>
-              <event [formControlName]="i"></event>
+              <event [formGroupName]="i"></event>
               <span class="mb-1-25-em"><button mat-icon-button matTooltip="删除该条事务" color="primary" (click)="deleteEvent(i)"><mat-icon>remove_circle</mat-icon></button></span>
             </div>
           </mat-list-item>

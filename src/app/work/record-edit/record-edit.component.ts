@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject} from '@angular/core';
-import {FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
+import {Component, OnInit, Inject, ViewChildren, QueryList} from '@angular/core';
+import {FormBuilder, FormGroup, FormArray, Validators, AbstractControl, FormControl} from '@angular/forms';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import * as format from 'date-fns/format';
 import * as startOfDay from 'date-fns/start_of_day';
@@ -7,6 +7,7 @@ import * as startOfDay from 'date-fns/start_of_day';
 import {GlobalStateService} from '../../shared/services/global-state.service';
 import {ConfirmDialogService} from '../../shared/services/confirm-dialog.service';
 import {RecordEditService} from './record-edit.service';
+import {EventComponent} from './event/event.component';
 
 @Component({
   selector: 'app-event-edit',
@@ -23,6 +24,9 @@ export class RecordEditComponent implements OnInit {
   isShowDeleteBtn: boolean = false;
   form: FormGroup;
 
+  @ViewChildren(EventComponent)
+  eventCmpList: QueryList<EventComponent>;
+
   constructor(
     public dialogRef: MatDialogRef<RecordEditComponent>,
     private fb: FormBuilder,
@@ -36,7 +40,7 @@ export class RecordEditComponent implements OnInit {
   ngOnInit() {
     this.originData = Object.assign({}, this.data);
     this.initData();
-    this.isShowDeleteBtn = this.events.length > 0 || this.overtime > 0;
+    this.isShowDeleteBtn = this.events.length > 0 || typeof this.overtime === 'number';
 
     this.form = this.fb.group({
       date: [{value: this.date, disabled: true}],
@@ -49,8 +53,13 @@ export class RecordEditComponent implements OnInit {
 
     if (this.form.valid) {
 
-      if (!this.form.value.overtime && this.form.value.overtime != '0' && this.form.value.events.length === 0) {
-        return this.recordEditService.showMessage('加班时长不能为空');
+      let value = this.form.value;
+
+      if (!value.overtime && value.overtime !== 0 && value.events.length === 0) {
+        let overtime = this.form.get('overtime');
+        overtime.setErrors({required: true});
+        overtime.markAsTouched();
+        return;
       }
 
       let params = this.getParams();
@@ -62,6 +71,12 @@ export class RecordEditComponent implements OnInit {
 
         this.createRecord(params);
       }
+    } else {
+
+      this.eventCmpList.forEach((item) => {
+
+        item.markAsTouched();
+      });
     }
   }
 
@@ -183,7 +198,11 @@ export class RecordEditComponent implements OnInit {
 
     let events = this.form.get('events') as FormArray;
 
-    events.push(this.fb.control(null));
+    events.push(this.fb.group({
+      startTime: null,
+      endTime: null,
+      note: null
+    }));
   }
 
   deleteEvent(index) {
@@ -198,5 +217,23 @@ export class RecordEditComponent implements OnInit {
         events.removeAt(index);
       }
     });
+  }
+
+  static markAllTouched(control: AbstractControl) {
+
+    if (control.hasOwnProperty('controls')) {
+
+      control.markAsTouched();
+
+      let ctrl = <any>control;
+
+      for (let inner in ctrl.controls) {
+        RecordEditComponent.markAllTouched(ctrl.controls[inner] as AbstractControl);
+      }
+
+    } else {
+      (<FormControl>(control)).setErrors({required: true});
+      (<FormControl>(control)).markAsTouched();
+    }
   }
 }

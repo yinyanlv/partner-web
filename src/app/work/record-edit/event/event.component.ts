@@ -42,9 +42,9 @@ export class EventComponent implements OnInit, ControlValueAccessor, Validator {
 
   ngOnInit() {
     this.form = this.fb.group({
-      startTime: ['', [Validators.required]],
-      endTime: ['', [Validators.required]],
-      note: ['', [Validators.required]]
+      startTime: [null, [Validators.required]],
+      endTime: [null, [Validators.required]],
+      note: [null]
     }, {
       validator: this.validateTime()
     });
@@ -132,21 +132,42 @@ export class EventComponent implements OnInit, ControlValueAccessor, Validator {
 
   validate(control: AbstractControl) {
 
-    if (this.form.get('startTime').hasError('required')) {
-
-      return {
-        startRequired: true
-      };
-    } else if (this.form.get('endTime').hasError('required')) {
-
-      return {
-        endRequired: true
-      };
-    } else if (this.form.hasError('timeRange')) {
+    if (this.form.hasError('timeRange')) {
 
       return {
         timeRange: true
       };
+    } else {
+
+      let startTime = this.form.get('startTime');
+      let endTime = this.form.get('endTime');
+
+      if (startTime.hasError('required') && endTime.hasError('required')) {
+
+        return {
+          startRequired: true,
+          endRequired: true
+        };
+      }
+
+      if (startTime.hasError('required')) {
+
+        return {
+          startRequired: true
+        };
+      }
+
+      if (endTime.hasError('required')) {
+
+        return {
+          endRequired: true
+        };
+      }
     }
+  }
+
+  markAsTouched() {
+    this.form.get('startTime').markAsTouched();
+    this.form.get('endTime').markAsTouched();
   }
 }
