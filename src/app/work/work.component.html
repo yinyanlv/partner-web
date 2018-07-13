@@ -5,6 +5,7 @@
   <mat-toolbar-row>
     <span fxFlex fxShow="false" fxShow.gt-xs>{{date | calendarDate:(calendarMode + 'ViewTitle'):'zh'}}</span>
     <span class="time-count">总计加班：{{overtimeCount}} 小时</span>
+    <span class="time-count">总计事务：{{eventCount}} 个</span>
     <div fxShow="false" fxShow.gt-xs>
       <button mat-button [class.active]="calendarMode === 'month'">月视图</button>
     </div>
@@ -20,11 +21,11 @@
     <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
   </div>
   <div class="cal-cell-middle">
-    <div class="overtime-box" *ngIf="day.events && day.events[0] && day.inMonth">加班时长：<span>{{day.events[0].meta.overtime}}</span> 小时</div>
+    <div class="overtime-box" *ngIf="day.events && day.events[0] && day.events[0].meta.overtime && day.inMonth">加班时长：<span>{{day.events[0].meta.overtime}}</span> 小时</div>
   </div>
   <div class="cal-cell-bottom" >
     <div *ngIf="day.inMonth">
-      <i class="dot" *ngFor="let item of day.events;"></i>
+      <i class="dot" *ngFor="let _item of day.events;"></i>
     </div>
   </div>
 </ng-template>

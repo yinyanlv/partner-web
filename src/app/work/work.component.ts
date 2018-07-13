@@ -25,6 +25,7 @@ export class WorkComponent implements OnInit {
   locale: string = 'zh';
   events: Array<CalendarEvent> = [];
   overtimeCount: number = 0;
+  eventCount: number = 0;
   private dialogRef: MatDialogRef<RecordEditComponent>;
 
   constructor(
@@ -49,7 +50,6 @@ export class WorkComponent implements OnInit {
     if (event && event.day && !event.day.inMonth) return;
 
     this.dialogRef = this.dialog.open(RecordEditComponent, {
-      width: '1100px',
       data: {
         date: event.day.date,
         events: event.day.events
@@ -67,15 +67,19 @@ export class WorkComponent implements OnInit {
     });
   }
 
-  updateTimeCount() {
-    let sum = 0;
+  updateMonthCount() {
+
+    let overTimeSum = 0;
+    let eventSum = 0;
 
     this.workService.originalData.forEach((item: any) => {
 
-      sum += item.overtime * 100;
+      overTimeSum += item.overtime * 1000;
+      eventSum += item.events.length;
     });
 
-    this.overtimeCount = sum / 100;
+    this.overtimeCount = overTimeSum / 1000;
+    this.eventCount = eventSum;
   }
 
   loadRecords() {
@@ -91,7 +95,7 @@ export class WorkComponent implements OnInit {
       if (res.success) {
 
         this.events = res.data;
-        this.updateTimeCount();
+        this.updateMonthCount();
       } else {
         this.workService.showMessage(res.message);
       }

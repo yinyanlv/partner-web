@@ -3,7 +3,6 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {CalendarEvent} from 'angular-calendar';
 import {utc} from 'moment';
-import * as format from 'date-fns/format';
 
 import {BaseHttp} from '../shared/etc/base-http';
 

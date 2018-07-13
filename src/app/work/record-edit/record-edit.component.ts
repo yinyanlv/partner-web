@@ -1,7 +1,6 @@
 import {Component, OnInit, Inject, ViewChildren, QueryList} from '@angular/core';
-import {FormBuilder, FormGroup, FormArray, Validators, AbstractControl, FormControl} from '@angular/forms';
+import {FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import * as format from 'date-fns/format';
 import * as startOfDay from 'date-fns/start_of_day';
 
 import {GlobalStateService} from '../../shared/services/global-state.service';
@@ -44,7 +43,7 @@ export class RecordEditComponent implements OnInit {
 
     this.form = this.fb.group({
       date: [{value: this.date, disabled: true}],
-      overtime: [this.overtime, [Validators.required, Validators.min(0), Validators.max(24)]],
+      overtime: [this.overtime, [Validators.min(0.01), Validators.max(24)]],
       events: this.fb.array(this.events)
     });
   }
@@ -53,7 +52,14 @@ export class RecordEditComponent implements OnInit {
 
     if (this.form.valid) {
 
-      let value = this.form.value;
+      let overtime = this.form.get('overtime');
+
+      if (!overtime.value && overtime.value !== 0 && this.form.value.events.length === 0) {
+
+        overtime.setErrors({required: true});
+        overtime.markAsTouched();
+        return;
+      }
 
       let params = this.getParams();
 
@@ -144,15 +150,15 @@ export class RecordEditComponent implements OnInit {
     if (this.data.events && this.data.events[0] && this.data.events[0].meta) {
 
       this.recordId = this.data.events[0].meta.recordId;
-      this.overtime = this.data.events[0].meta.overtime;
+      this.overtime = this.data.events[0].meta.overtime ? this.data.events[0].meta.overtime : null;
 
       let eventList = this.data.events.slice(1, this.data.events.length);
 
       this.events = eventList.map((item) => {
         let temp: any = {};
 
-        temp.startTime = format(item.start, 'HH:mm');
-        temp.endTime = format(item.end, 'HH:mm');
+        temp.startTime = item.start;
+        temp.endTime = item.end;
         temp.note = item.meta.note;
 
         return temp;
@@ -174,12 +180,10 @@ export class RecordEditComponent implements OnInit {
     params.overtime = formValue.overtime ? formValue.overtime : 0;
     params.events = formValue.events.map((item) => {
       let temp: any = {};
-      let startTime = item.startTime.split(':');
-      let endTime = item.endTime.split(':');
 
       temp.recordId = Number(this.recordId);
-      temp.startTime = new Date(this.date.setHours(startTime[0], startTime[1]));
-      temp.endTime = new Date(this.date.setHours(endTime[0], endTime[1]));
+      temp.startTime = new Date(this.date);
+      temp.endTime = new Date(this.date);
       temp.note = item.note;
 
       return temp;
