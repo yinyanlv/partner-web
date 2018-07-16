@@ -25,8 +25,8 @@
     <div class="record-list">
       <div class="record-list-title" fxLayout="row" fxLayoutAlign="space-between center"><span>事务列表：</span><button mat-icon-button type="button" matTooltip="增加一条新事务" color="primary" (click)="addEvent()"><mat-icon>add_circle</mat-icon></button></div>
       <div class="record-list-content" formArrayName="events">
-        <mat-list>
-          <mat-list-item *ngFor="let _item of form.get('events')['controls']; let i = index;">
+        <mat-list [dragula]="'bag'" [dragulaModel]="eventsModel">
+          <mat-list-item *ngFor="let _item of eventsModel; let i = index;">
             <div class="event-line" fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px grid">
               <span class="mb-1-55-em" fxFlex="80px">事务{{i + 1}}：</span>
               <event fxFlex [formControlName]="i"></event>

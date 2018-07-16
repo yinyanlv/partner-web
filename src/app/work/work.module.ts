@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CalendarModule} from 'angular-calendar';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {DragulaModule} from 'ng2-dragula';
 
 import {MaterialModule} from '../shared/modules/material.module';
 import {WorkRoutingModule} from './work.routing';
@@ -19,6 +20,7 @@ import { EventComponent } from './record-edit/event/event.component';
     ReactiveFormsModule,
     CalendarModule.forRoot(),
     FlexLayoutModule,
+    DragulaModule,
     MaterialModule,
     WorkRoutingModule
   ],

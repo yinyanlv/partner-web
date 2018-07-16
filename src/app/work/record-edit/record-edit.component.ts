@@ -1,6 +1,7 @@
 import {Component, OnInit, Inject, ViewChildren, QueryList} from '@angular/core';
 import {FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {DragulaService} from 'ng2-dragula';
 import * as startOfDay from 'date-fns/start_of_day';
 
 import {GlobalStateService} from '../../shared/services/global-state.service';
@@ -30,6 +31,7 @@ export class RecordEditComponent implements OnInit {
     public dialogRef: MatDialogRef<RecordEditComponent>,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) private data: any,
+    private dragulaService: DragulaService,
     private globalStateService: GlobalStateService,
     private confirmDialogService: ConfirmDialogService,
     private recordEditService: RecordEditService,
@@ -46,6 +48,15 @@ export class RecordEditComponent implements OnInit {
       overtime: [this.overtime, [Validators.min(0.01), Validators.max(24)]],
       events: this.fb.array(this.events)
     });
+
+    this.dragulaService.dropModel.subscribe(() => {
+      this.form.get('events').updateValueAndValidity();
+    });
+  }
+
+  get eventsModel() {
+
+    return (this.form.get('events') as FormArray).controls;
   }
 
   doSave() {
@@ -201,15 +212,8 @@ export class RecordEditComponent implements OnInit {
 
   deleteEvent(index) {
 
-    this.confirmDialogService.show({
-      content: `您确定要删除事务${index + 1}？`
-    }, (data) => {
+    let events = this.form.get('events') as FormArray;
 
-      if (data) {
-        let events = this.form.get('events') as FormArray;
-
-        events.removeAt(index);
-      }
-    });
+    events.removeAt(index);
   }
 }
