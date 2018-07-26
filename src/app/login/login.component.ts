@@ -76,7 +76,7 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
 
         if (res.success) {
 
-          this.globalStateService.isLogin = true;
+          this.globalStateService.isLoggedIn = true;
           this.globalStateService.userInfo = res.data;
           this.router.navigate([this.route.snapshot.queryParams.redirectTo || '']);
         } else {

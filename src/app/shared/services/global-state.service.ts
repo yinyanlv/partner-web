@@ -12,22 +12,22 @@ export class GlobalStateService {
     this.isPlatformBrowser = isPlatformBrowser(platformId);
   }
 
-  set isLogin(state: boolean) {
+  set isLoggedIn(state: boolean) {
 
     if (!this.isPlatformBrowser) {
       return;
     }
 
-    localStorage.setItem('isLogin', state.toString());
+    localStorage.setItem('isLoggedIn', state.toString());
   }
 
-  get isLogin() {
+  get isLoggedIn() {
 
     if (!this.isPlatformBrowser) {
       return;
     }
 
-    return localStorage.getItem('isLogin') && localStorage.getItem('isLogin') !== 'false';
+    return localStorage.getItem('isLoggedIn') && localStorage.getItem('isLoggedIn') !== 'false';
   }
 
   get userInfo() {

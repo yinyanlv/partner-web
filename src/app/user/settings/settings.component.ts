@@ -113,7 +113,7 @@ export class SettingsComponent implements OnInit {
 
         if (res.success) {
 
-          this.globalStateService.isLogin = false;
+          this.globalStateService.isLoggedIn = false;
           this.globalStateService.userInfo = null;
 
           this.settingsService.showMessage('用户密码修改成功，请重新登录', () => {

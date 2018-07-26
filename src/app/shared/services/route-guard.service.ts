@@ -14,7 +14,7 @@ export class RouteGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-    if (!this.globalState.isLogin) {
+    if (!this.globalState.isLoggedIn) {
       this.router.navigate(['login'], {
         queryParams: {
           redirectTo: state.url
